@@ -1,8 +1,8 @@
-# frontend
+# SmartRoom frontend
 
-Frontend stuff with react
-
-In order for the programm to run:
-1)Download the project
-2)Run in the command Line: npm install react-scripts --save
-3)Run in the command Line: npm start
+## Getting started
+1. Clone project
+2. Install node.js (https://nodejs.org/en/download/) 
+3. Run ``npm install react-scripts --save`` on CLI
+4. Run ``npm start`` on CLI 
+5. Visit ``localhost:3000``
