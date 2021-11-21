@@ -1,7 +1,18 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const Overview = () => {
+  let navigate = useNavigate();
+
+  const redirectToDevices = () => {
+    navigate("/devices");
+  };
+
+  const redirectToDetailed = () => {
+    navigate("/detailed");
+  };
+
   return (
     <>
       <div>
@@ -15,37 +26,51 @@ const Overview = () => {
 
         <div className="header">
           <div>Turned on</div>
-          <button className="btn-primary-no-background">View all</button>
+          <button
+            onClick={redirectToDevices}
+            className="btn-primary-no-background"
+          >
+            View all
+          </button>
         </div>
 
         <div className="scroll-area">
           {devices_turnedOn.map((src) => (
-            <div
-              key={src.title}
-              className="card"
-              style={{
-                backgroundImage: `url(${src.image})`,
-              }}
-            >
-              <div className="card-title">{src.title}</div>
-            </div>
+            <button onClick={redirectToDetailed}>
+              <div
+                key={src.title}
+                className="card"
+                style={{
+                  backgroundImage: `url(${src.image})`,
+                }}
+              >
+                <div className="card-title">{src.title}</div>
+              </div>
+            </button>
           ))}
         </div>
         <div className="header">
           <div>Frequently used</div>
-          <button className="btn-primary-no-background">View all</button>
+          <button
+            onClick={redirectToDevices}
+            className="btn-primary-no-background"
+          >
+            View all
+          </button>
         </div>
         <div className="scroll-area">
           {devices_frequentlyUsed.map((src) => (
-            <div
-              key={src.title}
-              className="card"
-              style={{
-                backgroundImage: `url(${src.image})`,
-              }}
-            >
-              <div className="card-title">{src.title}</div>
-            </div>
+            <button onClick={redirectToDetailed}>
+              <div
+                key={src.title}
+                className="card"
+                style={{
+                  backgroundImage: `url(${src.image})`,
+                }}
+              >
+                <div className="card-title">{src.title}</div>
+              </div>
+            </button>
           ))}
         </div>
       </div>
