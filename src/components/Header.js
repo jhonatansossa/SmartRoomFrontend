@@ -13,7 +13,7 @@ const Header = () => {
               <Nav.Link href="/overview">Overview</Nav.Link>
               <Nav.Link href="/devices">All Devices</Nav.Link>
               <Nav.Link href="/login">
-                <i className="fas fa-user"></i>Sign In
+                <i className="fas fa-user"></i> Sign In
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
