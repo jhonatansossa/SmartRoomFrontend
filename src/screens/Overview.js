@@ -1,17 +1,19 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, generatePath } from "react-router-dom";
 
 const Overview = () => {
   let navigate = useNavigate();
+  // const history = useHistory();
 
   const redirectToDevices = () => {
     navigate("/devices");
   };
 
-  const redirectToDetailed = () => {
-    navigate("/detailed");
-  };
+  function redirectToDetailed(id) {
+    let path = generatePath("/details/:id", { id });
+    navigate(path);
+  }
 
   return (
     <>
@@ -36,7 +38,10 @@ const Overview = () => {
 
         <div className="scroll-area">
           {devices_turnedOn.map((src) => (
-            <button className="card" onClick={redirectToDetailed}>
+            <button
+              className="card"
+              onClick={() => redirectToDetailed(src.title)}
+            >
               <div
                 key={src.title}
                 className="card-image"
@@ -59,7 +64,10 @@ const Overview = () => {
         </div>
         <div className="scroll-area">
           {devices_frequentlyUsed.map((src) => (
-            <button className="card" onClick={redirectToDetailed}>
+            <button
+              className="card"
+              onClick={() => redirectToDetailed(src.title)}
+            >
               <div
                 key={src.title}
                 className="card-image"
@@ -77,18 +85,18 @@ const Overview = () => {
 };
 
 const devices_turnedOn = [
-  { image: "/logo192.png", title: "device1" },
-  { image: "/logo192.png", title: "device2" },
-  { image: "/logo192.png", title: "device3" },
-  { image: "/logo192.png", title: "device4" },
-  { image: "/logo192.png", title: "device5" },
-  { image: "/logo192.png", title: "device6" },
+  { title: "device1", image: "/logo192.png" },
+  { title: "device2", image: "/logo192.png" },
+  { title: "device3", image: "/logo192.png" },
+  { title: "device4", image: "/logo192.png" },
+  { title: "device5", image: "/logo192.png" },
+  { title: "device6", image: "/logo192.png" },
 ];
 
 const devices_frequentlyUsed = [
-  { image: "/logo192.png", title: "device1" },
-  { image: "/logo192.png", title: "device2" },
-  { image: "/logo192.png", title: "device3" },
+  { title: "device7", image: "/logo192.png" },
+  { title: "device8", image: "/logo192.png" },
+  { title: "device9", image: "/logo192.png" },
 ];
 
 export default Overview;
