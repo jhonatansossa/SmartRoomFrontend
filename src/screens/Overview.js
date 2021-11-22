@@ -25,7 +25,7 @@ const Overview = () => {
         </div>
 
         <div className="header">
-          <div>Turned on</div>
+          <div className="section-header">Turned on</div>
           <button
             onClick={redirectToDevices}
             className="btn-primary-no-background"
@@ -36,21 +36,20 @@ const Overview = () => {
 
         <div className="scroll-area">
           {devices_turnedOn.map((src) => (
-            <button onClick={redirectToDetailed}>
+            <button className="card" onClick={redirectToDetailed}>
               <div
                 key={src.title}
-                className="card"
+                className="card-image"
                 style={{
                   backgroundImage: `url(${src.image})`,
                 }}
-              >
-                <div className="card-title">{src.title}</div>
-              </div>
+              ></div>
+              <div className="card-title">{src.title}</div>
             </button>
           ))}
         </div>
         <div className="header">
-          <div>Frequently used</div>
+          <div className="section-header">Frequently used</div>
           <button
             onClick={redirectToDevices}
             className="btn-primary-no-background"
@@ -60,16 +59,15 @@ const Overview = () => {
         </div>
         <div className="scroll-area">
           {devices_frequentlyUsed.map((src) => (
-            <button onClick={redirectToDetailed}>
+            <button className="card" onClick={redirectToDetailed}>
               <div
                 key={src.title}
-                className="card"
+                className="card-image"
                 style={{
                   backgroundImage: `url(${src.image})`,
                 }}
-              >
-                <div className="card-title">{src.title}</div>
-              </div>
+              ></div>
+              <div className="card-title">{src.title}</div>
             </button>
           ))}
         </div>

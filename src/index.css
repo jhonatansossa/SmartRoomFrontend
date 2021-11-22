@@ -19,11 +19,17 @@ main {
   /* width: 100%; */
 }
 
+.section-header {
+  font-size: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .scroll-area {
   display: inline-flex;
   overflow-x: scroll;
   width: 100%;
-  gap: 10px;
+  gap: 20px;
   padding-left: 0px;
 }
 
@@ -40,8 +46,25 @@ main {
   text-align: center;
 }
 
+.card:hover > .card-title {
+  color: #ef962e;
+}
+
+.card:hover {
+  border-color: #ef962e;
+}
+
+.card-image {
+  height: 100px;
+  width: 130px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
 .card-title {
   /* text-align: center; */
   position: absolute;
   bottom: 0;
+  font-size: 16px;
 }
