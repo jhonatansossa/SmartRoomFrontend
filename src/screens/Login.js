@@ -4,7 +4,6 @@ import { useNavigate, generatePath } from "react-router-dom";
 
 const Login = () => {
   let navigate = useNavigate();
-  // const history = useHistory();
 
   const redirectToDevices = () => {
     navigate("/overview");
