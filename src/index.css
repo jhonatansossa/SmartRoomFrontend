@@ -3,6 +3,22 @@ main {
   background-color: #f6f6f6;
 }
 
+body {
+  letter-spacing: normal;
+}
+
+/* text selection color for firefox */
+::-moz-selection {
+  color: white;
+  background: #d78729;
+}
+
+/* text selection color */
+::selection {
+  color: white;
+  background: #d78729;
+}
+
 footer {
   position: absolute;
   left: 0;
