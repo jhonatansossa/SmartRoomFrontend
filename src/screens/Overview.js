@@ -39,7 +39,7 @@ const Overview = () => {
         <div className="scroll-area">
           {devices_turnedOn.map((src) => (
             <button
-              className="card horizontal"
+              className="card hov-primary horizontal"
               onClick={() => redirectToDetailed(src.title)}
             >
               <div
@@ -65,7 +65,7 @@ const Overview = () => {
         <div className="scroll-area">
           {devices_frequentlyUsed.map((src) => (
             <button
-              className="card horizontal"
+              className="card hov-primary horizontal"
               onClick={() => redirectToDetailed(src.title)}
             >
               <div

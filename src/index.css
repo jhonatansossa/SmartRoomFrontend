@@ -123,11 +123,11 @@ footer {
   /* display: flex; */
 }
 
-.card:hover > .card-title {
+.card.hov-primary:hover > .card-title {
   color: #ef962e;
 }
 
-.card:hover {
+.card.hov-primary:hover {
   border-color: #ef962e;
 }
 
@@ -159,6 +159,12 @@ footer {
 }
 
 .card-title.vertical {
+  margin-left: 10px;
+}
+
+.card-content {
+  text-align: left;
+  line-height: 130%;
   margin-left: 10px;
 }
 
@@ -196,4 +202,29 @@ footer {
   margin-left: -7px;
   filter: grayscale(1);
   transform: scale(1.25);
+}
+
+.switch {
+  margin-top: 6px;
+  margin-left: 20px;
+}
+
+.switch-on {
+  color: #6aa84f;
+  border-color: #6aa84f;
+}
+
+.switch-off {
+  color: #cc4125;
+  border-color: #cc4125;
+}
+
+.switch-on:hover {
+  color: #6aa84f;
+  border-color: #6aa84f;
+}
+
+.switch-off:hover {
+  color: #cc4125;
+  border-color: #cc4125;
 }

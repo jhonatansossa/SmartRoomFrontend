@@ -14,7 +14,7 @@ const AllDevices = () => {
     <div className="vertical-scroll-area">
       {devices.map((src) => (
         <button
-          className="card vertical"
+          className="card hov-primary vertical"
           onClick={() => redirectToDetailed(src.title)}
         >
           <div
