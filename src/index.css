@@ -89,21 +89,38 @@ footer {
   display: inline-flex;
   overflow-x: scroll;
   width: 100%;
-  gap: 20px;
+  gap: 15px;
   padding-left: 0px;
 }
 
+.vertical-scroll-area {
+  display: grid;
+  overflow-y: scroll;
+  max-height: 80vh;
+  row-gap: 15px;
+  margin: 0px;
+}
+
 /* items in horizontal list */
-.card {
+.card.horizontal {
   flex-shrink: 0;
   height: 150px;
   width: 150px;
   border-radius: 10px;
   padding: 10px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
   text-align: center;
+}
+
+.card.vertical {
+  /* flex-shrink: 0; */
+  height: 60px;
+  min-width: 200px;
+  max-width: 400px;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  flex-direction: row;
+  /* display: flex; */
 }
 
 .card:hover > .card-title {
@@ -114,7 +131,7 @@ footer {
   border-color: #ef962e;
 }
 
-.card-image {
+.card-image.horizontal {
   height: 100px;
   width: 130px;
   background-size: cover;
@@ -122,10 +139,27 @@ footer {
   background-position: center center;
 }
 
+.card-image.vertical {
+  height: 36px;
+  width: 36px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
 .card-title {
+  margin-top: auto;
+  font-size: 16px;
+  color: #858585;
+}
+
+.card-title.horizontal {
   position: absolute;
   bottom: 0;
-  font-size: 16px;
+}
+
+.card-title.vertical {
+  margin-left: 10px;
 }
 
 .form-control {
