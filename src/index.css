@@ -60,6 +60,7 @@ footer {
   color: white;
   border: none;
   border-radius: 10px;
+  text-align: center;
 }
 
 .btn-primary:hover {
@@ -130,7 +131,6 @@ footer {
 .form-control {
   margin: auto;
   margin-top: 20px;
-  display: flex;
   min-width: 200px;
   max-width: 400px;
   padding: 10px;
