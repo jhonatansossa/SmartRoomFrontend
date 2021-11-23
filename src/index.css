@@ -7,6 +7,21 @@ body {
   letter-spacing: normal;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-transform: none !important;
+  letter-spacing: normal;
+}
+
+.navbar {
+  text-transform: none;
+  font-size: 18px;
+}
+
 /* text selection color for firefox */
 ::-moz-selection {
   color: white;
