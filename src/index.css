@@ -12,11 +12,29 @@ main {
   border: none;
 }
 
+.btn-primary {
+  background-color: #ef962e;
+  color: white;
+  border: none;
+  border-radius: 10px;
+}
+
+.btn-primary:hover {
+  background-color: #d78729;
+  border: none;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
   /* flex-wrap: wrap; */
   /* width: 100%; */
+}
+
+.huge-header {
+  color: #858585;
+  margin-top: 50px;
+  text-align: center;
 }
 
 .section-header {
@@ -33,6 +51,7 @@ main {
   padding-left: 0px;
 }
 
+/* items in horizontal list */
 .card {
   flex-shrink: 0;
   height: 150px;
@@ -67,4 +86,42 @@ main {
   position: absolute;
   bottom: 0;
   font-size: 16px;
+}
+
+/* login */
+.login-container {
+  /* background-color: red; */
+  /* justify-content: center; */
+  /* align-items: center; */
+}
+
+.form-control {
+  margin: auto;
+  margin-top: 20px;
+  display: flex;
+  min-width: 200px;
+  max-width: 400px;
+  padding: 10px;
+  /* box-sizing: 20; */
+}
+
+.form-control-input {
+  border-radius: 10px;
+  border: 1px solid #e8e8e8;
+  background-color: white;
+}
+
+.form-control-input:focus {
+  background-color: white;
+}
+
+.form-control:hover {
+  border-color: #858585;
+}
+
+.checkbox-icon {
+  margin-top: 5px;
+  margin-right: 10px;
+  filter: grayscale(1);
+  transform: scale(1.25);
 }
