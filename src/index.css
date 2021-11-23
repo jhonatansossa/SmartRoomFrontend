@@ -103,6 +103,12 @@ main {
   background-color: white;
 }
 
+.form-control-input-password {
+  margin-top: 5px;
+  margin-bottom: -5px;
+  background: none;
+}
+
 .form-control:hover {
   border-color: #858585;
 }
@@ -110,6 +116,7 @@ main {
 .checkbox-icon {
   margin-top: 5px;
   margin-right: 10px;
+  margin-left: -7px;
   filter: grayscale(1);
   transform: scale(1.25);
 }

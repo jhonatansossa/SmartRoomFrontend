@@ -36,7 +36,7 @@ const Login = () => {
           className="form-control form-control-input"
           required
         />
-        <label className="form-control form-control-input">
+        <label className="form-control form-control-input-password">
           <input
             type="checkbox"
             onClick={togglePassword}
