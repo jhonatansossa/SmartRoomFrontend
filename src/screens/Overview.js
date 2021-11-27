@@ -39,17 +39,17 @@ const Overview = () => {
         <div className="scroll-area">
           {devices_turnedOn.map((src) => (
             <button
-              className="card"
+              className="card hov-primary horizontal"
               onClick={() => redirectToDetailed(src.title)}
             >
               <div
                 key={src.title}
-                className="card-image"
+                className="card-image horizontal"
                 style={{
                   backgroundImage: `url(${src.image})`,
                 }}
               ></div>
-              <div className="card-title">{src.title}</div>
+              <div className="card-title horizontal">{src.title}</div>
             </button>
           ))}
         </div>
@@ -65,17 +65,17 @@ const Overview = () => {
         <div className="scroll-area">
           {devices_frequentlyUsed.map((src) => (
             <button
-              className="card"
+              className="card hov-primary horizontal"
               onClick={() => redirectToDetailed(src.title)}
             >
               <div
                 key={src.title}
-                className="card-image"
+                className="card-image horizontal"
                 style={{
                   backgroundImage: `url(${src.image})`,
                 }}
               ></div>
-              <div className="card-title">{src.title}</div>
+              <div className="card-title horizontal">{src.title}</div>
             </button>
           ))}
         </div>
