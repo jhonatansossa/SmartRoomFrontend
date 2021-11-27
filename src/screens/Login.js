@@ -45,7 +45,7 @@ const Login = () => {
           Show password
         </label>
         <button type="submit" className="form-control btn-primary">
-          Sign in
+          Log in
         </button>
       </form>
     </div>
