@@ -4,24 +4,21 @@ import { useNavigate, generatePath } from "react-router-dom";
 import PopUp from "../components/PopUp";
 // import '../popup.css';
 
-
-
 const updateColor = (volts, watts) => {
-  let color
-  if (volts < 25 && watts <100) {
-    color = '#6aa84f'
-  }else if ((volts > 25 && volts < 35) && (watts > 100 && watts < 250)){
-    color = '#ef962e'
-  }else{
-    color = '#cc4125'
+  let color;
+  if (volts < 25 && watts < 100) {
+    color = "#6aa84f";
+  } else if (volts > 25 && volts < 35 && watts > 100 && watts < 250) {
+    color = "#ef962e";
+  } else {
+    color = "#cc4125";
   }
-  return{color}
-}
+  return { color };
+};
 
 const Overview = () => {
   let navigate = useNavigate();
   // const history = useHistory();
-
 
   const redirectToDevices = () => {
     navigate("/devices");
@@ -32,58 +29,85 @@ const Overview = () => {
     navigate(path);
   }
 
-  let volts = 26
-  let watts = 101 
+  let volts = 26;
+  let watts = 101;
 
   const [seen, setSeen] = useState(false);
-  
+
   // onClick={() => setSeen(!seen)}
 
   // {this.state.seen ? <PopUp toggle={this.togglePop} /> : null}
-  console.log(seen)
+  console.log(seen);
   return (
     <>
       <div>
         <div className="flex-container">
           <div id="circle"></div>
-          <div id='horRectangle'></div>
+          <div id="horRectangle"></div>
           <div id="door"></div>
-          <div onClick={() => setSeen(!seen)} style={{backgroundColor: updateColor(volts, watts).color }} id="washer" className="square">
+          <div
+            onClick={() => setSeen(!seen)}
+            style={{ backgroundColor: updateColor(volts, watts).color }}
+            id="washer"
+            className="square"
+          >
             <div>
-              {volts}W<br/>
+              {volts}W<br />
               {watts}V
             </div>
           </div>
-          
 
-          <div onClick={() => setSeen(!seen)} style={{backgroundColor: updateColor(volts, watts).color }} style={{backgroundColor: updateColor(volts, watts).color }} id="tv" className="rectangle">
+          <div
+            onClick={() => setSeen(!seen)}
+            style={{ backgroundColor: updateColor(volts, watts).color }}
+            style={{ backgroundColor: updateColor(volts, watts).color }}
+            id="tv"
+            className="rectangle"
+          >
             <div>
-              {volts}W<br/>
+              {volts}W<br />
               {watts}V
             </div>
           </div>
-          <div onClick={() => setSeen(!seen)} style={{backgroundColor: updateColor(volts, watts).color }} style={{backgroundColor: updateColor(volts, watts).color }} id="kitchen" className="square">
+          <div
+            onClick={() => setSeen(!seen)}
+            style={{ backgroundColor: updateColor(volts, watts).color }}
+            style={{ backgroundColor: updateColor(volts, watts).color }}
+            id="kitchen"
+            className="square"
+          >
             <div>
-              {volts}W<br/>
+              {volts}W<br />
               {watts}V
             </div>
           </div>
-          <div onClick={() => setSeen(!seen)} style={{backgroundColor: updateColor(volts, watts).color }} style={{backgroundColor: updateColor(volts, watts).color }} id="refrigerator" className="square">
+          <div
+            onClick={() => setSeen(!seen)}
+            style={{ backgroundColor: updateColor(volts, watts).color }}
+            style={{ backgroundColor: updateColor(volts, watts).color }}
+            id="refrigerator"
+            className="square"
+          >
             <div>
-              {volts}W<br/>
+              {volts}W<br />
               {watts}V
             </div>
           </div>
-          <div onClick={() => setSeen(!seen)} style={{backgroundColor: updateColor(volts, watts).color }} style={{backgroundColor: updateColor(volts, watts).color }} id="dryer" className="square">
+          <div
+            onClick={() => setSeen(!seen)}
+            style={{ backgroundColor: updateColor(volts, watts).color }}
+            style={{ backgroundColor: updateColor(volts, watts).color }}
+            id="dryer"
+            className="square"
+          >
             <div>
-              {volts}W<br/>
+              {volts}W<br />
               {watts}V
             </div>
           </div>
-          
-          {seen ? <PopUp/> : null}
+
+          {seen ? <PopUp /> : null}
         </div>
-        
 
         <div className="header">
           <div className="section-header">Turned on</div>
