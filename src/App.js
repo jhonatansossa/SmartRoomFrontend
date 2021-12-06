@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Login from "./screens/Login";
+import Login from "./screens/Login/Login";
 import Overview from "./screens/Overview";
 import Detailed from "./screens/Detailed";
 import AllDevices from "./screens/AllDevices";
