@@ -48,40 +48,68 @@ const Overview = () => {
           <div id="circle"></div>
           <div id='horRectangle'></div>
           <div id="door"></div>
-          <div onClick={() => setSeen(!seen)} style={{backgroundColor: updateColor(volts, watts).color }} id="washer" className="square">
+          <div
+            onClick={() => redirectToDetailed(devices_turnedOn[0].title)}
+            style={{ backgroundColor: updateColor(volts, watts).color }}
+            id="washer"
+            className="square"
+          >
             <div>
-              {volts}W<br/>
+              {volts}W<br />
               {watts}V
             </div>
           </div>
-          
 
-          <div onClick={() => setSeen(!seen)} style={{backgroundColor: updateColor(volts, watts).color }} style={{backgroundColor: updateColor(volts, watts).color }} id="tv" className="rectangle">
+          <div
+            onClick={() => redirectToDetailed(devices_turnedOn[1].title)}
+            style={{ backgroundColor: updateColor(volts, watts).color }}
+            style={{ backgroundColor: updateColor(volts, watts).color }}
+            id="tv"
+            className="rectangle"
+          >
             <div>
-              {volts}W<br/>
+              {volts}W<br />
               {watts}V
             </div>
           </div>
-          <div onClick={() => setSeen(!seen)} style={{backgroundColor: updateColor(volts, watts).color }} style={{backgroundColor: updateColor(volts, watts).color }} id="kitchen" className="square">
+          <div
+            onClick={() => redirectToDetailed(devices_turnedOn[2].title)}
+            style={{ backgroundColor: updateColor(volts, watts).color }}
+            style={{ backgroundColor: updateColor(volts, watts).color }}
+            id="kitchen"
+            className="square"
+          >
             <div>
-              {volts}W<br/>
+              {volts}W<br />
               {watts}V
             </div>
           </div>
-          <div onClick={() => setSeen(!seen)} style={{backgroundColor: updateColor(volts, watts).color }} style={{backgroundColor: updateColor(volts, watts).color }} id="refrigerator" className="square">
+          <div
+            onClick={() => redirectToDetailed(devices_turnedOn[3].title)}
+            style={{ backgroundColor: updateColor(volts, watts).color }}
+            style={{ backgroundColor: updateColor(volts, watts).color }}
+            id="refrigerator"
+            className="square"
+          >
             <div>
-              {volts}W<br/>
+              {volts}W<br />
               {watts}V
             </div>
           </div>
-          <div onClick={() => setSeen(!seen)} style={{backgroundColor: updateColor(volts, watts).color }} style={{backgroundColor: updateColor(volts, watts).color }} id="dryer" className="square">
+          <div
+            onClick={() => redirectToDetailed(devices_turnedOn[4].title)}
+            style={{ backgroundColor: updateColor(volts, watts).color }}
+            style={{ backgroundColor: updateColor(volts, watts).color }}
+            id="dryer"
+            className="square"
+          >
             <div>
-              {volts}W<br/>
+              {volts}W<br />
               {watts}V
             </div>
           </div>
-          
-          {seen ? <PopUp/> : null}
+
+          {/* {seen ? <PopUp /> : null} */}
         </div>
         
 
