@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
+import Axios from 'axios';
 import { Col, Row } from "react-bootstrap";
 import { useNavigate, generatePath } from "react-router-dom";
 import PopUp from "../components/PopUp";
@@ -24,8 +25,13 @@ const Overview = () => {
     navigate("/devices");
   };
 
-  function redirectToDetailed(id) {
-    let path = generatePath("/details/:id", { id });
+  function redirectToDetailedDevice(id) {
+    let path = generatePath("/devices/:id/details", { id });
+    navigate(path);
+  }
+
+  function redirectToDetailedSwitch(id) {
+    let path = generatePath("/switches/:id/details", { id });
     navigate(path);
   }
 
@@ -34,10 +40,31 @@ const Overview = () => {
 
   const [seen, setSeen] = useState(false);
 
-  // onClick={() => setSeen(!seen)}
+  //Fetching openHAB switches
+  const [openHABItems,setOpenHABItems]=useState([])
 
-  // {this.state.seen ? <PopUp toggle={this.togglePop} /> : null}
-  console.log(seen);
+  const config = {
+    headers: { Authorization: `Bearer oh.testToken.JpBfn4tkeRgYr7jV2MQi2xiNqfbZUdxJVWjIwfNDOLmo28MEbk10YmxGgYRs16Y752YXmgdqpU8D7htg` }
+  };
+
+  useEffect(() => {
+    fetchOpenHABItems();
+  }, [openHABItems,setOpenHABItems])
+
+  const fetchOpenHABItems=async()=>{
+    // https://community.openhab.org/t/cors-problem/113063  --> If requests not working
+    const response=await Axios('http://localhost:8080/rest/items', config);
+    console.log(response);
+    setOpenHABItems(response.data)    
+  }
+
+  var switches = new Array();
+  openHABItems.forEach(function(item) {
+    if(item.type == "Switch"){
+      switches.push(item);
+    }
+  });
+
   return (
     <>
       <div>
@@ -123,7 +150,7 @@ const Overview = () => {
           {devices_turnedOn.map((src) => (
             <button
               className="card hov-primary horizontal"
-              onClick={() => redirectToDetailed(src.title)}
+              onClick={() => redirectToDetailedDevice(src.title)}
             >
               <div
                 key={src.title}
@@ -135,7 +162,29 @@ const Overview = () => {
               <div className="card-title horizontal">{src.title}</div>
             </button>
           ))}
+        </div>    
+
+        <div className="header">
+          <div className="section-header">Switches</div>
         </div>
+        <div className="scroll-area">
+          {switches.map((src) => (
+            <button
+              className="card hov-primary horizontal"
+              onClick={() => redirectToDetailedSwitch(src.name)}
+            >
+              <div
+                key={src.label}
+                className="card-image horizontal"
+                style={{
+                  backgroundImage: `url(/logo192.png)`,
+                }}
+              ></div>
+              <div className="card-title horizontal">{src.label}</div>
+            </button>
+          ))}
+        </div>         
+
         <div className="header">
           <div className="section-header">Frequently used</div>
           <button
@@ -149,7 +198,7 @@ const Overview = () => {
           {devices_frequentlyUsed.map((src) => (
             <button
               className="card hov-primary horizontal"
-              onClick={() => redirectToDetailed(src.title)}
+              onClick={() => redirectToDetailedDevice(src.title)}
             >
               <div
                 key={src.title}
