@@ -46,7 +46,7 @@ const Overview = () => {
           <div id="horRectangle"></div>
           <div id="door"></div>
           <div
-            onClick={() => setSeen(!seen)}
+            onClick={() => redirectToDetailed(devices_turnedOn[0].title)}
             style={{ backgroundColor: updateColor(volts, watts).color }}
             id="washer"
             className="square"
@@ -58,8 +58,7 @@ const Overview = () => {
           </div>
 
           <div
-            onClick={() => setSeen(!seen)}
-            style={{ backgroundColor: updateColor(volts, watts).color }}
+            onClick={() => redirectToDetailed(devices_turnedOn[1].title)}
             style={{ backgroundColor: updateColor(volts, watts).color }}
             id="tv"
             className="rectangle"
@@ -70,8 +69,7 @@ const Overview = () => {
             </div>
           </div>
           <div
-            onClick={() => setSeen(!seen)}
-            style={{ backgroundColor: updateColor(volts, watts).color }}
+            onClick={() => redirectToDetailed(devices_turnedOn[2].title)}
             style={{ backgroundColor: updateColor(volts, watts).color }}
             id="kitchen"
             className="square"
@@ -82,8 +80,7 @@ const Overview = () => {
             </div>
           </div>
           <div
-            onClick={() => setSeen(!seen)}
-            style={{ backgroundColor: updateColor(volts, watts).color }}
+            onClick={() => redirectToDetailed(devices_turnedOn[3].title)}
             style={{ backgroundColor: updateColor(volts, watts).color }}
             id="refrigerator"
             className="square"
@@ -94,8 +91,7 @@ const Overview = () => {
             </div>
           </div>
           <div
-            onClick={() => setSeen(!seen)}
-            style={{ backgroundColor: updateColor(volts, watts).color }}
+            onClick={() => redirectToDetailed(devices_turnedOn[4].title)}
             style={{ backgroundColor: updateColor(volts, watts).color }}
             id="dryer"
             className="square"
@@ -106,7 +102,7 @@ const Overview = () => {
             </div>
           </div>
 
-          {seen ? <PopUp /> : null}
+          {/* {seen ? <PopUp /> : null} */}
         </div>
 
         <div className="header">
