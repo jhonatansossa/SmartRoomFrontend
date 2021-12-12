@@ -63,7 +63,6 @@ const Overview = () => {
           <div
             onClick={() => redirectToDetailed(devices_turnedOn[1].title)}
             style={{ backgroundColor: updateColor(volts, watts).color }}
-            style={{ backgroundColor: updateColor(volts, watts).color }}
             id="tv"
             className="rectangle"
           >
@@ -74,7 +73,6 @@ const Overview = () => {
           </div>
           <div
             onClick={() => redirectToDetailed(devices_turnedOn[2].title)}
-            style={{ backgroundColor: updateColor(volts, watts).color }}
             style={{ backgroundColor: updateColor(volts, watts).color }}
             id="kitchen"
             className="square"
@@ -87,7 +85,6 @@ const Overview = () => {
           <div
             onClick={() => redirectToDetailed(devices_turnedOn[3].title)}
             style={{ backgroundColor: updateColor(volts, watts).color }}
-            style={{ backgroundColor: updateColor(volts, watts).color }}
             id="refrigerator"
             className="square"
           >
@@ -98,7 +95,6 @@ const Overview = () => {
           </div>
           <div
             onClick={() => redirectToDetailed(devices_turnedOn[4].title)}
-            style={{ backgroundColor: updateColor(volts, watts).color }}
             style={{ backgroundColor: updateColor(volts, watts).color }}
             id="dryer"
             className="square"
