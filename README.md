@@ -16,3 +16,7 @@ When starting an implementation of a new feature please follow this instruction 
 5. Run ``npm i react-router-dom react-router-bootstrap`` on CLI
 6. Run ``npm start`` on CLI 
 7. Visit ``localhost:3000``
+
+## Library for charts
+The library used to create the charts is Chart.js in conjunction with react-chartjs-2 which provides the charts as components.
+The documentation can be viewed at https://www.chartjs.org/ and https://react-chartjs-2.netlify.app/ 
