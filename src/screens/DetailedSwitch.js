@@ -62,9 +62,7 @@ const DetailedSwitch = () => {
     // Initialize a boolean state
     return (
         <div className="vertical-scroll-area">
-            <div className="card vertical">
-                <div className="card-title">JUST FOR DEMO: {id}</div>
-            </div>
+            <h2 className="title">{id}</h2>
             <ToggleButton
                 value={toggle}
                 onToggle={() => {

@@ -15,9 +15,7 @@ const DetailedDevice = () => {
 
     return (
         <div className="vertical-scroll-area">
-            <div className="card vertical">
-                <div className="card-title">JUST FOR DEMO: {id}</div>
-            </div>
+            <h2 className="title">{id}</h2>
             <div className="card vertical">
                 <div
                     key={src.title}
