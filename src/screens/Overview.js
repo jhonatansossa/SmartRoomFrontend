@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Axios from 'axios';
 import {generatePath, useNavigate} from "react-router-dom";
-import PopUp from "../components/PopUp";
 import openHAB from "../Token/openHAB";
 
 const updateColor = (volts, watts) => {
@@ -35,8 +34,6 @@ const Overview = () => {
 
     let volts = 26;
     let watts = 101;
-
-    const [seen, setSeen] = useState(false);
 
     //Fetching openHAB switches
     const [openHABItems, setOpenHABItems] = useState([])
@@ -72,7 +69,7 @@ const Overview = () => {
                     <div id="horRectangle"/>
                     <div id="door"/>
                     <div
-                        onClick={() => redirectToDetailed(devices_turnedOn[0].title)}
+                        onClick={() => redirectToDetailedDevice(devices_turnedOn[0].title)}
                         style={{backgroundColor: updateColor(volts, watts).color}}
                         id="washer"
                         className="square"
@@ -84,7 +81,7 @@ const Overview = () => {
                     </div>
 
                     <div
-                        onClick={() => redirectToDetailed(devices_turnedOn[1].title)}
+                        onClick={() => redirectToDetailedDevice(devices_turnedOn[1].title)}
                         style={{backgroundColor: updateColor(volts, watts).color}}
                         id="tv"
                         className="rectangle"
@@ -95,7 +92,7 @@ const Overview = () => {
                         </div>
                     </div>
                     <div
-                        onClick={() => redirectToDetailed(devices_turnedOn[2].title)}
+                        onClick={() => redirectToDetailedDevice(devices_turnedOn[2].title)}
                         style={{backgroundColor: updateColor(volts, watts).color}}
                         id="kitchen"
                         className="square"
@@ -106,7 +103,7 @@ const Overview = () => {
                         </div>
                     </div>
                     <div
-                        onClick={() => redirectToDetailed(devices_turnedOn[3].title)}
+                        onClick={() => redirectToDetailedDevice(devices_turnedOn[3].title)}
                         style={{backgroundColor: updateColor(volts, watts).color}}
                         id="refrigerator"
                         className="square"
@@ -117,7 +114,7 @@ const Overview = () => {
                         </div>
                     </div>
                     <div
-                        onClick={() => redirectToDetailed(devices_turnedOn[4].title)}
+                        onClick={() => redirectToDetailedDevice(devices_turnedOn[4].title)}
                         style={{backgroundColor: updateColor(volts, watts).color}}
                         id="dryer"
                         className="square"
@@ -128,8 +125,8 @@ const Overview = () => {
                         </div>
                     </div>
 
-          {/* {seen ? <PopUp /> : null} */}
-        </div>
+                    {/* {seen ? <PopUp /> : null} */}
+                </div>
 
                 <div className="header">
                     <div className="section-header">Turned on</div>
@@ -153,7 +150,7 @@ const Overview = () => {
                                 style={{
                                     backgroundImage: `url(${src.image})`,
                                 }}
-                            ></div>
+                            />
                             <div className="card-title horizontal">{src.title}</div>
                         </button>
                     ))}
@@ -174,7 +171,7 @@ const Overview = () => {
                                 style={{
                                     backgroundImage: `url(/logo192.png)`,
                                 }}
-                            ></div>
+                            />
                             <div className="card-title horizontal">{src.label}</div>
                         </button>
                     ))}
@@ -201,7 +198,7 @@ const Overview = () => {
                                 style={{
                                     backgroundImage: `url(${src.image})`,
                                 }}
-                            ></div>
+                            />
                             <div className="card-title horizontal">{src.title}</div>
                         </button>
                     ))}
