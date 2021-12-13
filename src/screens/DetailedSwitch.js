@@ -1,75 +1,79 @@
 import {React, useEffect, useState} from "react";
-import { useParams } from "react-router-dom";
-import ToggleButton from 'react-toggle-button'
+import {useParams} from "react-router-dom";
+import ToggleButton from "react-toggle-button";
 import Axios from "axios";
+import axios from "axios";
+import openHAB from "../Token/openHAB";
 
 const DetailedSwitch = () => {
-    const { id } = useParams();
+    const {id} = useParams();
 
     //Fetching openHAB switch item
-    const [openHABItem,setOpenHABItem]=useState([])
+    const [openHABItem, setOpenHABItem] = useState([]);
+    const [toggle, setToggle] = useState(false); // Switch toggle handler
+    const [responseStatus, setResponseStatus] = useState([])
 
     const config = {
-        headers: { Authorization: `Bearer oh.testToken.JpBfn4tkeRgYr7jV2MQi2xiNqfbZUdxJVWjIwfNDOLmo28MEbk10YmxGgYRs16Y752YXmgdqpU8D7htg` }
+        headers: {
+            Authorization: openHAB.token,
+            'Content-Type': 'text/plain'
+        },
     };
 
     useEffect(() => {
         fetchOpenHABItem();
-    }, [])
+    }, []);
 
-    const fetchOpenHABItem=async()=>{
+    const fetchOpenHABItem = async () => {
         // https://community.openhab.org/t/cors-problem/113063  --> If requests not working
-        const response=await Axios('http://localhost:8080/rest/items/' + id, config);
-        setOpenHABItem(response.data)
+        const response = await Axios(
+            openHAB.url + "/rest/items/" + id,
+            config
+        );
+        setOpenHABItem(response.data);
+    };
+
+    if (openHABItem.state === "ON") {
+        setToggle(true);
     }
 
-    var switchOn = false;
-    if(openHABItem.state === 'ON'){
-        switchOn = true;
-    }
-
-  const src = {
-    title: "device1",
-    image: "/logo192.png",
-    voltage: 30,
-    power: 240,
-    switchOn: true,
-  };
-
-  // Initialize a boolean state
-  const [passwordShown, setPasswordShown] = useState(src.switchOn);
-
-  // Switch toggle handler
-  const toggleSwitch = () => {
-    // When the handler is invoked
-    // inverse the boolean state of switch
-    setPasswordShown(!passwordShown);
-  };
-
-  return (
-    <div className="vertical-scroll-area">
-      <div className="card vertical">
-        <div className="card-title">JUST FOR DEMO: {id}</div>
-      </div>
-      <div
-        className={
-          passwordShown ? "card vertical switch-on" : "card vertical switch-off"
+    async function sendOpenHABRequest(toggle) {
+        if (toggle) {
+            axios.post(
+                openHAB.url + '/rest/items/' + id,
+                'OFF',
+                config,
+            ).then(response => {
+                setResponseStatus(response.data);
+                console.log(responseStatus);
+            });
+        } else {
+            axios.post(
+                openHAB.url + '/rest/items/' + id,
+                'ON',
+                config,
+            ).then(response => {
+                setResponseStatus(response.data);
+                console.log(responseStatus);
+            });
         }
-      >
-        <label
-          className={passwordShown ? "switch switch-on" : "switch switch-off"}
-        >
-        </label>
-          <ToggleButton
-              value={ self.state.value || false }
-              onToggle={(value) => {
-                  self.setState({
-                      value: !value,
-                  })
-              }} />
-      </div>
-    </div>
-  );
+    }
+
+    // Initialize a boolean state
+    return (
+        <div className="vertical-scroll-area">
+            <div className="card vertical">
+                <div className="card-title">JUST FOR DEMO: {id}</div>
+            </div>
+            <ToggleButton
+                value={toggle}
+                onToggle={() => {
+                    setToggle(!toggle);
+                    sendOpenHABRequest(toggle);
+                }}
+            />
+        </div>
+    );
 };
 
 export default DetailedSwitch;
