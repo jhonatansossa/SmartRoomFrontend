@@ -1,14 +1,32 @@
-import { React, useState } from "react";
-import { Col, Row } from "react-bootstrap";
+import {React, useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
+import ToggleButton from 'react-toggle-button'
+import Axios from "axios";
 
 const DetailedSwitch = () => {
-  const { id } = useParams();
+    const { id } = useParams();
 
-    /*
-    * Daten holen und Toogle button machen 
-    */
+    //Fetching openHAB switch item
+    const [openHABItem,setOpenHABItem]=useState([])
 
+    const config = {
+        headers: { Authorization: `Bearer oh.testToken.JpBfn4tkeRgYr7jV2MQi2xiNqfbZUdxJVWjIwfNDOLmo28MEbk10YmxGgYRs16Y752YXmgdqpU8D7htg` }
+    };
+
+    useEffect(() => {
+        fetchOpenHABItem();
+    }, [])
+
+    const fetchOpenHABItem=async()=>{
+        // https://community.openhab.org/t/cors-problem/113063  --> If requests not working
+        const response=await Axios('http://localhost:8080/rest/items/' + id, config);
+        setOpenHABItem(response.data)
+    }
+
+    var switchOn = false;
+    if(openHABItem.state === 'ON'){
+        switchOn = true;
+    }
 
   const src = {
     title: "device1",
@@ -41,28 +59,14 @@ const DetailedSwitch = () => {
         <label
           className={passwordShown ? "switch switch-on" : "switch switch-off"}
         >
-          <input
-            type="checkbox"
-            onClick={toggleSwitch}
-            className="checkbox-icon"
-          />
-          Switched on
         </label>
-      </div>
-      <div className="card vertical">
-        <div
-          key={src.title}
-          className="card-image vertical"
-          style={{
-            backgroundImage: `url(${src.image})`,
-          }}
-        ></div>
-        <div className="card-title card-content">
-          <p>
-            Current voltage: {src.voltage}V<br />
-            Current power: {src.power}W
-          </p>
-        </div>
+          <ToggleButton
+              value={ self.state.value || false }
+              onToggle={(value) => {
+                  self.setState({
+                      value: !value,
+                  })
+              }} />
       </div>
     </div>
   );

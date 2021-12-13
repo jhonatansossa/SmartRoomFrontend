@@ -1,9 +1,7 @@
 import React, { useState,useEffect } from "react";
 import Axios from 'axios';
-import { Col, Row } from "react-bootstrap";
 import { useNavigate, generatePath } from "react-router-dom";
 import PopUp from "../components/PopUp";
-// import '../popup.css';
 
 const updateColor = (volts, watts) => {
   let color;
@@ -19,7 +17,6 @@ const updateColor = (volts, watts) => {
 
 const Overview = () => {
   let navigate = useNavigate();
-  // const history = useHistory();
 
   const redirectToDevices = () => {
     navigate("/devices");
@@ -49,29 +46,30 @@ const Overview = () => {
 
   useEffect(() => {
     fetchOpenHABItems();
-  }, [openHABItems,setOpenHABItems])
+  }, [])
 
   const fetchOpenHABItems=async()=>{
     // https://community.openhab.org/t/cors-problem/113063  --> If requests not working
     const response=await Axios('http://localhost:8080/rest/items', config);
-    console.log(response);
-    setOpenHABItems(response.data)    
+    setOpenHABItems(response.data)
   }
 
-  var switches = new Array();
+  var switches = [];
   openHABItems.forEach(function(item) {
-    if(item.type == "Switch"){
+    if(item.type === "Switch"){
       switches.push(item);
     }
   });
+
+  console.log(switches)
 
   return (
     <>
       <div>
         <div className="flex-container">
-          <div id="circle"></div>
-          <div id="horRectangle"></div>
-          <div id="door"></div>
+          <div id="circle"/>
+          <div id="horRectangle"/>
+          <div id="door"/>
           <div
             onClick={() => setSeen(!seen)}
             style={{ backgroundColor: updateColor(volts, watts).color }}
