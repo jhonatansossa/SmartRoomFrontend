@@ -1,6 +1,6 @@
 import { React, useState } from "react";
-import { Col, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import Graphs from "../components/Graphs";
 
 const Detailed = () => {
   const { id } = useParams();
@@ -58,6 +58,9 @@ const Detailed = () => {
             Current power: {src.power}W
           </p>
         </div>
+      </div>
+      <div className="card vertical" >
+        <Graphs/>
       </div>
     </div>
   );
