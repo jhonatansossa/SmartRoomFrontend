@@ -1,6 +1,7 @@
 const openHAB = {
-    "token": "Bearer oh.testToken.JpBfn4tkeRgYr7jV2MQi2xiNqfbZUdxJVWjIwfNDOLmo28MEbk10YmxGgYRs16Y752YXmgdqpU8D7htg",
-    "url": "http://localhost:8080"
+  token:
+    "Bearer oh.TestToken2.4Io1Nb0EDvObPz5LoJnOsjS7OD8eUPOyPlfxZKcUkcux3Jy4qePDgnbOT2NM8S3lqe6cZ1Qwp7ZmLOwSKJJw",
+  url: "http://localhost:8080",
 };
 
 module.exports = openHAB;
