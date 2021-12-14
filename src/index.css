@@ -1,10 +1,10 @@
 main {
-    min-height: 90vh;
-    background-color: #f6f6f6;
+  min-height: 90vh;
+  background-color: #f6f6f6;
 }
 
 body {
-    letter-spacing: normal;
+  letter-spacing: normal;
 }
 
 h1,
@@ -13,349 +13,354 @@ h3,
 h4,
 h5,
 h6 {
-    text-transform: none !important;
-    letter-spacing: normal;
+  text-transform: none !important;
+  letter-spacing: normal;
+}
+
+p {
+  margin-block-end: 0;
 }
 
 .navbar {
-    text-transform: none;
-    font-size: 18px;
+  text-transform: none;
+  font-size: 18px;
 }
 
 /* text selection color for firefox */
 ::-moz-selection {
-    color: white;
-    background: #d78729;
+  color: white;
+  background: #d78729;
 }
 
 /* text selection color */
 ::selection {
-    color: white;
-    background: #d78729;
+  color: white;
+  background: #d78729;
 }
 
 footer {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    right: 0;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 
 .bg-dark {
-    background-color: #ef962e !important;
+  background-color: #ef962e !important;
 }
 
 ::-webkit-scrollbar {
-    width: 0px;
+  width: 0px;
 }
 
 .btn-primary-no-background {
-    background: none;
-    color: #ef962e;
-    border: none;
+  background: none;
+  color: #ef962e;
+  border: none;
 }
 
 .btn-primary {
-    background-color: #ef962e;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    text-align: center;
+  background-color: #ef962e;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  text-align: center;
 }
 
 .btn-primary:hover {
-    background-color: #d78729;
-    border: none;
+  background-color: #d78729;
+  border: none;
 }
 
 .header {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .huge-header {
-    color: #858585;
-    margin-top: 50px;
-    text-align: center;
+  color: #858585;
+  margin-top: 50px;
+  text-align: center;
 }
 
 .section-header {
-    font-size: 20px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+  font-size: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .scroll-area {
-    display: inline-flex;
-    overflow-x: scroll;
-    width: 100%;
-    gap: 15px;
-    padding-left: 0px;
+  display: inline-flex;
+  overflow-x: scroll;
+  width: 100%;
+  gap: 15px;
+  padding-left: 0px;
 }
 
 .vertical-scroll-area {
-    display: grid;
-    overflow-y: scroll;
-    max-height: 80vh;
-    row-gap: 15px;
-    margin: 0px;
+  display: grid;
+  overflow-y: scroll;
+  max-height: 80vh;
+  row-gap: 15px;
+  margin: 0px;
 }
 
 /* items in horizontal list */
 .card.horizontal {
-    flex-shrink: 0;
-    height: 150px;
-    width: 150px;
-    border-radius: 10px;
-    padding: 10px;
-    text-align: center;
+  flex-shrink: 0;
+  height: 150px;
+  width: 150px;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
 }
 
 .card.vertical {
-    /* flex-shrink: 0; */
-    min-height: 60px;
-    min-width: 200px;
-    max-width: 400px;
-    border-radius: 10px;
-    padding: 10px;
-    text-align: center;
-    flex-direction: row;
-    /* display: flex; */
+  /* flex-shrink: 0; */
+  min-height: 60px;
+  min-width: 200px;
+  max-width: 400px;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  flex-direction: row;
+  /* display: flex; */
 }
 
 .card.hov-primary:hover > .card-title {
-    color: #ef962e;
+  color: #ef962e;
 }
 
 .card.hov-primary:hover {
-    border-color: #ef962e;
+  border-color: #ef962e;
 }
 
 .card-image.horizontal {
-    height: 100px;
-    width: 130px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
+  height: 100px;
+  width: 130px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .card-image.vertical {
-    height: 36px;
-    width: 36px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
+  height: 36px;
+  width: 36px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .title {
-    margin-top: 10px;
-    color: #858585;
+  margin-top: 10px;
+  color: #858585;
 }
 
 .card-title {
-    margin-top: auto;
-    font-size: 16px;
-    color: #858585;
+  margin-top: auto;
+  font-size: 16px;
+  color: #858585;
 }
 
 .card-title.horizontal {
-    position: absolute;
-    bottom: 0;
+  position: absolute;
+  bottom: 0;
 }
 
 .card-title.vertical {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 .card-content {
-    text-align: left;
-    line-height: 130%;
-    margin-left: 10px;
+  text-align: left;
+  line-height: 130%;
+  margin-left: 10px;
 }
 
 .form-control {
-    margin: auto;
-    margin-top: 20px;
-    min-width: 200px;
-    max-width: 400px;
-    padding: 10px;
+  margin: auto;
+  margin-top: 20px;
+  min-width: 200px;
+  max-width: 400px;
+  padding: 10px;
 }
 
 .form-control-input {
-    border-radius: 10px;
-    border: 1px solid #e8e8e8;
-    background-color: white;
+  border-radius: 10px;
+  border: 1px solid #e8e8e8;
+  background-color: white;
 }
 
 .form-control-input:focus {
-    background-color: white;
+  background-color: white;
 }
 
 .form-control-input-password {
-    margin-top: 5px;
-    margin-bottom: -5px;
-    background: none;
+  margin-top: 5px;
+  margin-bottom: -5px;
+  background: none;
 }
 
 .form-control:hover {
-    border-color: #858585;
+  border-color: #858585;
 }
 
 .checkbox-icon {
-    margin-top: 5px;
-    margin-right: 10px;
-    margin-left: -7px;
-    filter: grayscale(1);
-    transform: scale(1.25);
+  margin-top: 5px;
+  margin-right: 10px;
+  margin-left: -7px;
+  filter: grayscale(1);
+  transform: scale(1.25);
 }
 
 .switch {
-    margin-top: 6px;
-    margin-left: 20px;
+  margin-top: 6px;
+  margin-left: 20px;
 }
 
 .switch-on {
-    color: #6aa84f;
-    border-color: #6aa84f;
+  color: #6aa84f;
+  border-color: #6aa84f;
 }
 
 .switch-off {
-    color: #cc4125;
-    border-color: #cc4125;
+  color: #cc4125;
+  border-color: #cc4125;
 }
 
 .switch-on:hover {
-    color: #6aa84f;
-    border-color: #6aa84f;
+  color: #6aa84f;
+  border-color: #6aa84f;
 }
 
 .switch-off:hover {
-    color: #cc4125;
-    border-color: #cc4125;
+  color: #cc4125;
+  border-color: #cc4125;
 }
 
 #circle {
-    width: 8vmax;
-    height: 8vmax;
-    border: solid 1px black;
-    border-radius: 70px;
-    background-color: #f6f6f6;
-    grid-row: 1 / span 2;
-    margin-top: 20%;
-    grid-column: 2;
+  width: 8vmax;
+  height: 8vmax;
+  border: solid 1px black;
+  border-radius: 70px;
+  background-color: #f6f6f6;
+  grid-row: 1 / span 2;
+  margin-top: 20%;
+  grid-column: 2;
 }
 
 #horRectangle {
-    width: 7vmax;
-    height: 2.5vmax;
-    background-color: #f6f6f6;
-    border: solid 1px black;
-    border-radius: 8px;
-    grid-row: 4;
-    grid-column: 1;
-    justify-self: center;
-    align-self: end;
+  width: 7vmax;
+  height: 2.5vmax;
+  background-color: #f6f6f6;
+  border: solid 1px black;
+  border-radius: 8px;
+  grid-row: 4;
+  grid-column: 1;
+  justify-self: center;
+  align-self: end;
 }
 
 #door {
-    width: 6.5vmax;
-    height: 6vmax;
-    background-color: #f6f6f6;
-    /* border: solid 1px black; */
-    border-top: solid 1px black;
-    border-bottom: solid 1px black;
-    border-left: solid 1px black;
-    border-top-left-radius: 90px;
-    grid-row: 4;
-    grid-column: 4;
-    justify-self: end;
-    align-self: center;
+  width: 6.5vmax;
+  height: 6vmax;
+  background-color: #f6f6f6;
+  /* border: solid 1px black; */
+  border-top: solid 1px black;
+  border-bottom: solid 1px black;
+  border-left: solid 1px black;
+  border-top-left-radius: 90px;
+  grid-row: 4;
+  grid-column: 4;
+  justify-self: end;
+  align-self: center;
 }
 
 .square {
-    min-width: 6vmax;
-    min-height: 6vmax;
-    width: fit-content;
-    height: fit-content;
-    text-align: center;
-    border: solid 1px black;
-    border-radius: 8px;
-    color: #f6f6f6;
-    overflow: auto;
-    cursor: pointer;
+  min-width: 6vmax;
+  min-height: 6vmax;
+  width: fit-content;
+  height: fit-content;
+  text-align: center;
+  border: solid 1px black;
+  border-radius: 8px;
+  color: #f6f6f6;
+  overflow: auto;
+  cursor: pointer;
 }
 
 .rectangle {
-    min-width: 3vmax;
-    min-height: 6vmax;
-    width: fit-content;
-    height: fit-content;
-    color: #f6f6f6;
-    text-align: center;
-    border: solid 1px black;
-    border-radius: 8px;
-    cursor: pointer;
+  min-width: 3vmax;
+  min-height: 6vmax;
+  width: fit-content;
+  height: fit-content;
+  color: #f6f6f6;
+  text-align: center;
+  border: solid 1px black;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 #washer {
-    grid-row: 2;
-    grid-column: 1;
-    font-size: 80%;
+  grid-row: 2;
+  grid-column: 1;
+  font-size: 80%;
 }
 
 #dryer {
-    grid-row: 4;
-    grid-column: 2;
-    font-size: 80%;
-    align-self: end;
+  grid-row: 4;
+  grid-column: 2;
+  font-size: 80%;
+  align-self: end;
 }
 
 #refrigerator {
-    grid-row: 3;
-    grid-column: 4;
-    justify-self: end;
-    font-size: 80%;
-    align-self: end;
+  grid-row: 3;
+  grid-column: 4;
+  justify-self: end;
+  font-size: 80%;
+  align-self: end;
 }
 
 #tv {
-    grid-row: 3;
-    grid-column: 1;
-    font-size: 80%;
+  grid-row: 3;
+  grid-column: 1;
+  font-size: 80%;
 }
 
 #kitchen {
-    grid-row: 2;
-    grid-column: 4;
-    justify-self: end;
-    font-size: 80%;
-    align-self: end;
+  grid-row: 2;
+  grid-column: 4;
+  justify-self: end;
+  font-size: 80%;
+  align-self: end;
 }
 
 .flex-container {
-    display: grid;
-    grid: 1fr 1fr 1fr 1fr/ 1fr 1fr 1fr 1fr;
-    width: 40vmax;
-    height: 30vmax;
-    margin: auto;
-    background-color: #f6f6f6;
-    border: solid 1px black;
-    border-radius: 8px;
+  display: grid;
+  grid: 1fr 1fr 1fr 1fr/ 1fr 1fr 1fr 1fr;
+  width: 40vmax;
+  height: 30vmax;
+  margin: auto;
+  background-color: #f6f6f6;
+  border: solid 1px black;
+  border-radius: 8px;
+  margin-bottom: 20px;
 }
 
 /* POPUP CSS */
 
 #modal {
-    height: 10vmax;
-    width: 15vmax;
-    border-radius: 8px;
-    background-color: rgba(0, 0, 0, 0.61);
-    backdrop-filter: blur(1px);
-    color: #f6f6f6;
-    text-align: center;
-    grid-row: 2 / span 2;
-    grid-column: 2 / span 2;
-    padding: 5px;
-    justify-self: center;
-    align-self: center;
+  height: 10vmax;
+  width: 15vmax;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.61);
+  backdrop-filter: blur(1px);
+  color: #f6f6f6;
+  text-align: center;
+  grid-row: 2 / span 2;
+  grid-column: 2 / span 2;
+  padding: 5px;
+  justify-self: center;
+  align-self: center;
 }
