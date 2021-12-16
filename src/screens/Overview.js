@@ -53,14 +53,31 @@ const Overview = () => {
     };
 
     var switches = [];
+    var devices = [];
+    var stateDescription;
     openHABItems.forEach(function (item) {
         if (item.type === "Switch") {
-            if (item.stateDescription.readOnly === false)
-                switches.push(item);
+            if ("stateDescription" in item) {
+                if ("readOnly" in item.stateDescription) {
+                    if (item.stateDescription.readOnly === false)
+                        switches.push(item);
+                }
+            }
+        }
+        if ("stateDescription" in item) {
+            if ("options" in item.stateDescription) {
+                if (item.stateDescription.options !== []) {
+                    item.stateDescription.options.forEach(function (value) {
+                        if (value.value === "device") {
+                            devices.push(item);
+                        }
+                    })
+                }
+            }
         }
     });
 
-    console.log(switches);
+    console.log(switches)
 
     return (
         <>
@@ -125,8 +142,6 @@ const Overview = () => {
                             {watts}V
                         </div>
                     </div>
-
-                    {/* {seen ? <PopUp /> : null} */}
                 </div>
 
                 <div className="header">
@@ -140,19 +155,19 @@ const Overview = () => {
                 </div>
 
                 <div className="scroll-area">
-                    {devices_turnedOn.map((src) => (
+                    {devices.map((src) => (
                         <button
                             className="card hov-primary horizontal"
-                            onClick={() => redirectToDetailedDevice(src.title)}
+                            onClick={() => redirectToDetailedDevice(src.stateDescription.options[0].value)}
                         >
                             <div
                                 key={src.title}
                                 className="card-image horizontal"
                                 style={{
-                                    backgroundImage: `url(${src.image})`,
+                                    backgroundImage: `url(/logo192.png)`,
                                 }}
                             />
-                            <div className="card-title horizontal">{src.title}</div>
+                            <div className="card-title horizontal">{src.stateDescription.options[0].value}</div>
                         </button>
                     ))}
                 </div>
