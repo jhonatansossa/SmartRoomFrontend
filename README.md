@@ -23,6 +23,16 @@ on master:
 6. Run ``npm start`` on CLI
 7. Visit ``localhost:3000``
 
+## OpenHAB Token
+
+To be able to send requests to your local openHAB do the fowlloing:
+
+1. Go to you openHAB installation e.g. ``C:\OpenHAB\openhab-3.1.0`` and search for ``runtime.cfg``
+2. Inside this file paste ``org.openhab.cors:enable=true``
+3. Also you need to generate a Bearer token for the openHAB authentification.
+4. Click on "admin" in the left corner of openHAB > "Create new API token" > Login, choose a name and copy the token
+5. Paste the token in ``openHAB/openHAB.js``
+
 ## Manipulating local openHAB
 
 In order for the local openHAB version to work properly with the app, the following must be changed:
