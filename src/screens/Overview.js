@@ -37,15 +37,13 @@ const Overview = () => {
 
     //Fetching openHAB switches
     const [openHABItems, setOpenHABItems] = useState([]);
-    const [openHABImages, setOpenHABImages] = useState([]);
-
 
     const config = {
         headers: {
             Authorization: openHAB.token,
         },
     }
-    
+
     useEffect(() => {
         fetchOpenHABItems();
     }, []);
@@ -71,7 +69,6 @@ const Overview = () => {
                 if (item.stateDescription.options !== []) {
                     item.stateDescription.options.forEach(function (value) {
                         if (value.value === "device") {
-                            fetchOpenHABImages(item.stateDescription.options[0].value)
                             devices.push(item);
                         }
                     })
@@ -79,20 +76,6 @@ const Overview = () => {
             }
         }
     });
-
-    async function fetchOpenHABImages(name) {
-        const response = await Axios(openHAB.url + "/static/" + name + ".png", config);
-        setOpenHABImages(response.data);
-    }
-
-    // devices.forEach(function (item) {
-    //     fetchOpenHABImages("test")
-    // })
-
-    /*const fetchOpenHABImages = async (name) => {
-        const response = await Axios(openHAB.url + "/static/" + name + ".png", config);
-        setOpenHABImages(response.data);
-    };*/
 
     return (
         <>
@@ -173,13 +156,13 @@ const Overview = () => {
                     {devices.map((src) => (
                         <button
                             className="card hov-primary horizontal"
-                            onClick={() => redirectToDetailedDevice(src.stateDescription.options[0].value)}
+                            onClick={() => redirectToDetailedDevice(src.stateDescription.options[2].value)}
                         >
                             <div
                                 key={src.title}
                                 className="card-image horizontal"
                                 style={{
-                                    backgroundImage: `url(/logo192.png)`,
+                                    backgroundImage: `url('/resources/${src.stateDescription.options[2].value}.png')`,
                                 }}
                             />
                             <div className="card-title horizontal">{src.stateDescription.options[0].value}</div>
@@ -200,7 +183,7 @@ const Overview = () => {
                                 key={src.label}
                                 className="card-image horizontal"
                                 style={{
-                                    backgroundImage: `url(/logo192.png)`,
+                                    backgroundImage: `url('/resources/${src.name}.png')`,
                                 }}
                             />
                             <div className="card-title horizontal">{src.label}</div>
