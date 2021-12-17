@@ -37,24 +37,26 @@ const Overview = () => {
 
     //Fetching openHAB switches
     const [openHABItems, setOpenHABItems] = useState([]);
+    const [openHABImages, setOpenHABImages] = useState([]);
+
 
     const config = {
-        headers: {Authorization: openHAB.token},
-    };
-
+        headers: {
+            Authorization: openHAB.token,
+        },
+    }
+    
     useEffect(() => {
         fetchOpenHABItems();
     }, []);
 
     const fetchOpenHABItems = async () => {
-        // https://community.openhab.org/t/cors-problem/113063  --> If requests not working
         const response = await Axios(openHAB.url + "/rest/items", config);
         setOpenHABItems(response.data);
     };
 
     var switches = [];
     var devices = [];
-    var stateDescription;
     openHABItems.forEach(function (item) {
         if (item.type === "Switch") {
             if ("stateDescription" in item) {
@@ -69,6 +71,7 @@ const Overview = () => {
                 if (item.stateDescription.options !== []) {
                     item.stateDescription.options.forEach(function (value) {
                         if (value.value === "device") {
+                            fetchOpenHABImages(item.stateDescription.options[0].value)
                             devices.push(item);
                         }
                     })
@@ -77,7 +80,19 @@ const Overview = () => {
         }
     });
 
-    console.log(switches)
+    async function fetchOpenHABImages(name) {
+        const response = await Axios(openHAB.url + "/static/" + name + ".png", config);
+        setOpenHABImages(response.data);
+    }
+
+    // devices.forEach(function (item) {
+    //     fetchOpenHABImages("test")
+    // })
+
+    /*const fetchOpenHABImages = async (name) => {
+        const response = await Axios(openHAB.url + "/static/" + name + ".png", config);
+        setOpenHABImages(response.data);
+    };*/
 
     return (
         <>
