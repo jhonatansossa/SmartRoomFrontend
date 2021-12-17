@@ -25,7 +25,6 @@ const DetailedSwitch = () => {
     }, []);
 
     const fetchOpenHABItem = async () => {
-        // https://community.openhab.org/t/cors-problem/113063  --> If requests not working
         const response = await Axios(openHAB.url + "/rest/items/" + id, config);
         setOpenHABItem(response.data);
     };

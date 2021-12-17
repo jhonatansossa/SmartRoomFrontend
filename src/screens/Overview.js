@@ -39,22 +39,22 @@ const Overview = () => {
     const [openHABItems, setOpenHABItems] = useState([]);
 
     const config = {
-        headers: {Authorization: openHAB.token},
-    };
+        headers: {
+            Authorization: openHAB.token,
+        },
+    }
 
     useEffect(() => {
         fetchOpenHABItems();
     }, []);
 
     const fetchOpenHABItems = async () => {
-        // https://community.openhab.org/t/cors-problem/113063  --> If requests not working
         const response = await Axios(openHAB.url + "/rest/items", config);
         setOpenHABItems(response.data);
     };
 
     var switches = [];
     var devices = [];
-    var stateDescription;
     openHABItems.forEach(function (item) {
         if (item.type === "Switch") {
             if ("stateDescription" in item) {
@@ -76,8 +76,6 @@ const Overview = () => {
             }
         }
     });
-
-    console.log(switches)
 
     return (
         <>
@@ -158,13 +156,13 @@ const Overview = () => {
                     {devices.map((src) => (
                         <button
                             className="card hov-primary horizontal"
-                            onClick={() => redirectToDetailedDevice(src.stateDescription.options[0].value)}
+                            onClick={() => redirectToDetailedDevice(src.stateDescription.options[2].value)}
                         >
                             <div
                                 key={src.title}
                                 className="card-image horizontal"
                                 style={{
-                                    backgroundImage: `url(/logo192.png)`,
+                                    backgroundImage: `url('/resources/${src.stateDescription.options[2].value}.png')`,
                                 }}
                             />
                             <div className="card-title horizontal">{src.stateDescription.options[0].value}</div>
@@ -185,7 +183,7 @@ const Overview = () => {
                                 key={src.label}
                                 className="card-image horizontal"
                                 style={{
-                                    backgroundImage: `url(/logo192.png)`,
+                                    backgroundImage: `url('/resources/${src.name}.png')`,
                                 }}
                             />
                             <div className="card-title horizontal">{src.label}</div>
