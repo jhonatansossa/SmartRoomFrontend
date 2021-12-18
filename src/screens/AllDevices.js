@@ -1,61 +1,65 @@
-import React from "react";
-import { generatePath, useNavigate } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {generatePath, useNavigate} from "react-router-dom";
+import openHAB from "../openHAB/openHAB";
+import Axios from "axios";
 
 const AllDevices = () => {
-  let navigate = useNavigate();
+    let navigate = useNavigate();
 
-  const [error, setError] = React.useState(null);
-  const [isLoaded, setIsLoaded] = React.useState(false);
-  const [devices, setDevices] = React.useState([]);
+    const [openHABItems, setOpenHABItems] = useState([]);
 
-  // Note: the empty deps array [] means
-  // this useEffect will run once
-  // similar to componentDidMount()
-  React.useEffect(() => {
-    fetch(
-      "https://6a3619a8-5eb6-49fe-8061-829b4d1de332.mock.pstmn.io/allDevices"
-    )
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setIsLoaded(true);
-          setDevices(result.devices);
-          console.log(result);
-          console.log(result.lastMeasurements);
-          console.log(result.device);
-        },
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
+    const config = {
+        headers: {Authorization: openHAB.token},
+    };
+
+    useEffect(() => {
+        fetchOpenHABItems();
+    }, []);
+
+    const fetchOpenHABItems = async () => {
+        const response = await Axios(openHAB.url + "/rest/items", config);
+        setOpenHABItems(response.data);
+    };
+
+    var devices = []
+    openHABItems.forEach(function (item) {
+        if ("stateDescription" in item) {
+            if ("options" in item.stateDescription) {
+                if (item.stateDescription.options !== []) {
+                    item.stateDescription.options.forEach(function (value) {
+                        if (value.value === "device") {
+                            devices.push(item)
+                        }
+                    })
+                }
+            }
         }
-      );
-  }, []);
-  console.log(devices);
+    });
 
-  function redirectToDetailedDevice(id) {
-    let path = generatePath("/devices/:id/details", { id });
-    navigate(path);
-  }
+    function redirectToDetailedDevice(id) {
+        let path = generatePath("/devices/:id/details", {id});
+        navigate(path);
+    }
 
-  return (
-    <div className="vertical-scroll-area">
-      {devices.map((src) => (
-        <button
-          className="card hov-primary vertical"
-          onClick={() => redirectToDetailedDevice(src.name)}
-        >
-          {/* <div
-            key={src.title}
-            className="card-image vertical"
-            style={{
-              backgroundImage: `url(${src.image})`,
-            }}
-          ></div> */}
-          <div className="card-title vertical">{src.name}</div>
-        </button>
-      ))}
-    </div>
-  );
+    return (
+        <div className="vertical-scroll-area">
+            {devices.map((src) => (
+                <button
+                    className="card hov-primary vertical"
+                    onClick={() => redirectToDetailedDevice(src.stateDescription.options[2].value)}
+                >
+                    {<div
+                        key={src.title}
+                        className="card-image vertical"
+                        style={{
+                            backgroundImage: `url('/resources/${src.stateDescription.options[2].value}.png')`,
+                        }}
+                    />}
+                    <div className="card-title vertical">{src.stateDescription.options[0].value}</div>
+                </button>
+            ))}
+        </div>
+    );
 };
 
 export default AllDevices;
