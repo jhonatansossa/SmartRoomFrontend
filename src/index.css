@@ -1,3 +1,7 @@
+#root {
+  font-family: Segoe UI Semibold !important;
+}
+
 main {
   min-height: 90vh;
   background-color: #f6f6f6;
@@ -24,6 +28,7 @@ p {
 .navbar {
   text-transform: none;
   font-size: 18px;
+  padding: 15px;
 }
 
 /* text selection color for firefox */
@@ -138,7 +143,7 @@ footer {
 .card-image.horizontal {
   height: 100px;
   width: 130px;
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
 }
@@ -363,4 +368,27 @@ footer {
   padding: 5px;
   justify-self: center;
   align-self: center;
+}
+
+.img-logo {
+  margin-right: 5px;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.login-header {
+  color: #ef962e;
+  text-align: center;
+  padding-bottom: 50px;
+  font-size: 50px;
+  font-weight: 700;
+  /* font-family: "Roboto Black"; */
+}
+
+.logo {
+  margin-top: 50px;
 }

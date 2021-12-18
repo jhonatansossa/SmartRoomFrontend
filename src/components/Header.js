@@ -8,12 +8,20 @@ const Header = () => {
         <Container>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Navbar.Brand href="/">SmartRoom</Navbar.Brand>
+            <Navbar.Brand href="/overview">
+              <img
+                src="smart-room-logo-white.svg"
+                width="50"
+                height="50"
+                className="img-logo"
+              ></img>
+              SmartRoom
+            </Navbar.Brand>
             <Nav className="ml-auto">
               <Nav.Link href="/overview">Overview</Nav.Link>
               <Nav.Link href="/devices">All Devices</Nav.Link>
               <Nav.Link href="/login">
-                <i className="fas fa-user"></i> Login
+                <i className="fas fa-user"></i> Logout
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>

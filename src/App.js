@@ -8,7 +8,6 @@ import Overview from "./screens/Overview";
 import DetailedDevice from "./screens/DetailedDevice";
 import DetailedSwitch from "./screens/DetailedSwitch";
 import AllDevices from "./screens/AllDevices";
-import HomeScreen from "./screens/HomeScreen";
 
 const App = () => {
   return (
@@ -17,7 +16,6 @@ const App = () => {
       <main className="py-3">
         <Container>
           <Routes>
-            <Route path="/" element={<HomeScreen />} exact />
             <Route path="/overview" element={<Overview />} />
             <Route path="/devices" element={<AllDevices />} />
             <Route path="/devices/:id/details" element={<DetailedDevice />} />
