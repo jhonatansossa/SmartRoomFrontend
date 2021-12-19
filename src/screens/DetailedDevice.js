@@ -17,7 +17,7 @@ const DetailedDevice = () => {
           key={id}
           className="card-image vertical"
           style={{
-            backgroundImage: `url('/resources/${id}.png'`,
+            backgroundImage: `url('/resources/${id}.svg'`,
           }}
         />
         <div className="card-title card-content">

@@ -164,7 +164,7 @@ const Overview = () => {
                 key={src.title}
                 className="card-image horizontal"
                 style={{
-                  backgroundImage: `url('/resources/${src.stateDescription.options[2].value}.png')`,
+                  backgroundImage: `url('resources/${src.stateDescription.options[2].value}.svg')`,
                 }}
               />
               <div className="card-title horizontal">
@@ -187,7 +187,7 @@ const Overview = () => {
                 key={src.label}
                 className="card-image horizontal"
                 style={{
-                  backgroundImage: `url('/resources/${src.name}.png')`,
+                  backgroundImage: `url('/resources/${src.name}.svg')`,
                 }}
               />
               <div className="card-title horizontal">{src.label}</div>
