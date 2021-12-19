@@ -40,8 +40,8 @@ const Login = () => {
     <div className="login-container">
       <img
         src="smart-room-logo-orange.svg"
-        width="150"
-        height="150"
+        width="130"
+        height="130"
         className="center logo"
       ></img>
       <h1 className="login-header">SmartRoom</h1>

@@ -17,14 +17,14 @@ const DetailedDevice = () => {
           key={id}
           className="card-image vertical"
           style={{
-            backgroundImage: `url('/resources/${id}.png'`,
+            backgroundImage: `url('/resources/${id}.svg'`,
           }}
         />
         <div className="card-title card-content">
           <p>
-            Current voltage: 30V
+            Current voltage: <b>30V</b>
             <br />
-            Current power: 240W
+            Current power: <b>240W</b>
           </p>
         </div>
       </div>
