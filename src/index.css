@@ -1,5 +1,6 @@
 #root {
-  font-family: Segoe UI Semibold !important;
+  font-family: Roboto, sans-serif !important;
+  font-weight: 400;
 }
 
 main {
@@ -29,6 +30,11 @@ p {
   text-transform: none;
   font-size: 18px;
   padding: 15px;
+  font-weight: 500;
+}
+
+.navbar-nav {
+  font-weight: 400;
 }
 
 /* text selection color for firefox */
@@ -225,6 +231,17 @@ footer {
   margin-top: 5px;
   margin-bottom: -5px;
   background: none;
+}
+
+.form-control-input::-webkit-input-placeholder {
+  font-weight: 300;
+}
+
+.form-control-input::-moz-placeholder {
+  font-weight: 300;
+}
+.form-control-input::-ms-input-placeholder {
+  font-weight: 300;
 }
 
 .form-control:hover {
