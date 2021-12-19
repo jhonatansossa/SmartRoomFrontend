@@ -1,5 +1,6 @@
 #root {
-  font-family: Segoe UI Semibold !important;
+  font-family: Roboto, sans-serif !important;
+  font-weight: 400;
 }
 
 main {
@@ -29,6 +30,11 @@ p {
   text-transform: none;
   font-size: 18px;
   padding: 15px;
+  font-weight: 500;
+}
+
+.navbar-nav {
+  font-weight: 400;
 }
 
 /* text selection color for firefox */
@@ -141,16 +147,33 @@ footer {
 }
 
 .card-image.horizontal {
-  height: 100px;
+  height: 85px;
   width: 130px;
+  margin-top: 5px;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
+  /* display: inline-block; */
+
+  /* top: -2px; */
+  position: relative;
+  vertical-align: middle;
+
+  /* background-size: 95%; */
+  /* background-repeat: no-repeat; */
+  background-attachment: scroll;
+  background-color: transparent;
+
+  stroke: #ef962e !important;
+}
+
+.card-image.horizontal:hover {
+  stroke: #ef962e !important;
 }
 
 .card-image.vertical {
-  height: 36px;
-  width: 36px;
+  height: 40px;
+  width: 40px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -163,16 +186,20 @@ footer {
 
 .card-title {
   margin-top: auto;
+  margin-bottom: 0px;
   font-size: 16px;
   color: #858585;
 }
 
 .card-title.horizontal {
+  margin-bottom: 10px;
   position: absolute;
   bottom: 0;
 }
 
 .card-title.vertical {
+  margin-top: auto;
+  margin-bottom: auto;
   margin-left: 10px;
 }
 
@@ -204,6 +231,17 @@ footer {
   margin-top: 5px;
   margin-bottom: -5px;
   background: none;
+}
+
+.form-control-input::-webkit-input-placeholder {
+  font-weight: 300;
+}
+
+.form-control-input::-moz-placeholder {
+  font-weight: 300;
+}
+.form-control-input::-ms-input-placeholder {
+  font-weight: 300;
 }
 
 .form-control:hover {

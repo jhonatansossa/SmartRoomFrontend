@@ -56,7 +56,7 @@ const AllDevices = () => {
               key={src.title}
               className="card-image vertical"
               style={{
-                backgroundImage: `url('/resources/${src.stateDescription.options[2].value}.png')`,
+                backgroundImage: `url('/resources/${src.stateDescription.options[2].value}.svg')`,
               }}
             />
           }
