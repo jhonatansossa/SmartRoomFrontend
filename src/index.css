@@ -299,19 +299,19 @@ footer {
     background-color: #f6f6f6;
     border: solid 1px black;
     border-radius: 8px;
-    grid-row: 4;
+    grid-row: 6;
     grid-column: 1;
     justify-self: center;
     align-self: end;
 }
 
 #server {
-    width: 7vmax;
-    height: 7vmax;
+    width: 5.5vmax;
+    height: 5.5vmax;
     background-color: #f6f6f6;
     border: solid 1px black;
     border-radius: 8px;
-    grid-row: 4;
+    grid-row: 6;
     grid-column: 2;
     justify-self: left;
     align-self: end;
@@ -326,16 +326,19 @@ footer {
     border-bottom: solid 1px black;
     border-left: solid 1px black;
     border-top-left-radius: 90px;
-    grid-row: 4;
+    grid-row: 4 / span 5;
     grid-column: 4;
     justify-self: end;
     align-self: center;
+    margin-bottom: -9%;
 }
 
 .square {
-    min-width: 6vmax;
-    min-height: 6vmax;
+    min-width: 5.2vmax;
+    min-height: 5.2vmax;
+    width: -moz-fit-content;
     width: fit-content;
+    height: -moz-fit-content;
     height: fit-content;
     text-align: center;
     border: solid 1px black;
@@ -343,6 +346,9 @@ footer {
     color: #f6f6f6;
     overflow: auto;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .rectangle {
@@ -358,70 +364,79 @@ footer {
 }
 
 #refrigerator {
-    grid-row: 1;
+    grid-row: 2;
     align-self: end;
     grid-column: 1;
-    font-size: 80%;
+    font-size: 65%;
 }
 
+#dishWasher {
+    grid-row: 3;
+    align-self: end;
+    grid-column: 1;
+    font-size: 65%;
+}
+
+
 #modem {
-    grid-row: 4;
+    grid-row: 6;
     grid-column: 3;
-    font-size: 80%;
+    font-size: 65%;
     align-self: end;
 }
 
 #washer {
-    grid-row: 3;
+    grid-row: 4;
     grid-column: 4;
     justify-self: end;
     margin-bottom: 5px;
-    font-size: 80%;
+    font-size: 65%;
     align-self: end;
 }
 
 #lamp {
-    grid-row: 1;
+    grid-row: 2;
     grid-column: 3;
-    justify-self: center;
-    font-size: 80%;
+    justify-self: start;
+    font-size: 65%;
     align-self: end;
 }
 
 #oven {
-    grid-row: 2;
+    grid-row: 4;
     grid-column: 1;
     align-self: end;
     justify-self: start;
-    font-size: 80%;
+    font-size: 65%;
 }
 
 #ovenFan {
-    grid-row: 3;
+    grid-row: 5;
     align-self: end;
     grid-column: 1;
-    font-size: 80%;
+    font-size: 65%;
 }
 
 #dryer {
-    grid-row: 2;
+    grid-row: 3;
     grid-column: 4;
     justify-self: end;
-    font-size: 80%;
-    align-self: end;
+    font-size: 65%;
+    align-self: start;
 }
 
 .flex-container {
     display: grid;
-    grid: 1fr 1fr 1fr 1fr/ 1fr 1fr 1fr 1fr;
+    grid: 1fr 1fr 1fr  1fr 1fr 1fr/ 1fr 1fr 1fr 1fr;
     width: 40vmax;
-    height: 30vmax;
+    height: 34vmax;
     margin: auto;
     background-color: #f6f6f6;
     border: solid 1px black;
     border-radius: 8px;
     margin-bottom: 20px;
 }
+
 
 /* POPUP CSS */
 
@@ -463,8 +478,4 @@ footer {
     margin-top: 50px;
 }
 
-.deviceData {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+

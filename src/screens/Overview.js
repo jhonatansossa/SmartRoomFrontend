@@ -4,17 +4,25 @@ import {generatePath, useNavigate} from "react-router-dom";
 import openHAB from "../openHAB/openHAB";
 import ReactTooltip from "react-tooltip";
 
-/*const updateColor = (volts, watts) => {
+const updateColor = (kwh) => {
     let color;
-    if (volts < 25 && watts < 100) {
-        color = "#6aa84f";
-    } else if (volts > 25 && volts < 35 && watts > 100 && watts < 250) {
-        color = "#ef962e";
+    if (kwh <= 0) {
+        color = "#818181";
     } else {
-        color = "#cc4125";
+        color = "#ef962e";
     }
     return {color};
-};*/
+};
+
+const updateColorSwitch = (state) => {
+    let color;
+    if (state === "OFF") {
+        color = "#818181";
+    } else {
+        color = "#ef962e";
+    }
+    return {color};
+};
 
 const Overview = () => {
     let navigate = useNavigate();
@@ -80,15 +88,15 @@ const Overview = () => {
     });
 
     //Turned on devices
+    var totalConsumption = 0.0;
     var turnedOnDevices = [];
     devices.forEach(function (item) {
         if (item.state > 0) {
             turnedOnDevices.push(item)
+            console.log(item.label + item.state)
+            totalConsumption = parseFloat(totalConsumption) + parseFloat(item.state);
         }
     });
-
-    //Frequenty used devices
-    var frequentyUsedDevices = [];
 
     function containsDevices(arr, val) {
         for (var i = 0; i < arr.length; i++) {
@@ -138,8 +146,7 @@ const Overview = () => {
                     {containsDevices(devices, openHAB.devices.WASHING_MACHINE_ID) &&
                         < div
                             onClick={() => redirectToDetailedDevice(openHAB.devices.WASHING_MACHINE_ID)}
-                            style={{backgroundColor: '#ef962e'}}
-                            //style={{backgroundColor: updateColor(volts, watts).color}}
+                            style={{backgroundColor: updateColor(devices.find(device => device.stateDescription.options[2].value === openHAB.devices.WASHING_MACHINE_ID).state).color}}
                             id="washer"
                             className="square"
                             data-tip
@@ -149,7 +156,8 @@ const Overview = () => {
                                 <span>Washing machine</span>
                             </ReactTooltip>
                             <div className="deviceData">
-                                {devices.find(device => device.stateDescription.options[2].value === openHAB.devices.WASHING_MACHINE_ID).state} kWh<br/>
+                                {devices.find(device => device.stateDescription.options[2].value === openHAB.devices.WASHING_MACHINE_ID).state}
+                                <br/> kWh
                             </div>
                         </div>
                     }
@@ -157,8 +165,7 @@ const Overview = () => {
                     {containsSwitches(switches, openHAB.switches.LIGHT_SWITCH_ID) &&
                         <div
                             onClick={() => redirectToDetailedDevice(openHAB.switches.LIGHT_SWITCH_ID)}
-                            style={{backgroundColor: '#ef962e'}}
-                            //style={{backgroundColor: updateColor(volts, watts).color}}
+                            style={{backgroundColor: updateColorSwitch(switches.find(s => s.name === openHAB.switches.LIGHT_SWITCH_ID).state).color}}
                             id="lamp"
                             className="square"
                             data-tip
@@ -176,8 +183,7 @@ const Overview = () => {
                     {containsDevices(devices, openHAB.devices.OVEN_ID) &&
                         <div
                             onClick={() => redirectToDetailedDevice(openHAB.devices.OVEN_ID)}
-                            style={{backgroundColor: '#ef962e'}}
-                            //style={{backgroundColor: updateColor(volts, watts).color}}
+                            style={{backgroundColor: updateColor(devices.find(device => device.stateDescription.options[2].value === openHAB.devices.OVEN_ID).state).color}}
                             id="oven"
                             className="square"
                             data-tip
@@ -187,7 +193,8 @@ const Overview = () => {
                                 <span>Oven</span>
                             </ReactTooltip>
                             <div>
-                                {devices.find(device => device.stateDescription.options[2].value === openHAB.devices.OVEN_ID).state} kWH<br/>
+                                {devices.find(device => device.stateDescription.options[2].value === openHAB.devices.OVEN_ID).state}
+                                <br/> kWh
                             </div>
                         </div>
                     }
@@ -195,8 +202,7 @@ const Overview = () => {
                     {containsDevices(devices, openHAB.devices.OVEN_FAN_ID) &&
                         <div
                             onClick={() => redirectToDetailedDevice(openHAB.devices.OVEN_FAN_ID)}
-                            style={{backgroundColor: '#ef962e'}}
-                            //style={{backgroundColor: updateColor(volts, watts).color}}
+                            style={{backgroundColor: updateColor(devices.find(device => device.stateDescription.options[2].value === openHAB.devices.OVEN_FAN_ID).state).color}}
                             id="ovenFan"
                             className="square"
                             data-tip
@@ -207,7 +213,8 @@ const Overview = () => {
                             </ReactTooltip>
                             <div>
                                 <div>
-                                    {devices.find(device => device.stateDescription.options[2].value === openHAB.devices.OVEN_FAN_ID).state} kWh<br/>
+                                    {devices.find(device => device.stateDescription.options[2].value === openHAB.devices.OVEN_FAN_ID).state}
+                                    <br/> kWh
                                 </div>
                             </div>
                         </div>
@@ -216,8 +223,7 @@ const Overview = () => {
                     {containsDevices(devices, openHAB.devices.MODEM_ID) &&
                         <div
                             onClick={() => redirectToDetailedDevice(openHAB.devices.MODEM_ID)}
-                            style={{backgroundColor: '#ef962e'}}
-                            //style={{backgroundColor: updateColor(volts, watts).color}}
+                            style={{backgroundColor: updateColor(devices.find(device => device.stateDescription.options[2].value === openHAB.devices.MODEM_ID).state).color}}
                             id="modem"
                             className="square"
                             data-tip
@@ -227,7 +233,8 @@ const Overview = () => {
                                 <span>Modem</span>
                             </ReactTooltip>
                             <div>
-                                {devices.find(device => device.stateDescription.options[2].value === openHAB.devices.MODEM_ID).state} kWh<br/>
+                                {devices.find(device => device.stateDescription.options[2].value === openHAB.devices.MODEM_ID).state}
+                                <br/> kWh
                             </div>
                         </div>
                     }
@@ -235,8 +242,7 @@ const Overview = () => {
                     {containsDevices(devices, openHAB.devices.REFRIGERATOR_ID) &&
                         <div
                             onClick={() => redirectToDetailedDevice(openHAB.devices.REFRIGERATOR_ID)}
-                            style={{backgroundColor: '#ef962e'}}
-                            //style={{backgroundColor: updateColor(volts, watts).color}}
+                            style={{backgroundColor: updateColor(devices.find(device => device.stateDescription.options[2].value === openHAB.devices.REFRIGERATOR_ID).state).color}}
                             id="refrigerator"
                             className="square"
                             data-tip
@@ -246,17 +252,17 @@ const Overview = () => {
                                 <span>Refrigerator</span>
                             </ReactTooltip>
                             <div>
-                                {devices.find(device => device.stateDescription.options[2].value === openHAB.devices.REFRIGERATOR_ID).state} kWh<br/>
+                                {devices.find(device => device.stateDescription.options[2].value === openHAB.devices.REFRIGERATOR_ID).state}
+                                <br/> kWh
                             </div>
                         </div>
                     }
 
-                    {containsDevices(devices, openHAB.devices.RYER_ID) &&
+                    {containsDevices(devices, openHAB.devices.DRYER_ID) &&
 
                         <div
                             onClick={() => redirectToDetailedDevice(openHAB.devices.DRYER_ID)}
-                            style={{backgroundColor: '#ef962e'}}
-                            //style={{backgroundColor: updateColor(volts, watts).color}}
+                            style={{backgroundColor: updateColor(devices.find(device => device.stateDescription.options[2].value === openHAB.devices.DRYER_ID).state).color}}
                             id="dryer"
                             className="square"
                             data-tip
@@ -266,7 +272,28 @@ const Overview = () => {
                                 <span>Dryer</span>
                             </ReactTooltip>
                             <div>
-                                {devices.find(device => device.stateDescription.options[2].value === openHAB.devices.DRYER_ID).state} kWh<br/>
+                                {devices.find(device => device.stateDescription.options[2].value === openHAB.devices.DRYER_ID).state}
+                                <br/> kWh
+                            </div>
+                        </div>
+                    }
+
+                    {containsDevices(devices, openHAB.devices.DISHWASHER_ID) &&
+
+                        <div
+                            onClick={() => redirectToDetailedDevice(openHAB.devices.DISHWASHER_ID)}
+                            style={{backgroundColor: updateColor(devices.find(device => device.stateDescription.options[2].value === openHAB.devices.DISHWASHER_ID).state).color}}
+                            id="dishWasher"
+                            className="square"
+                            data-tip
+                            data-for='dishWasherToolTip'
+                        >
+                            <ReactTooltip id='dishWasherToolTip'>
+                                <span>Dish Washer</span>
+                            </ReactTooltip>
+                            <div>
+                                {devices.find(device => device.stateDescription.options[2].value === openHAB.devices.DISHWASHER_ID).state}
+                                <br/> kWh
                             </div>
                         </div>
                     }
