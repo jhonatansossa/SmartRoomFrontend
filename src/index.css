@@ -363,14 +363,14 @@ footer {
     cursor: pointer;
 }
 
-#refrigerator {
+#device30 {
     grid-row: 2;
     align-self: end;
     grid-column: 1;
     font-size: 65%;
 }
 
-#dishWasher {
+#device26 {
     grid-row: 3;
     align-self: end;
     grid-column: 1;
@@ -378,14 +378,14 @@ footer {
 }
 
 
-#modem {
+#device27 {
     grid-row: 6;
     grid-column: 3;
     font-size: 65%;
     align-self: end;
 }
 
-#washer {
+#device25 {
     grid-row: 4;
     grid-column: 4;
     justify-self: end;
@@ -394,7 +394,7 @@ footer {
     align-self: end;
 }
 
-#lamp {
+#ZWaveNode004HS2SKZSmartMeteringPlug_SwitchSwitch {
     grid-row: 2;
     grid-column: 3;
     justify-self: start;
@@ -402,7 +402,7 @@ footer {
     align-self: end;
 }
 
-#oven {
+#device13 {
     grid-row: 4;
     grid-column: 1;
     align-self: end;
@@ -410,14 +410,14 @@ footer {
     font-size: 65%;
 }
 
-#ovenFan {
+#device29 {
     grid-row: 5;
     align-self: end;
     grid-column: 1;
     font-size: 65%;
 }
 
-#dryer {
+#device31 {
     grid-row: 3;
     grid-column: 4;
     justify-self: end;
