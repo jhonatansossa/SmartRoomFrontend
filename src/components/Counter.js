@@ -26,13 +26,22 @@ function Counter(props) {
       <div class="counter" data-target={props.value}>
         0
       </div>
-      <div
-        className="counterUnit CounterToolTip"
-        data-tip={props.unitDescription}
-      >
-        {props.unit}
+      <div>
+        <div
+          className="counterHelp"
+          data-tip={
+            props.unit +
+            " = " +
+            props.unitDescription +
+            "<br />" +
+            props.description
+          }
+        >
+          <div className="counterUnit">{props.unit}</div>
+          <img src="help.svg" width="14px" height="14px" />
+        </div>
+        <ReactTooltip multiline={true} />
       </div>
-      <ReactTooltip />
     </div>
   );
 }

@@ -70,7 +70,8 @@ const Overview = () => {
         <Counter
           value={totalConsumption}
           unit="kVArh"
-          unitDescription="Kilo Volt Amperes reactive hours = Total energy consumption"
+          unitDescription="Kilo Volt Amperes reactive hours"
+          description="This value represents the total overall energy consumption"
         />
 
         <div className="flex-container">

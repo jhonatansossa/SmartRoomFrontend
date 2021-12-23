@@ -489,4 +489,10 @@ footer {
 .counterUnit {
   font-size: 14px;
   color: #858585;
+  display: inline-block;
+  padding-right: 5px;
+}
+
+.counterHelp {
+  display: inline-block;
 }
