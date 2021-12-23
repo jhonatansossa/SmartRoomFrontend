@@ -14,7 +14,7 @@ function Counter(props) {
         n.innerText = Math.ceil(count + inc);
         setTimeout(updateCount, 1);
       } else {
-        n.innerText = target;
+        n.innerText = Math.round(target);
       }
     };
     updateCount();
@@ -22,7 +22,7 @@ function Counter(props) {
 
   return (
     <div className="card cardCounter">
-      <div class="counter" data-target="200000">
+      <div class="counter" data-target={props.value}>
         0
       </div>
       <div className="counterUnit">kW/h</div>
