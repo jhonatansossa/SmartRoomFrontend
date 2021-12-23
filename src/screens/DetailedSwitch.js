@@ -1,11 +1,13 @@
 import {React, useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
+import { useNavigate } from "react-router-dom"
 import ToggleButton from "react-toggle-button";
 import Axios from "axios";
 import axios from "axios";
 import openHAB from "../openHAB/openHAB";
 
 const DetailedSwitch = () => {
+    const navigate = useNavigate();
     const {id} = useParams();
 
     //Fetching openHAB switch item
@@ -21,8 +23,13 @@ const DetailedSwitch = () => {
     };
 
     useEffect(() => {
-        fetchOpenHABItem();
         document.title = "SmartRoom – " + openHABItem.label;
+        let auth = sessionStorage.getItem("auth")
+        if(auth !== "true"){
+            navigate("/login");
+        }else {
+            fetchOpenHABItem();
+        }
     }, []);
 
     const fetchOpenHABItem = async () => {
