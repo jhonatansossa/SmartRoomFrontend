@@ -69,9 +69,9 @@ const Overview = () => {
       <div>
         <Counter
           value={totalConsumption}
-          unit="kVArh"
-          unitDescription="Kilo Volt Amperes reactive hours"
-          description="This value represents the total overall energy consumption"
+          unit="kWh"
+          unitDescription="Kilowatt hours"
+          description="This value represents the total overall energy consumption of the smart room"
         />
 
         <div className="flex-container">

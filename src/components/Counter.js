@@ -12,10 +12,10 @@ function Counter(props) {
       const speed = 500; // Animation speed
       const inc = target / speed;
       if (count < target) {
-        n.innerText = Math.ceil(count + inc);
+        n.innerText = Math.ceil(count + inc) + ".00";
         setTimeout(updateCount, 1);
       } else {
-        n.innerText = Math.round(target);
+        n.innerText = Math.round(target * 100) / 100;
       }
     };
     updateCount();
