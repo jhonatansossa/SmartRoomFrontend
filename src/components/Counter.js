@@ -1,4 +1,5 @@
 import { React } from "react";
+import ReactTooltip from "react-tooltip";
 
 function Counter(props) {
   // Animation counter
@@ -25,7 +26,13 @@ function Counter(props) {
       <div class="counter" data-target={props.value}>
         0
       </div>
-      <div className="counterUnit">{props.unit}</div>
+      <div
+        className="counterUnit CounterToolTip"
+        data-tip={props.unitDescription}
+      >
+        {props.unit}
+      </div>
+      <ReactTooltip />
     </div>
   );
 }

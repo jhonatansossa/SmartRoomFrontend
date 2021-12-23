@@ -67,7 +67,11 @@ const Overview = () => {
   return (
     <>
       <div>
-        <Counter value={totalConsumption} unit="kVArh" />
+        <Counter
+          value={totalConsumption}
+          unit="kVArh"
+          unitDescription="Kilo Volt Amperes reactive hours = Total energy consumption"
+        />
 
         <div className="flex-container">
           <OverviewTopDownStaticElement id="circle" name="Round table" />
