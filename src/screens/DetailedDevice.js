@@ -1,5 +1,5 @@
 import {React, useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import Graphs from "../components/Graphs";
 import openHAB from "../openHAB/openHAB";
 import Axios from "axios";
@@ -7,6 +7,7 @@ import Axios from "axios";
 const DetailedDevice = () => {
     const [openHABItem, setOpenHABItem] = useState();
     const {id} = useParams();
+    const navigate = useNavigate();
 
     const config = {
         headers: {
@@ -16,9 +17,13 @@ const DetailedDevice = () => {
 
     useEffect(() => {
         document.title = "SmartRoom – " + id;
-        setInterval(function () {
-            fetchOpenHABItem();
-        }, 1000);
+        let auth = sessionStorage.getItem("auth")
+        if(auth !== "true") {
+            navigate("/login");
+            setInterval(function () {
+                fetchOpenHABItem();
+            }, 1000);
+        }
     }, []);
 
     const fetchOpenHABItem = async () => {
