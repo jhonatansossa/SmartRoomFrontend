@@ -18,6 +18,7 @@ const Login = () => {
   };
 
   useEffect(() => {
+    sessionStorage.removeItem('auth');
     document.title = "SmartRoom – Login";
   }, []);
 
@@ -29,7 +30,7 @@ const Login = () => {
         passwordValue === eachUser.password
       ) {
         isCorrect = true;
-        // setCookies(eachUser.name);
+        sessionStorage.setItem("auth", "true");
         navigate("/overview");
       }
     });
@@ -39,11 +40,11 @@ const Login = () => {
   return (
     <div className="login-container">
       <img
-        src="smart-room-logo-orange.svg"
-        width="130"
-        height="130"
-        className="center logo"
-      ></img>
+    src="smart-room-logo-orange.svg"
+    width="130"
+    height="130"
+    className="center logo"
+    />
       <h1 className="login-header">SmartRoom</h1>
       <form name="login-form">
         <input
@@ -83,4 +84,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+  export default Login;

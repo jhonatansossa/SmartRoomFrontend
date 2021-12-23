@@ -6,8 +6,10 @@ import OverviewTopDownSwitchElement from "../components/OverviewTopDownSwitchEle
 import OverviewDeviceList from "../components/OverviewDeviceList";
 import OverviewSwitchList from "../components/OverviewSwitchList";
 import OverviewTopDownStaticElement from "../components/OverviewTopDownStaticElement";
+import { useNavigate } from "react-router-dom"
 
 const Overview = () => {
+    const navigate = useNavigate();
 
     //Fetching openHAB switches
     const [openHABItems, setOpenHABItems] = useState([]);
@@ -20,9 +22,14 @@ const Overview = () => {
 
     useEffect(() => {
         document.title = "SmartRoom – Overview";
-        setInterval(function () {
-            fetchOpenHABItems();
-        }, 1000);
+        let auth = sessionStorage.getItem("auth")
+        if(auth !== "true"){
+            navigate("/login");
+        }else{
+            setInterval(function () {
+                fetchOpenHABItems();
+            }, 1000);
+        }
     }, []);
 
     const fetchOpenHABItems = async () => {
@@ -63,8 +70,7 @@ const Overview = () => {
             totalConsumption = parseFloat(totalConsumption) + parseFloat(item.state);
         }
     });
-
-    return (
+        return (
         <>
             <div>
                 <div className="flex-container">
