@@ -6,6 +6,7 @@ import OverviewTopDownSwitchElement from "../components/OverviewTopDownSwitchEle
 import OverviewDeviceList from "../components/OverviewDeviceList";
 import OverviewSwitchList from "../components/OverviewSwitchList";
 import OverviewTopDownStaticElement from "../components/OverviewTopDownStaticElement";
+import Counter from "../components/Counter";
 
 const Overview = () => {
   //Fetching openHAB switches
@@ -63,33 +64,11 @@ const Overview = () => {
     }
   });
 
-  // Overall consumption counter - Animation
-  const counters = document.querySelectorAll(".counter");
-  for (let n of counters) {
-    const updateCount = () => {
-      const target = +n.getAttribute("data-target");
-      const count = +n.innerText;
-      const speed = 500; // change animation speed here
-      const inc = target / speed;
-      if (count < target) {
-        n.innerText = Math.ceil(count + inc);
-        setTimeout(updateCount, 1);
-      } else {
-        n.innerText = target;
-      }
-    };
-    updateCount();
-  }
-
   return (
     <>
       <div>
-        <div className="card cardCounter">
-          <div class="counter" data-target="200000">
-            0
-          </div>
-          <div className="counterUnit">kW/h</div>
-        </div>
+        <Counter />
+
         <div className="flex-container">
           <OverviewTopDownStaticElement id="circle" name="Round table" />
           <OverviewTopDownStaticElement id="horRectangle" name="Table" />
