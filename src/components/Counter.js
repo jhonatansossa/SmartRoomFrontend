@@ -23,24 +23,47 @@ function Counter(props) {
 
   return (
     <div className="card cardCounter">
-      <div class="counter" data-target={props.value}>
-        0
-      </div>
-      <div>
-        <div
-          className="counterHelp"
-          data-tip={
-            props.unit +
-            " = " +
-            props.unitDescription +
-            "<br />" +
-            props.description
-          }
-        >
-          <div className="counterUnit">{props.unit}</div>
-          <img src="help.svg" width="14px" height="14px" />
+      <div className="counterItem">
+        <div class="counter" data-target={props.value}>
+          0
         </div>
-        <ReactTooltip multiline={true} />
+        <div>
+          <div
+            className="counterHelp"
+            data-tip={
+              props.unit +
+              " = " +
+              props.unitDescription +
+              "<br />" +
+              props.description
+            }
+          >
+            <div className="counterUnit">{props.unit}</div>
+            <img src="help.svg" width="14px" height="14px" />
+          </div>
+          <ReactTooltip multiline={true} />
+        </div>
+      </div>
+      <div className="counterItem">
+        <div class="counter" data-target={props.value}>
+          0
+        </div>
+        <div>
+          <div
+            className="counterHelp"
+            data-tip={
+              props.unit +
+              " = " +
+              props.unitDescription +
+              "<br />" +
+              props.description
+            }
+          >
+            <div className="counterUnit">{props.unit}</div>
+            <img src="help.svg" width="14px" height="14px" />
+          </div>
+          <ReactTooltip multiline={true} />
+        </div>
       </div>
     </div>
   );
