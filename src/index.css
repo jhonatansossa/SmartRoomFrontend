@@ -482,6 +482,7 @@ footer {
   resize: none;
   flex-wrap: wrap;
   flex-direction: row;
+  gap: 30px;
 }
 
 .counter {
