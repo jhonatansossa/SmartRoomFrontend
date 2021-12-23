@@ -67,12 +67,20 @@ const Overview = () => {
   return (
     <>
       <div>
-        <Counter
-          value={totalConsumption}
-          unit="kWh"
-          unitDescription="Kilowatt hours"
-          description="This value represents the total overall energy consumption of the smart room"
-        />
+        <div className="card cardCounter">
+          <Counter
+            value={totalConsumption}
+            unit="kWh"
+            unitDescription="Kilowatt hours"
+            description="This value represents the total overall energy consumption of the smart room"
+          />
+          <Counter
+            value={totalConsumption + 100}
+            unit="kWh"
+            unitDescription="Kilowatt hours"
+            description="This value represents the total overall energy consumption of the smart room"
+          />
+        </div>
 
         <div className="flex-container">
           <OverviewTopDownStaticElement id="circle" name="Round table" />

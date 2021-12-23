@@ -9,7 +9,7 @@ function Counter(props) {
     const updateCount = () => {
       const target = +n.getAttribute("data-target");
       const count = +n.innerText;
-      const speed = 500; // Animation speed
+      const speed = 5000; // Animation speed
       const inc = target / speed;
       if (count < target) {
         n.innerText = Math.ceil(count + inc) + ".00";
@@ -22,48 +22,25 @@ function Counter(props) {
   }
 
   return (
-    <div className="card cardCounter">
-      <div className="counterItem">
-        <div class="counter" data-target={props.value}>
-          0
-        </div>
-        <div>
-          <div
-            className="counterHelp"
-            data-tip={
-              props.unit +
-              " = " +
-              props.unitDescription +
-              "<br />" +
-              props.description
-            }
-          >
-            <div className="counterUnit">{props.unit}</div>
-            <img src="help.svg" width="14px" height="14px" />
-          </div>
-          <ReactTooltip multiline={true} />
-        </div>
+    <div className="counterItem">
+      <div class="counter" data-target={props.value}>
+        0
       </div>
-      <div className="counterItem">
-        <div class="counter" data-target={props.value}>
-          0
+      <div>
+        <div
+          className="counterHelp"
+          data-tip={
+            props.unit +
+            " = " +
+            props.unitDescription +
+            "<br />" +
+            props.description
+          }
+        >
+          <div className="counterUnit">{props.unit}</div>
+          <img src="help.svg" width="14px" height="14px" />
         </div>
-        <div>
-          <div
-            className="counterHelp"
-            data-tip={
-              props.unit +
-              " = " +
-              props.unitDescription +
-              "<br />" +
-              props.description
-            }
-          >
-            <div className="counterUnit">{props.unit}</div>
-            <img src="help.svg" width="14px" height="14px" />
-          </div>
-          <ReactTooltip multiline={true} />
-        </div>
+        <ReactTooltip multiline={true} />
       </div>
     </div>
   );
