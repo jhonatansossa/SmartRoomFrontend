@@ -67,7 +67,7 @@ const Overview = () => {
   return (
     <>
       <div>
-        <Counter value={totalConsumption} />
+        <Counter value={totalConsumption} unit="kVArh" />
 
         <div className="flex-container">
           <OverviewTopDownStaticElement id="circle" name="Round table" />

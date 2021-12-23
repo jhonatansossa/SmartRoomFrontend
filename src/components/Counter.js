@@ -25,7 +25,7 @@ function Counter(props) {
       <div class="counter" data-target={props.value}>
         0
       </div>
-      <div className="counterUnit">kW/h</div>
+      <div className="counterUnit">{props.unit}</div>
     </div>
   );
 }
