@@ -17,6 +17,7 @@ const AllDevices = () => {
     let auth = sessionStorage.getItem("auth")
     if(auth !== "true") {
       navigate("/login");
+    }else{
       fetchOpenHABItems();
     }
   }, []);
