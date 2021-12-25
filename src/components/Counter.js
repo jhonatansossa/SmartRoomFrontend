@@ -3,14 +3,14 @@ import ReactTooltip from "react-tooltip";
 import CountUp from "react-countup";
 
 function Counter(props) {
-  var unitDescription = "";
-  if (props.unitDescription !== "") {
-    unitDescription = " = " + props.unitDescription;
+  var details = "";
+  if (props.unit !== undefined && props.unitDescription !== undefined) {
+    details = props.unit + " = " + props.unitDescription + "<br />";
   }
 
   return (
     <div className="counterItem">
-      <div class="counter" data-target={props.value}>
+      <div class="counter">
         <CountUp
           start={0}
           end={props.value}
@@ -20,11 +20,8 @@ function Counter(props) {
         />
       </div>
       <div>
-        <div
-          className="counterHelp"
-          data-tip={props.unit + unitDescription + "<br />" + props.description}
-        >
-          <div className="counterUnit">{props.unit}</div>
+        <div className="counterHelp" data-tip={details + props.description}>
+          <div className="counterUnit">{props.text}</div>
           <img src="help.svg" width="14px" height="14px" />
         </div>
         <ReactTooltip multiline={true} />

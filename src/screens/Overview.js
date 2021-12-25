@@ -70,29 +70,35 @@ const Overview = () => {
         <div className="card cardCounter">
           <Counter
             value={totalConsumption}
+            text="Total consumption in kWh"
             unit="kWh"
             unitDescription="Kilowatt hours"
             description="This value represents the total overall energy consumption of the smart room"
             decimals="2"
           />
           <Counter
+            value={totalConsumption / devices.length}
+            text="Average consumption in kWh"
+            unit="kWh"
+            unitDescription="Kilowatt hours"
+            description="This value represents the average overall energy consumption per device of the smart room"
+            decimals="2"
+          />
+          <Counter
             value={devices.length}
-            unit="Devices"
-            unitDescription=""
+            text="Devices"
             description="This value represents the amount of devices in the smart room"
             decimals="0"
           />
           <Counter
             value={turnedOnDevices.length}
-            unit="Turned on devices"
-            unitDescription=""
+            text="Turned on devices"
             description="This value represents the amount of turned on devices in the smart room"
             decimals="0"
           />
           <Counter
             value={switches.length}
-            unit="Switches"
-            unitDescription=""
+            text="Switches"
             description="This value represents the amount of switches in the smart room"
             decimals="0"
           />
