@@ -1,5 +1,6 @@
 import { React } from "react";
 import ReactTooltip from "react-tooltip";
+import CountUp from "react-countup";
 
 function Counter(props) {
   var unitDescription = "";
@@ -10,7 +11,13 @@ function Counter(props) {
   return (
     <div className="counterItem">
       <div class="counter" data-target={props.value}>
-        0
+        <CountUp
+          start={0}
+          end={props.value}
+          duration={2}
+          decimals={props.decimals}
+          decimal="."
+        />
       </div>
       <div>
         <div
