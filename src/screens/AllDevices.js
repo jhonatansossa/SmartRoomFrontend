@@ -13,8 +13,12 @@ const AllDevices = () => {
   };
 
   useEffect(() => {
-    fetchOpenHABItems();
     document.title = "SmartRoom – All devices";
+    let auth = sessionStorage.getItem("auth")
+    if(auth !== "true") {
+      navigate("/login");
+      fetchOpenHABItems();
+    }
   }, []);
 
   const fetchOpenHABItems = async () => {

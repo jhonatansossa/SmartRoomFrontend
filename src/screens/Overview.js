@@ -7,10 +7,12 @@ import OverviewDeviceList from "../components/OverviewDeviceList";
 import OverviewSwitchList from "../components/OverviewSwitchList";
 import OverviewTopDownStaticElement from "../components/OverviewTopDownStaticElement";
 import Counter from "../components/Counter";
+import { useNavigate } from "react-router-dom";
 
 const Overview = () => {
   //Fetching openHAB switches
   const [openHABItems, setOpenHABItems] = useState([]);
+  const navigate = useNavigate();
 
   const config = {
     headers: {
@@ -20,9 +22,14 @@ const Overview = () => {
 
   useEffect(() => {
     document.title = "SmartRoom – Overview";
-    setInterval(function () {
-      fetchOpenHABItems();
-    }, 1000);
+    let auth = sessionStorage.getItem("auth");
+    if (auth !== "true") {
+      navigate("/login");
+    } else {
+      setInterval(function () {
+        fetchOpenHABItems();
+      }, 1000);
+    }
   }, []);
 
   const fetchOpenHABItems = async () => {
