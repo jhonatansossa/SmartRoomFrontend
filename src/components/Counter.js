@@ -10,7 +10,7 @@ function Counter(props) {
 
   return (
     <div>
-      <div class="counter">
+      <div className="counter">
         <CountUp
           start={0}
           end={props.value}
@@ -22,7 +22,7 @@ function Counter(props) {
       <div>
         <div className="counterHelp" data-tip={details + props.description}>
           <div className="counterUnit">{props.text}</div>
-          <img src="help.svg" width="14px" height="14px" />
+          <img src="help.svg" alt="help" width="14px" height="14px" />
         </div>
         <ReactTooltip multiline={true} />
       </div>
