@@ -9,7 +9,7 @@ function Counter(props) {
   }
 
   return (
-    <div className="counterItem">
+    <div>
       <div class="counter">
         <CountUp
           start={0}
