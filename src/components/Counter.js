@@ -21,6 +21,11 @@ function Counter(props) {
     updateCount();
   }
 
+  var unitDescription = "";
+  if (props.unitDescription !== "") {
+    unitDescription = " = " + props.unitDescription;
+  }
+
   return (
     <div className="counterItem">
       <div class="counter" data-target={props.value}>
@@ -29,13 +34,7 @@ function Counter(props) {
       <div>
         <div
           className="counterHelp"
-          data-tip={
-            props.unit +
-            " = " +
-            props.unitDescription +
-            "<br />" +
-            props.description
-          }
+          data-tip={props.unit + unitDescription + "<br />" + props.description}
         >
           <div className="counterUnit">{props.unit}</div>
           <img src="help.svg" width="14px" height="14px" />

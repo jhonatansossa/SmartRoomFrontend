@@ -75,10 +75,10 @@ const Overview = () => {
             description="This value represents the total overall energy consumption of the smart room"
           />
           <Counter
-            value={totalConsumption + 100}
-            unit="kWh"
-            unitDescription="Kilowatt hours"
-            description="This value represents the total overall energy consumption of the smart room"
+            value={totalConsumption}
+            unit="Turned on devices"
+            unitDescription=""
+            description="This value represents the amount of turned on devices in the smart room"
           />
         </div>
 
