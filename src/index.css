@@ -485,6 +485,12 @@ footer {
   gap: 30px;
 }
 
+.counter {
+  font-size: 50px;
+  color: #ef962e;
+  line-height: 50px;
+}
+
 .counterUnit {
   font-size: 14px;
   color: #858585;
@@ -500,83 +506,4 @@ footer {
   /* max-width: 100px; */
   /* padding: 50px; */
   /* display: inline-block; */
-}
-
-/* @property --num {
-  syntax: "<integer>";
-  initial-value: 0;
-  inherits: false;
-}
-
-.counterNew {
-  transition: --num 5s;
-  counter-set: num var(--num);
-  font: 800 40px system-ui;
-}
-.counterNew::after {
-  content: counter(num);
-}
-.counterNew:hover {
-  --num: 100;
-} */
-
-/* @property --num {
-  syntax: "<integer>";
-  initial-value: 100;
-  inherits: false;
-}
-
-.counterNew {
-  animation: counter 5s alternate ease-in-out;
-  counter-reset: num var(--num);
-  font: 800 40px system-ui;
-  padding: 2rem;
-}
-.counterNew::after {
-  content: counter(num);
-}
-
-@keyframes counter {
-  from {
-    --num: 0;
-  }
-  to {
-    --num: 100;
-  }
-} */
-
-@property --percent {
-  syntax: "<number>";
-  initial-value: 0;
-  inherits: false;
-}
-@property --temp {
-  syntax: "<number>";
-  initial-value: 0;
-  inherits: false;
-}
-@property --v1 {
-  syntax: "<integer>";
-  initial-value: 0;
-  inherits: false;
-}
-@property --v2 {
-  syntax: "<integer>";
-  initial-value: 0;
-  inherits: false;
-}
-
-.counter {
-  font-size: 50px;
-  color: #ef962e;
-  line-height: 50px;
-  padding: 2rem;
-  transition: --percent 1s;
-  --temp: calc(var(--percent));
-  --v1: max(var(--temp) - 0.5, 0);
-  --v2: max((var(--temp) - var(--v1)) * 100 - 0.5, 0);
-  counter-reset: v1 var(--v1) v2 var(--v2);
-}
-.counter::before {
-  content: counter(v1) "." counter(v2, decimal-leading-zero);
 }
