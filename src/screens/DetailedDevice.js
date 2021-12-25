@@ -20,6 +20,7 @@ const DetailedDevice = () => {
         let auth = sessionStorage.getItem("auth")
         if(auth !== "true") {
             navigate("/login");
+        }else{
             setInterval(function () {
                 fetchOpenHABItem();
             }, 1000);
