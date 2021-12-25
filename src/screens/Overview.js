@@ -121,7 +121,10 @@ const Overview = () => {
             <OverviewTopDownSwitchElement id={s.name} switches={switches} />
           ))}
         </div>
-        <OverviewDeviceList name={"Turned on"} deviceList={turnedOnDevices} />
+        <OverviewDeviceList
+          name={"Turned on devices"}
+          deviceList={turnedOnDevices}
+        />
         <OverviewSwitchList name={"Switches"} switchList={switches} />
       </div>
     </>
