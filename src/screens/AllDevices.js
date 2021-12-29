@@ -48,29 +48,37 @@ const AllDevices = () => {
   }
 
   return (
-    <div className="vertical-scroll-area">
-      {devices.map((src) => (
-        <button
-          className="card hov-primary vertical"
-          onClick={() =>
-            redirectToDetailedDevice(src.stateDescription.options[2].value)
-          }
-        >
-          {
-            <div
-              key={src.title}
-              className="card-image vertical"
-              style={{
-                backgroundImage: `url('/resources/${src.stateDescription.options[2].value}.svg')`,
-              }}
-            />
-          }
-          <div className="card-title vertical">
-            {src.stateDescription.options[0].value}
-          </div>
-        </button>
-      ))}
-    </div>
+    <>
+    {devices.length === 0 &&
+      <div className="noDevicesPopup">
+        No devices found. Make sure openHAB is running!
+      </div>
+    }
+
+      <div className="vertical-scroll-area">
+        {devices.map((src) => (
+          <button
+            className="card hov-primary vertical"
+            onClick={() =>
+              redirectToDetailedDevice(src.stateDescription.options[2].value)
+            }
+          >
+            {
+              <div
+                key={src.title}
+                className="card-image vertical"
+                style={{
+                  backgroundImage: `url('/resources/${src.stateDescription.options[2].value}.svg')`,
+                }}
+              />
+            }
+            <div className="card-title vertical">
+              {src.stateDescription.options[0].value}
+            </div>
+          </button>
+        ))}
+      </div>
+    </>
   );
 };
 

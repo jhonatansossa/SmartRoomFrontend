@@ -68,6 +68,7 @@ const DetailedSwitch = () => {
             />
         </div>
     );
+
 };
 
 export default DetailedSwitch;

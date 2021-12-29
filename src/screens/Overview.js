@@ -117,6 +117,12 @@ const Overview = () => {
           <OverviewTopDownStaticElement id="server" name="Server" />
           <OverviewTopDownStaticElement id="door" name="Door" />
 
+          {devices.length === 0 && devices.length === 0 &&
+              <div className="noDevicesPopup">
+                No devices or switches found. Make sure openHAB is running!
+              </div>
+          }
+
           {devices.map((device) => (
             <OverviewTopDownDeviceElement
               id={device.stateDescription.options[2].value}

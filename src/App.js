@@ -10,6 +10,7 @@ import DetailedSwitch from "./screens/DetailedSwitch";
 import AllDevices from "./screens/AllDevices";
 import NotFoundComponent from "./components/NotFoundComponent";
 import NotFound from "./screens/NotFound";
+import AllSwitches from "./screens/AllSwitches";
 
 const App = () => {
         return (
@@ -20,6 +21,7 @@ const App = () => {
                         <Routes>
                             <Route path="/overview" element={<Overview/>}/>
                             <Route path="/devices" element={<AllDevices/>}/>
+                            <Route path="/switches" element={<AllSwitches/>}/>
                             <Route path="/devices/:id/details" element={<DetailedDevice/>}/>
                             <Route path="/switches/:id/details" element={<DetailedSwitch/>}/>
                             <Route path="/login" element={<Login/>}/>
