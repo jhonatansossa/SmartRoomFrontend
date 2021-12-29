@@ -28,6 +28,15 @@ function OverviewSwitchList(props) {
       </div>
 
       <div className="scroll-area">
+        {props.switchList.length === 0 && (
+            <div
+                className="altList"
+                style={{
+                  color: '#ef962e',
+                  fontStyle: 'italic',
+                }}
+            >No switches found</div>
+        )}
         {props.switchList.map((src) => (
           <button
             className="card hov-primary horizontal"

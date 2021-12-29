@@ -24,6 +24,7 @@ const Header = () => {
                 <Nav className="ml-auto">
                   <Nav.Link href="/overview">Overview</Nav.Link>
                   <Nav.Link href="/devices">All Devices</Nav.Link>
+                  <Nav.Link href="/switches">All Switches</Nav.Link>
                   <Nav.Link href="/login">
                     <i className="fas fa-user"/> Logout
                   </Nav.Link>

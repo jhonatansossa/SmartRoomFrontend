@@ -5,6 +5,7 @@ import user from "./Users";
 const Login = () => {
   var [usernameValue, setUsernameValue] = useState();
   var [passwordValue, setPasswordValue] = useState();
+  const [errorMessage, setErrorMessage] = useState('');
   let navigate = useNavigate();
 
   // Initialize a boolean state
@@ -22,19 +23,20 @@ const Login = () => {
     document.title = "SmartRoom – Login";
   }, []);
 
-  const authenticateUser = (usernameValue, passwordValue) => {
-    let isCorrect = false;
+  const authenticateUser = (e, usernameValue, passwordValue) => {
+    e.preventDefault();
+
     user.login.map((eachUser) => {
       if (
         usernameValue === eachUser.username &&
         passwordValue === eachUser.password
       ) {
-        isCorrect = true;
         sessionStorage.setItem("auth", "true");
         navigate("/overview");
+      }else{
+        setErrorMessage('Wrong username or password, please try again');
       }
     });
-    if (!isCorrect) alert("Wrong username or password, please try again");
   };
 
   return (
@@ -64,6 +66,11 @@ const Login = () => {
           value={passwordValue}
           onChange={(e) => setPasswordValue(e.target.value)}
         />
+
+        {errorMessage && (
+            <div className="text-danger form-control input-error">{errorMessage}</div>
+        )}
+
         <label className="form-control form-control-input-password">
           <input
             type="checkbox"
@@ -75,7 +82,7 @@ const Login = () => {
         <button
           type="submit"
           className="form-control btn-primary"
-          onClick={() => authenticateUser(usernameValue, passwordValue)}
+          onClick={(e) => authenticateUser(e, usernameValue, passwordValue)}
         >
           Log in
         </button>

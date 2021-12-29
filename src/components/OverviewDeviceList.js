@@ -28,6 +28,15 @@ function OverviewDeviceList(props) {
       </div>
 
       <div className="scroll-area">
+        {props.deviceList.length === 0 && (
+            <div
+                className="altList"
+                style={{
+                  color: '#ef962e',
+                  fontStyle: 'italic',
+                }}
+            >No devices found</div>
+        )}
         {props.deviceList.map((src) => (
           <button
             className="card hov-primary horizontal"
