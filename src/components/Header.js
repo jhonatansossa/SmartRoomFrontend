@@ -1,5 +1,7 @@
 import React from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
+import {LinkContainer} from 'react-router-bootstrap'
+
 import {useLocation} from "react-router-dom";
 
 const Header = () => {
@@ -10,9 +12,8 @@ const Header = () => {
         <header>
           <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
             <Container>
-              <Navbar.Toggle aria-controls="basic-navbar-nav" />
-              <Navbar.Collapse id="basic-navbar-nav">
-                <Navbar.Brand href="/overview">
+            <LinkContainer to="/overview">
+            <Navbar.Brand>
                   <img
                       src="smart-room-logo-white.svg"
                       width="50"
@@ -21,13 +22,26 @@ const Header = () => {
                   />
                   SmartRoom
                 </Navbar.Brand>
+              </LinkContainer>
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Collapse id="basic-navbar-nav">
+                
                 <Nav className="ml-auto">
-                  <Nav.Link href="/overview">Overview</Nav.Link>
-                  <Nav.Link href="/devices">All Devices</Nav.Link>
-                  <Nav.Link href="/switches">All Switches</Nav.Link>
-                  <Nav.Link href="/login">
-                    <i className="fas fa-user"/> Logout
-                  </Nav.Link>
+                  <LinkContainer to='/overview'>
+                    <Nav.Link >Overview</Nav.Link>
+                  </LinkContainer>
+                  <LinkContainer to='/devices'>
+                    <Nav.Link>All Devices</Nav.Link>
+                  </LinkContainer>                  
+                  <LinkContainer to='/switches'>
+                    <Nav.Link>All Switches</Nav.Link>
+                  </LinkContainer>
+                  <LinkContainer to='/login'>
+                    <Nav.Link>
+                      <i className="fas fa-user"/> Logout
+                    </Nav.Link>
+                  </LinkContainer>
+                  
                 </Nav>
               </Navbar.Collapse>
             </Container>
