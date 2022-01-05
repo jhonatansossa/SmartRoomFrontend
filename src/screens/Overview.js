@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Axios from "axios";
 import openHAB from "../openHAB/openHAB";
 import OverviewTopDownDeviceElement from "../components/OverviewTopDownDeviceElement";
@@ -20,15 +20,20 @@ const Overview = () => {
     },
   };
 
+  const timerRef = useRef(null);
+
   useEffect(() => {
     document.title = "SmartRoom – Overview";
     let auth = sessionStorage.getItem("auth");
     if (auth !== "true") {
       navigate("/login");
     } else {
-      setInterval(function () {
+      timerRef.current = setInterval(function () {
         fetchOpenHABItems();
       }, 1000);
+      return () => {
+        clearInterval(timerRef.current);
+      };
     }
   }, []);
 
@@ -117,11 +122,11 @@ const Overview = () => {
           <OverviewTopDownStaticElement id="server" name="Server" />
           <OverviewTopDownStaticElement id="door" name="Door" />
 
-          {devices.length === 0 && devices.length === 0 &&
-              <div className="noDevicesPopup">
-                No devices or switches found. Make sure openHAB is running!
-              </div>
-          }
+          {devices.length === 0 && devices.length === 0 && (
+            <div className="noDevicesPopup">
+              No devices or switches found. Make sure openHAB is running!
+            </div>
+          )}
 
           {devices.map((device) => (
             <OverviewTopDownDeviceElement
