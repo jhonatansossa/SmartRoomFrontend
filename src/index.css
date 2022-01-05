@@ -100,6 +100,11 @@ footer {
   margin-bottom: 10px;
 }
 
+.topdown-element-text {
+  font-size: 1.7vh;
+  line-height: 120%;
+}
+
 .scroll-area {
   display: inline-flex;
   overflow-x: scroll;
@@ -502,15 +507,15 @@ footer {
   display: inline-block;
 }
 
-.input-error{
+.input-error {
   margin-top: 0;
 }
 
-.altList{
+.altList {
   margin-left: 1%;
 }
 
-.noDevicesPopup{
+.noDevicesPopup {
   grid-row: 3 / span 2;
   grid-column: 2 / span 2;
   text-align: center;
@@ -520,12 +525,12 @@ footer {
   font-size: 1.1rem;
 }
 
-.masterSwitch{
+.masterSwitch {
   align-items: center;
   display: inline-block;
 }
 
-.masterSwitchContainer{
+.masterSwitchContainer {
   display: flex;
 }
 
@@ -540,23 +545,23 @@ footer {
   margin-bottom: 1rem;
 }
 
-#masterHelpIcon{
+#masterHelpIcon {
   margin-top: 13px;
 }
 
-#masterToggle{
+#masterToggle {
   margin-top: 13px;
 }
 
-#masterSwitchDesc{
+#masterSwitchDesc {
   margin-top: 9px;
   margin-right: 5px;
 }
 
-#switchOFF{
+#switchOFF {
   border: 1px solid rgba(204, 65, 37, 1);
 }
 
-#switchON{
+#switchON {
   border: 1px solid rgba(106, 168, 79, 1);
 }
