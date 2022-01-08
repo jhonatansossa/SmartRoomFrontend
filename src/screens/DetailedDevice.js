@@ -62,9 +62,7 @@ const DetailedDevice = () => {
             </p>
           </div>
         </div>
-        <div className="card vertical">
-          <Graphs />
-        </div>
+        <Graphs />
       </div>
     );
   }
