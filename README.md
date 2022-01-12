@@ -33,19 +33,12 @@ To be able to send requests to your local openHAB do the fowlloing:
 4. Click on "admin" in the left corner of openHAB > "Create new API token" > Login, choose a name and copy the token
 5. Paste the token in ``openHAB/openHAB.js``
 
-## Manipulating local openHAB
+## Get the right openHAB version
 
-In order for the local openHAB version to work properly with the app, the following must be changed:
+1. Download this folder: https://drive.google.com/drive/folders/1iHWQya4qS_ngza9xN4kSElWbFe63Sh7V
+2. Replace the local openHAB folder with the downloaded folder.
 
-1. For all switches that are not readOnly (property of the json object) you need to modify the state description:
-    1. Settings > Items > the desired switch > Add metadata > State description > add something to the options and save
-       it
-2. In order to see all devices you have to do something similar
-    1. A device consists of different openHAB items. You can identify which item belongs to which device by the number
-       in the name e.g "27_APARENT_IMPORT_KVAH" belongs to the modem.
-    2. To see all devices in the app, you have to add the following to one of the items that belongs to a device:
-        1. Settings > Items > the desired item > Add metadata > State description > add "a display name for the device"
-           and "device" to the options and save it
+If you don't follow this steps, you can't see any data in the application.
 
 ## Library for charts
 
