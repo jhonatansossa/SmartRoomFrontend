@@ -73,12 +73,15 @@ const Graphs = () => {
       await apiCallBackend(requestbody).then(data => {
         setAllDatasets(allDatasets => ([...allDatasets, energy]));
         setChartData(chartData => ({
+          tension: 0.1,
           labels: data.lastMeasurements.map((eachMeasure) => {
-            return eachMeasure.time;
+            const moment_source = moment(eachMeasure.time, 'ddd, DD MMM YYYY HH:mm:ss Z')
+            //console.log(moment_source)
+            return moment_source.format('DD-MM-YYYY HH:mm');
           }),
-          datasets: [... chartData.datasets,
+          datasets: [...chartData.datasets,
             {
-              label: energy,
+              label: energy.replace(/_/gi, " ").split("energy")[0],
               data: data.lastMeasurements.map((eachMeasure) => {
                 return eachMeasure.value;
               }),
@@ -150,12 +153,15 @@ const Graphs = () => {
       },
       title: {
         display: true,
-        text: 'Measurements',
+        text: 'Energy Measurements',
       },
     },
     scales: {
       x: {
         grid: {
+          display: false
+        },
+        ticks: {
           display: false
         }
       },
