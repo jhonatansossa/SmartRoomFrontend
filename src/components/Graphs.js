@@ -12,7 +12,8 @@ import { Line } from 'react-chartjs-2';
 import { React, useState, useEffect } from 'react';
 import { DropdownButton, Dropdown } from 'react-bootstrap';
 import * as moment from 'moment';
-import apiCallBackend from './ApiCallBackend';
+import apiCallBackend from '../services/ApiCallBackend';
+import Stack from 'react-bootstrap/Stack';
 
 const Graphs = () => {
   ChartJS.register(
@@ -174,16 +175,18 @@ const Graphs = () => {
   };
 
   return (
-    <div>
-      <DropdownButton id="dropdown-basic-button" title={selectRange} size="sm" align={{ lg: 'start' }}>
+    <Stack gap={2}>
+      <DropdownButton id="dropdown-basic-button" title={selectRange}  align={{ lg: 'left' }}>
       <Dropdown.Item href="#/action-1" onClick={() => updateRequestBody('5hours')}>Last 5 hours</Dropdown.Item>
       <Dropdown.Item href="#/action-2" onClick={() => updateRequestBody('1day')}>Last day</Dropdown.Item>
       <Dropdown.Item href="#/action-3" onClick={() => updateRequestBody('1week')}>Last week</Dropdown.Item>
       <Dropdown.Item href="#/action-3" onClick={() => updateRequestBody('1month')}>Last month</Dropdown.Item>
       <Dropdown.Item href="#/action-3" onClick={() => updateRequestBody('1year')}>Last year</Dropdown.Item>
       </DropdownButton>
+      <div className="bg-light border">
       <Line options={options} data={chartData} />
-  </div>
+      </div>
+    </Stack>
   );
 };
 
