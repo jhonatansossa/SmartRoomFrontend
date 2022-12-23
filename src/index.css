@@ -440,6 +440,33 @@ footer {
   margin-bottom: 20px;
 }
 
+/* FLEX CONTAINER ICONS */
+.flex-container #circle{
+  border: solid 1px #f6f6f6;
+  background-image: url("C:/Users/WINDOWS 10/Downloads/meeting128px.png");
+}
+.flex-container #server{
+  /*border: solid 1px #f6f6f6;*/
+  background-image: url("C:/Users/WINDOWS 10/Downloads/server64px.png");
+  background-repeat: no-repeat;
+  background-size:  90px 90px;
+  border: solid 1px #f6f6f6;  
+}
+.flex-container #horRectangle{
+  /*border: solid 1px #f6f6f6;*/
+  background-color: #80471c;
+  /*background-image: url("C:/Users/WINDOWS 10/Downloads/desk2.png");
+  background-repeat: no-repeat;
+  background-size:  115px 50px;
+  border: solid 1px #f6f6f6;*/    
+}
+.flex-container #door{
+  background-image: url("C:/Users/WINDOWS 10/Downloads/door.png");
+  background-repeat: no-repeat;
+  background-size:  125px 125px;
+  border: solid 1px #f6f6f6;
+}
+
 /* POPUP CSS */
 
 #modal {
