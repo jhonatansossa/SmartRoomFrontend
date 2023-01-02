@@ -4,6 +4,7 @@ import openHAB from "../openHAB/openHAB";
 import Axios from "axios";
 import OpenDoor from "../Images/opendoor.png";
 import CloseDoor from "../Images/closedoor.png";
+import ToggleButton from "react-toggle-button";
 
 
 
@@ -12,6 +13,7 @@ const DoorStatus = () => {
   let navigate = useNavigate();
 
   const [openHABItems, setOpenHABItems] = useState([]);
+  const [toggle, setToggle] = useState(false);
 
   const config = {
     headers: { Authorization: openHAB.token },
@@ -49,25 +51,26 @@ const DoorStatus = () => {
   });
 
    /*
-    {devices.length === 0 &&
-      <div className="noDevicesPopup">
-        No door found. Make sure openHAB is running!
-      </div>
-    }
+    
+
+    
     */
    
   return (
     <>
-      <div className="DoorOpen">
-        
-        <h2 className="title" align="center">Door Status<br></br><br></br></h2>
-        <p align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src={OpenDoor}></img></p>
 
-        <h4 align="center"><br></br>The door is open</h4>
-        
-        
-      </div>
+      {devices.length === 0 &&
+      <div className="noDevicesPopup">
+        No door found. Make sure openHAB is running!
+      </div>}
+      <ToggleButton
+        value={toggle}
+        onToggle={() => {
+          setToggle(!toggle);
+        }}
+      />
 
+      {!toggle &&
       <div className="DoorClose">
         
         <h2 className="title" align="center">Door Status<br></br><br></br></h2>
@@ -75,8 +78,18 @@ const DoorStatus = () => {
 
         <h4 align="center"><br></br>The door is close</h4>
         
-</div>
+      </div>}
 
+      {toggle &&
+      <div className="DoorOpen">
+        
+      <h2 className="title" align="center">Door Status<br></br><br></br></h2>
+      <p align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src={OpenDoor}></img></p>
+
+      <h4 align="center"><br></br>The door is open</h4>
+      
+    </div>}
+  
 
     </>
   );

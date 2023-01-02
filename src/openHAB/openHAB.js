@@ -1,6 +1,6 @@
 const openHAB = {
     token:
-        "Bearer oh.token1.q5SuOVyvQq6LZMR9zDju3YuYK4B1duPCMxGwJfBGrJunGXbnzlM8ARWTYNs3cOU5hjHDAbkEtoxezhURhg",
+        "Bearer oh.OpenHabRober.uyX2GEjHvWPW1b9SnmGkLsui7bf1nQki4xarB41pBQ6QYIKR6cFYRb8f9PjjkdgrLjKlLnSZhtpB4zOxwEgQ",
     url: "http://localhost:8080",
     devices: {
         OVEN_ID: "13",
