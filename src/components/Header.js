@@ -36,6 +36,9 @@ const Header = () => {
                   <LinkContainer to='/switches'>
                     <Nav.Link>All Switches</Nav.Link>
                   </LinkContainer>
+                  <LinkContainer to='/door'>
+                    <Nav.Link>Door status</Nav.Link>
+                  </LinkContainer>
                   <LinkContainer to='/login'>
                     <Nav.Link>
                       <i className="fas fa-user"/> Logout
