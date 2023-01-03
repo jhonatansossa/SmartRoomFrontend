@@ -2,6 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./bootstrap.min.css";
 
+//import "./bootstrap.min.css";
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
+//import 'bootstrap/dist/js/bootstrap'
 import "./index.css";
 
 import App from "./App";
