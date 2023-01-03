@@ -15,4 +15,8 @@ export default function apiCallBackend(requestbody) {
               return response.json()
             }
         })
+        .catch(e => {
+          console.log(e)
+          return measurements
+        });
 }
