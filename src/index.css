@@ -33,6 +33,11 @@ p {
   font-weight: 500;
 }
 
+.align {
+  display:flex;
+  width: auto;
+  justify-content: space-between;
+}
 .navbar-nav {
   font-weight: 400;
 }

@@ -8,11 +8,18 @@ import OverviewSwitchList from "../components/OverviewSwitchList";
 import OverviewTopDownStaticElement from "../components/OverviewTopDownStaticElement";
 import Counter from "../components/Counter";
 import { useNavigate } from "react-router-dom";
+import ToggleButton from "react-toggle-button";
 
 const Overview = () => {
   //Fetching openHAB switches
   const [openHABItems, setOpenHABItems] = useState([]);
   const navigate = useNavigate();
+  const [emptyRoom, setToggle1] = useState(false);
+  const [energySave, setToggle2] = useState(false);
+  const [security, setToggle3] = useState(false);
+  const [doorAlarm, setToggle4] = useState(false);
+
+
 
   const config = {
     headers: {
@@ -79,6 +86,9 @@ const Overview = () => {
   return (
     <>
       <div>
+      
+      
+      
         <div className="card cardCounter">
           <Counter
             value={totalConsumption}
@@ -115,6 +125,49 @@ const Overview = () => {
             decimals="0"
           />
         </div>
+
+        <div className="align">
+
+        <div className="align">
+          <p>Empty Room &nbsp;</p>
+      <ToggleButton
+        value={emptyRoom}
+        onToggle={() => {
+          setToggle1(!emptyRoom);
+        }}
+      /> 
+        </div>
+
+        <div className="align">
+        <p>Energy Saver &nbsp;</p>
+      <ToggleButton
+        value={energySave}
+        onToggle={() => {
+          setToggle2(!energySave);
+        }}
+      /> 
+        </div>
+
+        <div className="align">
+        <p>Security &nbsp;</p>
+      <ToggleButton
+        value={security}
+        onToggle={() => {
+          setToggle3(!security);
+        }}
+      />
+        </div>
+
+        <div className="align">
+        <p>Door Alarm &nbsp;</p>
+      <ToggleButton
+        value={doorAlarm}
+        onToggle={() => {
+          setToggle4(!doorAlarm);
+        }}
+      /> </div>
+      </div>
+      <br></br>
 
         <div className="flex-container">
           <OverviewTopDownStaticElement id="circle" name="Round table" />
