@@ -130,8 +130,8 @@ const Overview = () => {
 
           {devices.map((device) => (
             <OverviewTopDownDeviceElement
-              id={device.stateDescription.options[2].value}
-              devices={devices}
+              id = {device.stateDescription.options[2].value}
+              devices = {devices}
             />
           ))}
 
