@@ -117,7 +117,7 @@ const Overview = () => {
         </div>
 
         <div className="flex-container">
-          <OverviewTopDownStaticElement id="circle" name="Round table" />
+          <OverviewTopDownStaticElement id="circle" name="Round table"/>
           <OverviewTopDownStaticElement id="horRectangle" name="Table" />
           <OverviewTopDownStaticElement id="server" name="Server" />
           <OverviewTopDownStaticElement id="door" name="Door" />
@@ -130,8 +130,8 @@ const Overview = () => {
 
           {devices.map((device) => (
             <OverviewTopDownDeviceElement
-              id={device.stateDescription.options[2].value}
-              devices={devices}
+              id = {device.stateDescription.options[2].value}
+              devices = {devices}
             />
           ))}
 
@@ -139,8 +139,9 @@ const Overview = () => {
             <OverviewTopDownSwitchElement id={s.name} switches={switches} />
           ))}
         </div>
+        
         <OverviewDeviceList
-          name={"Turned on devices"}
+          name = {"Turned on devices"}
           deviceList={turnedOnDevices}
         />
         <OverviewSwitchList name={"Switches"} switchList={switches} />

@@ -395,7 +395,7 @@ footer {
   margin-bottom: 5px;
   font-size: 65%;
   align-self: end;
-}
+  }
 
 #ZWaveNode004HS2SKZSmartMeteringPlug_SwitchSwitch {
   grid-row: 2;
@@ -438,6 +438,105 @@ footer {
   border: solid 1px black;
   border-radius: 8px;
   margin-bottom: 20px;
+}
+
+/* FLEX CONTAINER ICONS */
+.flex-container #circle{
+  border: solid 1px #f6f6f6;
+  background-image: url("../../frontend/src/icons/meeting128px.png");
+}
+.flex-container #server{
+  /*border: solid 1px #f6f6f6;*/
+  background-image: url("../../frontend/src/icons/server64px.png");
+  background-repeat: no-repeat;
+  background-size:  90px 90px;
+  border: solid 1px #f6f6f6;  
+}
+.flex-container #horRectangle{
+  /*border: solid 1px #f6f6f6;*/
+  background-color: #80471c;
+  /*background-image: url("C:/Users/WINDOWS 10/Downloads/desk2.png");
+  background-repeat: no-repeat;
+  background-size:  115px 50px;
+  border: solid 1px #f6f6f6;*/    
+}
+.flex-container #door{
+  background-image: url("../../frontend/src/icons/door.png");
+  background-repeat: no-repeat;
+  background-size:  125px 125px;
+  border: solid 1px #f6f6f6;
+}
+/*
+Devices 25-- washing machine
+        27 -- modem
+        13 -- oven
+        29 -- oven fan
+        30 -- fridge
+        31 -- dryer machine
+
+*/
+.flex-container #device25{
+  background-image: url("../../frontend/src/icons/lavadora.png");
+  background-repeat: no-repeat;
+  background-size:  80px 86px;
+  border: solid 1px #f6f6f6;
+  color: black;
+  font-weight: bolder;
+  font-size: large;
+}
+.flex-container #device30{
+  background-image: url("../../frontend/src/icons/fridge.png");
+  background-repeat: no-repeat;
+  background-size:  100px 110px;
+  border: solid 1px #f6f6f6;
+  color: black;
+  font-weight: bolder;
+  font-size: large;
+}
+.flex-container #device31{
+  background-image: url("../../frontend/src/icons/dryer2.png");
+  background-repeat: no-repeat;
+  background-size:  80px 95px;
+  border: solid 1px #f6f6f6;
+  color: black;
+  font-weight: bolder;
+  font-size: large;
+}
+.flex-container #device13{
+  background-image: url("../../frontend/src/icons/oven.png");
+  background-repeat: no-repeat;
+  background-size:  95px 95px;
+  border: solid 1px #f6f6f6;
+  color: black;
+  font-weight: bolder;
+  font-size: large;
+}
+.flex-container #device29{
+  background-image: url("../../frontend/src/icons/oven_fan.png");
+  background-repeat: no-repeat;
+  background-size:  95px 95px;
+  border: solid 1px #f6f6f6;
+  color: black;
+  font-weight: bolder;
+  font-size: large;
+}
+.flex-container #device27{
+  background-image: url("../../frontend/src/icons/modem.png");
+  background-repeat: no-repeat;
+  background-size:  100px 100px;
+  border: solid 1px #f6f6f6;
+  color: black;
+  font-weight: bolder;
+  font-size: large;
+}
+.flex-container #device26{
+  background-image: url("../../frontend/src/icons/dish_washer.png");
+  background-repeat: no-repeat;
+  background-size:  100px 100px;
+  border: solid 1px #f6f6f6;
+  color: black;
+  font-weight: bolder;
+  font-size: large;
 }
 
 /* POPUP CSS */

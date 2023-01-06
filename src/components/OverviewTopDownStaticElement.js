@@ -7,7 +7,9 @@ function OverviewTopDownStaticElement(props) {
         <>
             <div id={props.id}
                  data-tip
-                 data-for={props.id + 'ToolTip'}/>
+                 data-for={props.id + 'ToolTip'}
+            />
+            
             <ReactTooltip id={props.id + 'ToolTip'}>
                 <span>{props.name}</span>
             </ReactTooltip>

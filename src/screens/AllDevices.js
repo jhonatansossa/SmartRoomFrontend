@@ -48,7 +48,7 @@ const AllDevices = () => {
   }
 
   return (
-    <>
+    <> 
     {devices.length === 0 &&
       <div className="noDevicesPopup">
         No devices found. Make sure openHAB is running!
