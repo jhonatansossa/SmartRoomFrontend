@@ -444,12 +444,14 @@ footer {
 .flex-container #circle{
   border: solid 1px #f6f6f6;
   background-image: url("../../frontend/src/icons/meeting128px.png");
+  background-size:  cover;
+  background-repeat: no-repeat;
 }
 .flex-container #server{
   /*border: solid 1px #f6f6f6;*/
   background-image: url("../../frontend/src/icons/server64px.png");
   background-repeat: no-repeat;
-  background-size:  90px 90px;
+  background-size:  cover;
   border: solid 1px #f6f6f6;  
 }
 .flex-container #horRectangle{
@@ -463,7 +465,7 @@ footer {
 .flex-container #door{
   background-image: url("../../frontend/src/icons/door.png");
   background-repeat: no-repeat;
-  background-size:  125px 125px;
+  background-size:  cover;
   border: solid 1px #f6f6f6;
 }
 /*
@@ -478,7 +480,7 @@ Devices 25-- washing machine
 .flex-container #device25{
   background-image: url("../../frontend/src/icons/lavadora.png");
   background-repeat: no-repeat;
-  background-size:  80px 86px;
+  background-size:  cover;
   border: solid 1px #f6f6f6;
   color: black;
   font-weight: bolder;
@@ -486,17 +488,15 @@ Devices 25-- washing machine
 }
 .flex-container #device30{
   background-image: url("../../frontend/src/icons/fridge.png");
-  background-repeat: no-repeat;
-  background-size:  100px 110px;
+  background-size:  cover;
   border: solid 1px #f6f6f6;
-  color: black;
   font-weight: bolder;
   font-size: large;
 }
 .flex-container #device31{
   background-image: url("../../frontend/src/icons/dryer2.png");
   background-repeat: no-repeat;
-  background-size:  80px 95px;
+  background-size:  cover;
   border: solid 1px #f6f6f6;
   color: black;
   font-weight: bolder;
@@ -505,7 +505,7 @@ Devices 25-- washing machine
 .flex-container #device13{
   background-image: url("../../frontend/src/icons/oven.png");
   background-repeat: no-repeat;
-  background-size:  95px 95px;
+  background-size:  cover;
   border: solid 1px #f6f6f6;
   color: black;
   font-weight: bolder;
@@ -514,7 +514,7 @@ Devices 25-- washing machine
 .flex-container #device29{
   background-image: url("../../frontend/src/icons/oven_fan.png");
   background-repeat: no-repeat;
-  background-size:  95px 95px;
+  background-size:  cover;
   border: solid 1px #f6f6f6;
   color: black;
   font-weight: bolder;
@@ -523,7 +523,7 @@ Devices 25-- washing machine
 .flex-container #device27{
   background-image: url("../../frontend/src/icons/modem.png");
   background-repeat: no-repeat;
-  background-size:  100px 100px;
+  background-size:  cover;
   border: solid 1px #f6f6f6;
   color: black;
   font-weight: bolder;
@@ -532,7 +532,7 @@ Devices 25-- washing machine
 .flex-container #device26{
   background-image: url("../../frontend/src/icons/dish_washer.png");
   background-repeat: no-repeat;
-  background-size:  100px 100px;
+  background-size:  cover;
   border: solid 1px #f6f6f6;
   color: black;
   font-weight: bolder;
