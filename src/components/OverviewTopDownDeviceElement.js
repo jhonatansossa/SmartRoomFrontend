@@ -24,7 +24,7 @@ function OverviewTopDownDeviceElement(props) {
     <div
       onClick={() => redirectToDetailedDevice(props.id)}
       style={{
-        backgroundColor: updateColor(
+        filter: updateColor(
           props.devices.find(
             (device) => device.stateDescription.options[2].value === props.id
           ).state
@@ -53,22 +53,23 @@ function OverviewTopDownDeviceElement(props) {
       >
         <span>
           {
-            props.devices.find(
-              (device) => device.stateDescription.options[2].value === props.id
-            ).stateDescription.options[0].value
+            getNameAndCurrentConsumption()
           }
         </span>
       </ReactTooltip>
-      <div className="topdown-element-text">
-        {
-          props.devices.find(
-            (device) => device.stateDescription.options[2].value === props.id
-          ).state
-        }
-        <br /> kWh
-      </div>
     </div>
   );
+
+  function getNameAndCurrentConsumption() {
+    var name = props.devices.find(
+      (device) => device.stateDescription.options[2].value === props.id
+    ).stateDescription.options[0].value;
+    var value = props.devices.find(
+      (device) => device.stateDescription.options[2].value === props.id
+    ).state
+    var state = value <= 0 ? 'OFF' : 'ON: ' + value + 'kWh' 
+    return name + ' ' + state 
+  }
 }
 
 export default OverviewTopDownDeviceElement;
