@@ -45,8 +45,8 @@ function OverviewDeviceList(props) {
             }
           >
             <div
-              key={src.title}
-              className="card-image horizontal"
+              key = {src.title}
+              className = "card-image horizontal"
               style={{
                 backgroundImage: `url('/resources/${src.stateDescription.options[2].value}.svg')`,
               }}
