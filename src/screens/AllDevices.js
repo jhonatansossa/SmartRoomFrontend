@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import { generatePath, useNavigate } from "react-router-dom";
 import openHAB from "../openHAB/openHAB";
 import Axios from "axios";
-
+import base64 from 'base-64';
+import { token } from "./Login/Login";
 const AllDevices = () => {
   let navigate = useNavigate();
 
   const [openHABItems, setOpenHABItems] = useState([]);
 
+  //let base64 = require("base-64");
   const config = {
-    headers: { Authorization: openHAB.token },
+    headers: { Authorization: token },
   };
 
   useEffect(() => {
@@ -23,22 +25,14 @@ const AllDevices = () => {
   }, []);
 
   const fetchOpenHABItems = async () => {
-    const response = await Axios(openHAB.url + "/rest/items", config);
+    const response = await Axios(openHAB.url + "/api/v1/devices/items", config);
     setOpenHABItems(response.data);
   };
 
   var devices = [];
   openHABItems.forEach(function (item) {
-    if ("stateDescription" in item) {
-      if ("options" in item.stateDescription) {
-        if (item.stateDescription.options !== []) {
-          item.stateDescription.options.forEach(function (value) {
-            if (value.value === "device") {
-              devices.push(item);
-            }
-          });
-        }
-      }
+    if ("Switch" === item.type) {
+      devices.push(item);
     }
   });
 
@@ -60,7 +54,7 @@ const AllDevices = () => {
           <button
             className="card hov-primary vertical"
             onClick={() =>
-              redirectToDetailedDevice(src.stateDescription.options[2].value)
+              redirectToDetailedDevice(25)
             }
           >
             {
@@ -68,12 +62,12 @@ const AllDevices = () => {
                 key={src.title}
                 className="card-image vertical"
                 style={{
-                  backgroundImage: `url('/resources/${src.stateDescription.options[2].value}.svg')`,
+                  backgroundImage: `25`,
                 }}
               />
             }
             <div className="card-title vertical">
-              {src.stateDescription.options[0].value}
+              {25}
             </div>
           </button>
         ))}

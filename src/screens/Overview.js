@@ -8,16 +8,17 @@ import OverviewSwitchList from "../components/OverviewSwitchList";
 import OverviewTopDownStaticElement from "../components/OverviewTopDownStaticElement";
 import Counter from "../components/Counter";
 import { useNavigate } from "react-router-dom";
+import { token } from "./Login/Login";
+import base64 from 'base-64';
 
 const Overview = () => {
   //Fetching openHAB switches
   const [openHABItems, setOpenHABItems] = useState([]);
   const navigate = useNavigate();
 
+  //let base64 = require("base-64");
   const config = {
-    headers: {
-      Authorization: openHAB.token,
-    },
+    headers: { Authorization: token },
   };
 
   const timerRef = useRef(null);
@@ -38,8 +39,9 @@ const Overview = () => {
   }, []);
 
   const fetchOpenHABItems = async () => {
-    const response = await Axios(openHAB.url + "/rest/items", config);
+    const response = await Axios(openHAB.url + "/api/v1/devices/relations", config);
     setOpenHABItems(response.data);
+    //console.log("klevi ",response.data);
   };
 
   var switches = [];
@@ -54,7 +56,7 @@ const Overview = () => {
     }
     if ("stateDescription" in item) {
       if ("options" in item.stateDescription) {
-        if (item.stateDescription.options !== []) {
+        if (item.stateDescription.options.length > 0) {
           item.stateDescription.options.forEach(function (value) {
             if (value.value === "device") {
               devices.push(item);
@@ -117,10 +119,10 @@ const Overview = () => {
         </div>
 
         <div className="flex-container">
-          <OverviewTopDownStaticElement id="circle" name="Round table"/>
-          <OverviewTopDownStaticElement id="horRectangle" name="Table" />
-          <OverviewTopDownStaticElement id="server" name="Server" />
-          <OverviewTopDownStaticElement id="door" name="Door" />
+              {/* <OverviewTopDownStaticElement id="circle" name="Round table"/>
+              <OverviewTopDownStaticElement id="horRectangle" name="Table" />
+              <OverviewTopDownStaticElement id="server" name="Server" />
+              <OverviewTopDownStaticElement id="door" name="Door" /> */}
 
           {devices.length === 0 && devices.length === 0 && (
             <div className="noDevicesPopup">

@@ -3,16 +3,17 @@ import { useNavigate, useParams } from "react-router-dom";
 import Graphs from "../components/Graphs";
 import openHAB from "../openHAB/openHAB";
 import Axios from "axios";
+import { token } from "./Login/Login";
+import base64 from 'base-64';
 
 const DetailedDevice = () => {
   const [openHABItem, setOpenHABItem] = useState();
   const { id } = useParams();
   const navigate = useNavigate();
 
+  //let base64 = require("base-64");
   const config = {
-    headers: {
-      Authorization: openHAB.token,
-    },
+    headers: { Authorization: token },
   };
 
   const timerRef = useRef(null);
@@ -34,7 +35,7 @@ const DetailedDevice = () => {
 
   const fetchOpenHABItem = async () => {
     const response = await Axios(
-      openHAB.url + "/rest/items/" + id + "_ACTIVE_EXPORT_KWH",
+      openHAB.url + "/api/v1/devices/items/" + id + "_ACTIVE_EXPORT_KWH",
       config
     );
     setOpenHABItem(response.data);

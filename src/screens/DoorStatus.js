@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { generatePath, useNavigate } from "react-router-dom";
 import openHAB from "../openHAB/openHAB";
 import Axios from "axios";
-import OpenDoor from "../Images/opendoor.png";
-import CloseDoor from "../Images/closedoor.png";
+import OpenDoor from "../Images/dooropened.png";
+import CloseDoor from "../Images/doorclosed.jpg";
 import ToggleButton from "react-toggle-button";
+import { token } from "./Login/Login";
+import base64 from 'base-64';
 
 
 
@@ -15,8 +17,9 @@ const DoorStatus = () => {
   const [openHABItems, setOpenHABItems] = useState([]);
   const [toggle, setToggle] = useState(false);
 
+  //let base64 = require("base-64");
   const config = {
-    headers: { Authorization: openHAB.token },
+    headers: { Authorization: token },
   };
 
   useEffect(() => {
@@ -30,23 +33,16 @@ const DoorStatus = () => {
   }, []);
 
   const fetchOpenHABItems = async () => {
-    const response = await Axios(openHAB.url + "/rest/items", config);
+    const response = await Axios(openHAB.url + "/api/v1/devices/items", config);
     setOpenHABItems(response.data);
   };
 
 
   var devices = [];
   openHABItems.forEach(function (item) {
-    if ("stateDescription" in item) {
-      if ("options" in item.stateDescription) {
-        if (item.stateDescription.options !== []) {
-          item.stateDescription.options.forEach(function (value) {
-            if (value.value === "device") {
-              devices.push(item);
-            }
-          });
-        }
-      }
+    if (item.name === "Door_Sensor_sensordoor_12_01"){
+      var doorStatus = item.state;
+      devices.push(item);
     }
   });
 
@@ -76,7 +72,7 @@ const DoorStatus = () => {
         <h2 className="title" align="center">Door Status<br></br><br></br></h2>
         <p align="center" margin-left="2px"><img src={CloseDoor}></img></p>
 
-        <h4 align="center"><br></br>The door is close</h4>
+        <h4 align="center"><br></br>The door is closed</h4>
         
       </div>}
 
@@ -86,7 +82,7 @@ const DoorStatus = () => {
       <h2 className="title" align="center">Door Status<br></br><br></br></h2>
       <p align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src={OpenDoor}></img></p>
 
-      <h4 align="center"><br></br>The door is open</h4>
+      <h4 align="center"><br></br>The door is opened</h4>
       
     </div>}
   

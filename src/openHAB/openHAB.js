@@ -1,7 +1,11 @@
 const openHAB = {
     token:
-        "Bearer oh.tokenAleja.Lg2OnVwu9n4JS6vDHYrqbUV4SmpC3IUcsB5WISjGh0NGed983eCPrb2I9OyRPmr1iVKqhwLJwiNlzcoiGg",
-    url: "http://localhost:8080",
+        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5OTgwODM1OSwianRpIjoiZjVjMzllOTMtZDlhYS00ODc5LWIyMDItOGMyYTI2MDNjODBjIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6NiwibmJmIjoxNjk5ODA4MzU5LCJleHAiOjE3MDAwNjc1NTl9.IEeV-LdMjWi-XcaI9wPZzDFjMCaTV5BRXl5vP_vBebE",
+    username:
+        "dsd@.com",
+    password:
+        "",
+    url: "https://smart-room.fly.dev",
     devices: {
         OVEN_ID: "13",
         DISHWASHER_ID: "26",
