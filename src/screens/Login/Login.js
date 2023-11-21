@@ -1,12 +1,14 @@
-import { React, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import user from "./Users";
+import Axios from "axios";
+import openHAB from "../../openHAB/openHAB";
 
+export var token;
 const Login = () => {
-  var [usernameValue, setUsernameValue] = useState();
-  var [passwordValue, setPasswordValue] = useState();
-  const [errorMessage, setErrorMessage] = useState('');
-  let navigate = useNavigate();
+  const [usernameValue, setUsernameValue] = useState("");
+  const [passwordValue, setPasswordValue] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
   // Initialize a boolean state
   const [passwordShown, setPasswordShown] = useState(false);
@@ -19,34 +21,49 @@ const Login = () => {
   };
 
   useEffect(() => {
-    sessionStorage.removeItem('auth');
+    sessionStorage.removeItem("auth");
     document.title = "SmartRoom – Login";
   }, []);
 
-  const authenticateUser = (e, usernameValue, passwordValue) => {
+  const authenticateUser = async (e, usernameValue, passwordValue) => {
     e.preventDefault();
 
-    user.login.map((eachUser) => {
-      if (
-        usernameValue === eachUser.username &&
-        passwordValue === eachUser.password
-      ) {
+    try {
+      const response = await Axios.post(
+        openHAB.url + "/api/v1/auth/login",
+        {
+          email: usernameValue,
+          password: passwordValue,
+        }
+      );
+
+      if (response.status === 200) {
+        // Authentication successful
+        const accessToken = response.data.user.access;
+        token = "Bearer "+accessToken;
+        console.log("Bearer "+accessToken);
         sessionStorage.setItem("auth", "true");
         navigate("/overview");
-      }else{
-        setErrorMessage('Wrong username or password, please try again');
+      } else {
+        // Authentication failed
+        setErrorMessage("Wrong username or password, please try again");
       }
-    });
+    } catch (error) {
+      // Handle any errors during the request
+      console.error("Error during authentication:", error);
+      setErrorMessage("An error occurred during authentication");
+    }
   };
 
   return (
     <div className="login-container">
       <img
-    src="smart-room-logo-orange.svg"
-    width="130"
-    height="130"
-    className="center logo"
-    />
+        src="smart-room-logo-orange.svg"
+        width="130"
+        height="130"
+        className="center logo"
+        alt="SmartRoom Logo"
+      />
       <h1 className="login-header">SmartRoom</h1>
       <form name="login-form">
         <input
@@ -68,7 +85,9 @@ const Login = () => {
         />
 
         {errorMessage && (
-            <div className="text-danger form-control input-error">{errorMessage}</div>
+          <div className="text-danger form-control input-error">
+            {errorMessage}
+          </div>
         )}
 
         <label className="form-control form-control-input-password">
@@ -91,4 +110,4 @@ const Login = () => {
   );
 };
 
-  export default Login;
+export default Login;

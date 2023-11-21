@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { generatePath, useNavigate } from "react-router-dom";
 import openHAB from "../openHAB/openHAB";
 import Axios from "axios";
-import axios from "axios";
 import ToggleButton from "react-toggle-button";
 import ReactTooltip from "react-tooltip";
-
+import { token } from "./Login/Login";
+import base64 from 'base-64';
+var regex = /^(?!.*Sensor).*$/i;
 const AllSwitches = () => {
   let navigate = useNavigate();
 
@@ -13,13 +14,14 @@ const AllSwitches = () => {
   const [toggle, setToggle] = useState(false); // Switch toggle handler
   const [responseStatus, setResponseStatus] = useState([]);
 
-  const config = {
-    headers: { Authorization: openHAB.token },
-  };
+  //let base64 = require("base-64");
+    const config = {
+      headers: { Authorization: token },
+    };
 
   const postConfig = {
     headers: {
-      Authorization: openHAB.token,
+      Authorization: token,
       "Content-Type": "text/plain",
     },
   };
@@ -35,22 +37,17 @@ const AllSwitches = () => {
   }, []);
 
   const fetchOpenHABItems = async () => {
-    const response = await Axios(openHAB.url + "/rest/items", config);
+    const response = await Axios.get(openHAB.url + "/api/v1/devices/items", config);
     setOpenHABItems(response.data);
   };
 
   var switches = [];
   openHABItems.forEach(function (item) {
-    if (item.type === "Switch") {
-      if ("stateDescription" in item) {
-        if ("readOnly" in item.stateDescription) {
-          if (item.stateDescription.readOnly === false) {
+    if (item.type === "Switch" && regex.test(item.name)) {
             switches.push(item);
           }
         }
-      }
-    }
-  });
+  );
 
   function redirectToDetailedSwitch(id) {
     let path = generatePath("/switches/:id/details", { id });
@@ -60,15 +57,15 @@ const AllSwitches = () => {
   async function toggleAllSwitches(toggle) {
     switches.forEach(function (item) {
       if (toggle === true) {
-        axios
-          .post(openHAB.url + "/rest/items/" + item.name, "OFF", postConfig)
+        Axios
+          .post(openHAB.url + "/api/v1/devices/items/" + item.name, "OFF", postConfig)
           .then((response) => {
             setResponseStatus(response.data);
             console.log(responseStatus);
           });
       } else {
-        axios
-          .post(openHAB.url + "/rest/items/" + item.name, "ON", postConfig)
+        Axios
+          .post(openHAB.url + "/api/v1/devices/items/" + item.name, "ON", postConfig)
           .then((response) => {
             setResponseStatus(response.data);
             console.log(responseStatus);

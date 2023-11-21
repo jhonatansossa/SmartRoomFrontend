@@ -441,34 +441,34 @@ footer {
 }
 
 /* FLEX CONTAINER ICONS */
-.flex-container #circle{
+/* .flex-container #circle{
   border: solid 1px #f6f6f6;
   background-image: url("../../frontend/src/icons/meeting128px.png");
   background-size:  cover;
   background-repeat: no-repeat;
 }
 .flex-container #server{
-  /*border: solid 1px #f6f6f6;*/
+  border: solid 1px #f6f6f6;
   background-image: url("../../frontend/src/icons/server64px.png");
   background-repeat: no-repeat;
   background-size:  cover;
   border: solid 1px #f6f6f6;  
-}
+} 
 .flex-container #horRectangle{
-  /*border: solid 1px #f6f6f6;*/
+  border: solid 1px #f6f6f6;
   background-color: #80471c;
-  /*background-image: url("C:/Users/WINDOWS 10/Downloads/desk2.png");
+  background-image: url("C:/Users/WINDOWS 10/Downloads/desk2.png");
   background-repeat: no-repeat;
   background-size:  115px 50px;
-  border: solid 1px #f6f6f6;*/    
+  border: solid 1px #f6f6f6;   
 }
 .flex-container #door{
   background-image: url("../../frontend/src/icons/door.png");
   background-repeat: no-repeat;
   background-size:  cover;
   border: solid 1px #f6f6f6;
-}
-/*
+} 
+
 Devices 25-- washing machine
         27 -- modem
         13 -- oven
@@ -477,7 +477,7 @@ Devices 25-- washing machine
         31 -- dryer machine
 
 */
-.flex-container #device25{
+/* .flex-container #device25{
   background-image: url("../../frontend/src/icons/lavadora.png");
   background-repeat: no-repeat;
   background-size:  cover;
@@ -537,7 +537,7 @@ Devices 25-- washing machine
   color: black;
   font-weight: bolder;
   font-size: large;
-}
+} */
 
 /* POPUP CSS */
 
