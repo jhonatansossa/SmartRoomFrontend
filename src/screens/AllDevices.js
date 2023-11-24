@@ -4,6 +4,7 @@ import openHAB from "../openHAB/openHAB";
 import Axios from "axios";
 import base64 from 'base-64';
 import { token } from "./Login/Login";
+var regex = /^(?!.*Sensor).*$/i;
 const AllDevices = () => {
   let navigate = useNavigate();
 
@@ -31,7 +32,10 @@ const AllDevices = () => {
 
   var devices = [];
   openHABItems.forEach(function (item) {
-    if ("Switch" === item.type) {
+    if (item.type === "Switch" && !regex.test(item.name)){
+      devices.push(item);
+    }
+    if ("Switch" !== item.type) {
       devices.push(item);
     }
   });
@@ -67,7 +71,7 @@ const AllDevices = () => {
               />
             }
             <div className="card-title vertical">
-              {25}
+              {src.name}
             </div>
           </button>
         ))}

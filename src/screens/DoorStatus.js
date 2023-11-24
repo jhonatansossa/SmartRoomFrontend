@@ -1,95 +1,80 @@
 import React, { useEffect, useState } from "react";
-import { generatePath, useNavigate } from "react-router-dom";
-import openHAB from "../openHAB/openHAB";
+import { useNavigate } from "react-router-dom";
 import Axios from "axios";
+import openHAB from "../openHAB/openHAB";
 import OpenDoor from "../Images/dooropened.png";
 import CloseDoor from "../Images/doorclosed.jpg";
-import ToggleButton from "react-toggle-button";
 import { token } from "./Login/Login";
-import base64 from 'base-64';
-
-
-
 
 const DoorStatus = () => {
   let navigate = useNavigate();
 
   const [openHABItems, setOpenHABItems] = useState([]);
-  const [toggle, setToggle] = useState(false);
+  const [backendResponseReceived, setBackendResponseReceived] = useState(false);
 
-  //let base64 = require("base-64");
   const config = {
     headers: { Authorization: token },
   };
 
   useEffect(() => {
     document.title = "SmartRoom – Door Status";
-    let auth = sessionStorage.getItem("auth")
-    if(auth !== "true") {
+    let auth = sessionStorage.getItem("auth");
+    if (auth !== "true") {
       navigate("/login");
-    }else{
+    } else {
       fetchOpenHABItems();
     }
   }, []);
 
   const fetchOpenHABItems = async () => {
-    const response = await Axios(openHAB.url + "/api/v1/devices/items", config);
-    setOpenHABItems(response.data);
+    try {
+      const response = await Axios(openHAB.url + "/api/v1/devices/items", config);
+      setOpenHABItems(response.data);
+      setBackendResponseReceived(true);
+    } catch (error) {
+      console.error("Error fetching openHAB items:", error);
+    }
   };
 
+  if (!backendResponseReceived) {
+    return <div className="noDevicesPopup" >Loading...</div>;
+  }
 
-  var devices = [];
-  openHABItems.forEach(function (item) {
-    if (item.name === "Door_Sensor_sensordoor_12_01"){
-      var doorStatus = item.state;
-      devices.push(item);
-    }
-  });
+  const doorItem = openHABItems.find((item) => item.name === "Door_Sensor_sensordoor_12_01");
 
-   /*
-    
-
-    
-    */
-   
-  return (
-    <>
-
-      {devices.length === 0 &&
+  if (!doorItem) {
+    return (
       <div className="noDevicesPopup">
         No door found. Make sure openHAB is running!
-      </div>}
-      <ToggleButton
-        value={toggle}
-        onToggle={() => {
-          setToggle(!toggle);
-        }}
-      />
+      </div>
+    );
+  }
 
-      {!toggle &&
-      <div className="DoorClose">
-        
-        <h2 className="title" align="center">Door Status<br></br><br></br></h2>
-        <p align="center" margin-left="2px"><img src={CloseDoor}></img></p>
+  const doorStatus = doorItem.state;
 
-        <h4 align="center"><br></br>The door is closed</h4>
-        
-      </div>}
+  return (
+    <>
+      {doorStatus === "CLOSED" && (
+        <div className="DoorClose">
+          <h2 className="title" align="center">
+            Door Status<br></br><br></br>
+          </h2>
+          <p align="center"><img src={CloseDoor} alt="Door closed" /></p>
+          <h4 align="center"><br></br>The door is closed</h4>
+        </div>
+      )}
 
-      {toggle &&
-      <div className="DoorOpen">
-        
-      <h2 className="title" align="center">Door Status<br></br><br></br></h2>
-      <p align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src={OpenDoor}></img></p>
-
-      <h4 align="center"><br></br>The door is opened</h4>
-      
-    </div>}
-  
-
+      {doorStatus === "OPEN" && (
+        <div className="DoorOpen">
+          <h2 className="title" align="center">
+            Door Status<br></br><br></br>
+          </h2>
+          <p align="center"><img src={OpenDoor} alt="Door opened" /></p>
+          <h4 align="center"><br></br>The door is opened</h4>
+        </div>
+      )}
     </>
   );
 };
 
 export default DoorStatus;
-

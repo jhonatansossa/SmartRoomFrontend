@@ -11,15 +11,22 @@ import { useNavigate } from "react-router-dom";
 import { token } from "./Login/Login";
 import base64 from 'base-64';
 
+var regex = /^(?!.*Sensor).*$/i;
+
 const Overview = () => {
-  //Fetching openHAB switches
   const [openHABItems, setOpenHABItems] = useState([]);
+  const [energyConsumptionData, setEnergyConsumptionData] = useState({
+    averageEnergy: 0,
+    devicesCount: 0,
+    switchCount: 0,
+    totalEnergy: 0,
+  });
+
   const navigate = useNavigate();
 
-  //let base64 = require("base-64");
   const config = {
     headers: { Authorization: token },
-  };
+    };
 
   const timerRef = useRef(null);
 
@@ -31,6 +38,7 @@ const Overview = () => {
     } else {
       timerRef.current = setInterval(function () {
         fetchOpenHABItems();
+        fetchEnergyConsumptionData();
       }, 1000);
       return () => {
         clearInterval(timerRef.current);
@@ -39,31 +47,45 @@ const Overview = () => {
   }, []);
 
   const fetchOpenHABItems = async () => {
-    const response = await Axios(openHAB.url + "/api/v1/devices/relations", config);
+    const response = await Axios.get(openHAB.url + "/api/v1/devices/items", config);
     setOpenHABItems(response.data);
-    //console.log("klevi ",response.data);
   };
+
+  const fetchEnergyConsumptionData = async () => {
+    try {
+      const response = await Axios.get(
+        openHAB.url + "/api/v1/devices/energy_consumption",
+        config
+      );
+
+      //console.log("Energy Consumption Response:", response.data);
+
+      // Update state with the fetched energy consumption data
+      setEnergyConsumptionData({
+        averageEnergy: response.data.average_energy,
+        devicesCount: response.data.devices_count,
+        switchCount: response.data.switch_count,
+        totalEnergy: response.data.total_energy,
+      });
+      
+      
+    } catch (error) {
+      console.error("Error fetching energy consumption data:", error);
+    }
+  };
+
 
   var switches = [];
   var devices = [];
   openHABItems.forEach(function (item) {
-    if (item.type === "Switch") {
-      if ("stateDescription" in item) {
-        if ("readOnly" in item.stateDescription) {
-          if (item.stateDescription.readOnly === false) switches.push(item);
-        }
-      }
+    if (item.type === "Switch" && regex.test(item.name)) {
+      switches.push(item);
     }
-    if ("stateDescription" in item) {
-      if ("options" in item.stateDescription) {
-        if (item.stateDescription.options.length > 0) {
-          item.stateDescription.options.forEach(function (value) {
-            if (value.value === "device") {
-              devices.push(item);
-            }
-          });
-        }
-      }
+    if (item.type === "Switch" && !regex.test(item.name)){
+      devices.push(item);
+    }
+    if ("Switch" !== item.type) {
+      devices.push(item);
     }
   });
 
@@ -83,7 +105,7 @@ const Overview = () => {
       <div>
         <div className="card cardCounter">
           <Counter
-            value={totalConsumption}
+            value={energyConsumptionData.totalEnergy}
             text="Total consumption in kWh"
             unit="kWh"
             unitDescription="Kilowatt hours"
@@ -91,7 +113,7 @@ const Overview = () => {
             decimals="2"
           />
           <Counter
-            value={totalConsumption / devices.length}
+            value={energyConsumptionData.averageEnergy}
             text="Average consumption in kWh"
             unit="kWh"
             unitDescription="Kilowatt hours"
@@ -99,19 +121,19 @@ const Overview = () => {
             decimals="2"
           />
           <Counter
-            value={devices.length}
+            value={energyConsumptionData.devicesCount}
             text="Devices"
             description="This value represents the amount of devices in the smart room"
             decimals="0"
           />
           <Counter
-            value={turnedOnDevices.length}
+            value={energyConsumptionData.switchCount}
             text="Turned on devices"
             description="This value represents the amount of turned on devices in the smart room"
             decimals="0"
           />
           <Counter
-            value={switches.length}
+            value={energyConsumptionData.switchCount}
             text="Switches"
             description="This value represents the amount of switches in the smart room"
             decimals="0"
@@ -119,10 +141,10 @@ const Overview = () => {
         </div>
 
         <div className="flex-container">
-              {/* <OverviewTopDownStaticElement id="circle" name="Round table"/>
-              <OverviewTopDownStaticElement id="horRectangle" name="Table" />
-              <OverviewTopDownStaticElement id="server" name="Server" />
-              <OverviewTopDownStaticElement id="door" name="Door" /> */}
+          {/* <OverviewTopDownStaticElement id="circle" name="Round table"/>
+          <OverviewTopDownStaticElement id="horRectangle" name="Table" />
+          <OverviewTopDownStaticElement id="server" name="Server" />
+          <OverviewTopDownStaticElement id="door" name="Door" /> */}
 
           {devices.length === 0 && devices.length === 0 && (
             <div className="noDevicesPopup">
@@ -132,7 +154,7 @@ const Overview = () => {
 
           {devices.map((device) => (
             <OverviewTopDownDeviceElement
-              id = {device.stateDescription.options[2].value}
+              id = {device.name}
               devices = {devices}
             />
           ))}
@@ -151,5 +173,6 @@ const Overview = () => {
     </>
   );
 };
+
 
 export default Overview;
