@@ -25,30 +25,29 @@ function OverviewTopDownDeviceElement(props) {
       onClick={() => redirectToDetailedDevice(props.id)}
       style={{
         filter: updateColor(
-          props.devices.find(
-            (device) => device.stateDescription.options[2].value === props.id
-          ).state
+          props.devices.find((device) => device.name === props.id).state
         ).color,
       }}
+
       id={
         "device" +
         props.devices.find(
-          (device) => device.stateDescription.options[2].value === props.id
-        ).stateDescription.options[2].value
+          (device) => device.name === props.id
+        ).name
       }
       className="square"
       data-tip
       data-for={
         props.devices.find(
-          (device) => device.stateDescription.options[2].value === props.id
-        ).stateDescription.options[2].value + "ToolTip"
+          (device) => device.name === props.id
+        ).name + "ToolTip"
       }
     >
       <ReactTooltip
         id={
           props.devices.find(
-            (device) => device.stateDescription.options[2].value === props.id
-          ).stateDescription.options[2].value + "ToolTip"
+            (device) => device.name === props.id
+          ).name + "ToolTip"
         }
       >
         <span>
@@ -62,10 +61,10 @@ function OverviewTopDownDeviceElement(props) {
 
   function getNameAndCurrentConsumption() {
     var name = props.devices.find(
-      (device) => device.stateDescription.options[2].value === props.id
-    ).stateDescription.options[0].value;
+      (device) => device.name === props.id
+    ).name;
     var value = props.devices.find(
-      (device) => device.stateDescription.options[2].value === props.id
+      (device) => device.name === props.id
     ).state
     var state = value <= 0 ? 'OFF' : 'ON: ' + value + 'kWh' 
     return name + ' ' + state 

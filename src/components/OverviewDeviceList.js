@@ -41,18 +41,18 @@ function OverviewDeviceList(props) {
           <button
             className="card hov-primary horizontal"
             onClick={() =>
-              redirectToDetailedDevice(src.stateDescription.options[2].value)
+              redirectToDetailedDevice(src.name)
             }
           >
             <div
               key = {src.title}
               className = "card-image horizontal"
               style={{
-                backgroundImage: `url('/resources/${src.stateDescription.options[2].value}.svg')`,
+                backgroundImage: `url('/resources/${src.name}.svg')`,
               }}
             />
             <div className="card-title horizontal">
-              {src.stateDescription.options[0].value}
+              {src.name}
             </div>
           </button>
         ))}
