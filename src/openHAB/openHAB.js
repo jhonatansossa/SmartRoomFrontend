@@ -7,16 +7,14 @@ const openHAB = {
         "",
     url: "https://smart-room.fly.dev",
     devices: {
-        OVEN_ID: "13",
-        DISHWASHER_ID: "26",
-        REFRIGERATOR_ID: "30",
-        MODEM_ID: "27",
-        OVEN_FAN_ID: "29",
-        DRYER_ID: "31",
-        WASHING_MACHINE_ID: "25",
+        TV_ID: "tv",
+        CAMERA_ID: "camera_s",
+        LIGHT_ID: "light",
+        LAMP_ID: "light",
+        SENSOR_ID: "sensor"
     },
     switches: {
-        LIGHT_SWITCH_ID: "ZWaveNode004HS2SKZSmartMeteringPlug_Switch"
+        LIGHT_SWITCH_ID: "switch"
     }
 };
 

@@ -1,5 +1,6 @@
 import { React } from "react";
 import { generatePath, useNavigate } from "react-router-dom";
+import openHAB from "../openHAB/openHAB";
 
 function OverviewSwitchList(props) {
   let navigate = useNavigate();
@@ -12,6 +13,17 @@ function OverviewSwitchList(props) {
     let path = generatePath("/switches/:id/details", { id });
     navigate(path);
   }
+
+  function shortname(parameter) {
+    const fullWord = parameter.split('_');
+    const indiceSwitch = fullWord.indexOf('switch');
+
+    const selection = indiceSwitch !== -1 ? fullWord.slice(0, indiceSwitch) : fullWord.slice(0, 2);
+    const result = selection.join(' ');
+
+    return result;
+  }
+
 
   return (
     <>
@@ -46,10 +58,11 @@ function OverviewSwitchList(props) {
               key={src.label}
               className="card-image horizontal"
               style={{
-                backgroundImage: `url('/resources/${src.name}.svg')`,
+                //backgroundImage: `url('/resources/${src.name}.svg')`,
+                backgroundImage: `url('/resources/${openHAB.switches.LIGHT_SWITCH_ID}.svg')`,
               }}
             />
-            <div className="card-title horizontal">{src.label}</div>
+            <div className="card-title horizontal">{shortname(src.label)}</div>
           </button>
         ))}
       </div>

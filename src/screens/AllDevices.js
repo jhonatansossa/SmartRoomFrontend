@@ -41,8 +41,14 @@ const AllDevices = () => {
   });
 
   function redirectToDetailedDevice(id) {
-    let path = generatePath("/devices/:id/details", { id });
-    navigate(path);
+    if (!id) {
+      console.error("ID no válido");
+      return;
+    }else{
+      let path = generatePath("/devices/:id/details", { id });
+      navigate(path);
+    }
+    
   }
 
   return (
@@ -58,7 +64,7 @@ const AllDevices = () => {
           <button
             className="card hov-primary vertical"
             onClick={() =>
-              redirectToDetailedDevice(25)
+              redirectToDetailedDevice(src.label)
             }
           >
             {

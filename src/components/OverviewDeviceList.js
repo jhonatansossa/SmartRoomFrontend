@@ -1,5 +1,6 @@
 import { React } from "react";
 import { generatePath, useNavigate } from "react-router-dom";
+import openHAB from "../openHAB/openHAB";
 
 function OverviewDeviceList(props) {
   let navigate = useNavigate();
@@ -11,6 +12,41 @@ function OverviewDeviceList(props) {
   function redirectToDetailedDevice(id) {
     let path = generatePath("/devices/:id/details", { id });
     navigate(path);
+  }
+
+  function printId(label) {
+  const deviceTypes = ['Camera', 'Sensor', 'TV', 'LIGHT', 'Lamps'];
+  let imageName = '-1.svg';
+
+  const lowercasedLabel = label.toLowerCase();
+
+  for (const type of deviceTypes) {
+    const lowercasedType = type.toLowerCase();
+
+    if (lowercasedLabel.includes(lowercasedType)) {
+      switch (type) {
+        case 'Camera': imageName = openHAB.devices.CAMERA_ID;    break;
+        case 'Sensor': imageName = openHAB.devices.SENSOR_ID;    break;
+        case 'TV':     imageName = openHAB.devices.TV_ID;        break;
+        case 'LIGHT':  imageName = openHAB.devices.LIGHT_ID;     break;
+        case 'Lamps':  imageName = openHAB.devices.LAMP_ID;      break;
+        default: break;
+      }
+      break;
+    }
+  }
+
+  return imageName;
+}
+
+  function shortname(parameter) {
+    const fullWord = parameter.split('_');
+    const indiceSwitch = fullWord.indexOf('switch');
+
+    const selection = indiceSwitch !== -1 ? fullWord.slice(0, indiceSwitch) : fullWord.slice(0, 2);
+    const result = selection.join(' ');
+
+    return result;
   }
 
   return (
@@ -47,12 +83,15 @@ function OverviewDeviceList(props) {
             <div
               key = {src.title}
               className = "card-image horizontal"
+              onClick={() =>{
+                printId(src.name)
+              }}
               style={{
-                backgroundImage: `url('/resources/${src.name}.svg')`,
+                backgroundImage: `url('/resources/${printId(src.label)}.svg')`,
               }}
             />
             <div className="card-title horizontal">
-              {src.name}
+              {shortname(src.label)}
             </div>
           </button>
         ))}
