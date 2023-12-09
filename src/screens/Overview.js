@@ -15,6 +15,7 @@ var regex = /^(?!.*Sensor).*$/i;
 
 const Overview = () => {
   const [openHABItems, setOpenHABItems] = useState([]);
+  const [peopleInsideRoom, setPeopleInsideRoom] = useState(0)
   const [energyConsumptionData, setEnergyConsumptionData] = useState({
     averageEnergy: 0,
     devicesCount: 0,
@@ -39,12 +40,27 @@ const Overview = () => {
       timerRef.current = setInterval(function () {
         fetchOpenHABItems();
         fetchEnergyConsumptionData();
+        fetchPeopleInsideRoom();
       }, 1000);
       return () => {
         clearInterval(timerRef.current);
       };
     }
   }, []);
+
+  const fetchPeopleInsideRoom = async () => {
+    try {
+      const response = await Axios.get(
+        openHAB.url + "/devices/roomstatus",
+        config
+      );
+
+      const numberOfPeopleInsideRoom = response.data.numberOfPeople;
+      setPeopleInsideRoom(numberOfPeopleInsideRoom);
+    } catch (error) {
+      console.error("Error fetching number of people inside the room:", error);
+    }
+  };
 
   const fetchOpenHABItems = async () => {
     const response = await Axios.get(openHAB.url + "/api/v1/devices/items", config);
@@ -92,13 +108,18 @@ const Overview = () => {
   //Turned on devices
   var totalConsumption = 0.0;
   var turnedOnDevices = [];
-  devices.forEach(function (item) {
-    if (item.state > 0) {
-      turnedOnDevices.push(item);
-      console.log(item.label + item.state);
-      totalConsumption = parseFloat(totalConsumption) + parseFloat(item.state);
-    }
+  openHABItems.forEach(function (item) {
+  const isOn =  item.state === 'ON';
+
+  if (isOn) {
+    turnedOnDevices.push(item);
+    totalConsumption += Number.parseFloat(item.state);
+  }
   });
+
+  function getTurnedOnDevices() {
+  return turnedOnDevices.filter(device => device.state === "ON");
+}
 
   return (
     <>
@@ -127,7 +148,7 @@ const Overview = () => {
             decimals="0"
           />
           <Counter
-            value={energyConsumptionData.switchCount}
+            value={energyConsumptionData.devicesCount}
             text="Turned on devices"
             description="This value represents the amount of turned on devices in the smart room"
             decimals="0"
@@ -138,13 +159,25 @@ const Overview = () => {
             description="This value represents the amount of switches in the smart room"
             decimals="0"
           />
+          <Counter
+            value={peopleInsideRoom}
+            text="People inside the Room"
+            description="This value represents the number of the people inside the smart room"
+            decimals="0"
+          />
         </div>
 
         <div className="flex-container">
-          {/* <OverviewTopDownStaticElement id="circle" name="Round table"/>
-          <OverviewTopDownStaticElement id="horRectangle" name="Table" />
+          <OverviewTopDownStaticElement id="tv1" name="TV1"/>
+          <OverviewTopDownStaticElement id="tv2" name="TV2" />
+          <OverviewTopDownStaticElement id="sofa" name="Sofa" />
+          <OverviewTopDownStaticElement id="window1" name="Window" />
+          <OverviewTopDownStaticElement id="window2" name="Window" />
+          <OverviewTopDownStaticElement id="lamp1" name="Lamp" />
+          <OverviewTopDownStaticElement id="lamp2" name="Lamp" />
           <OverviewTopDownStaticElement id="server" name="Server" />
-          <OverviewTopDownStaticElement id="door" name="Door" /> */}
+          <OverviewTopDownStaticElement id="door" name="Door" />
+          <OverviewTopDownStaticElement id="camera" name="Camera" />
 
           {devices.length === 0 && devices.length === 0 && (
             <div className="noDevicesPopup">
@@ -152,12 +185,14 @@ const Overview = () => {
             </div>
           )}
 
-          {devices.map((device) => (
+          
+
+          {/* {devices.map((device) => (
             <OverviewTopDownDeviceElement
               id = {device.name}
               devices = {devices}
             />
-          ))}
+          ))} */}
 
           {switches.map((s) => (
             <OverviewTopDownSwitchElement id={s.name} switches={switches} />

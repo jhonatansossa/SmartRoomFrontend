@@ -1,4 +1,4 @@
-import { React, useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Graphs from "../components/Graphs";
 import openHAB from "../openHAB/openHAB";
@@ -7,11 +7,9 @@ import { token } from "./Login/Login";
 import base64 from 'base-64';
 
 const DetailedDevice = () => {
-  const [openHABItem, setOpenHABItem] = useState();
+  const [openHABItem, setOpenHABItem] = useState(null);
   const { id } = useParams();
   const navigate = useNavigate();
-
-  //let base64 = require("base-64");
   const config = {
     headers: { Authorization: token },
   };
@@ -24,37 +22,42 @@ const DetailedDevice = () => {
     if (auth !== "true") {
       navigate("/login");
     } else {
-      timerRef.current = setInterval(function () {
+      timerRef.current = setInterval(() => {
         fetchOpenHABItem();
       }, 1000);
+
       return () => {
         clearInterval(timerRef.current);
       };
     }
-  }, []);
+  }, [id, navigate]);
 
   const fetchOpenHABItem = async () => {
-    const response = await Axios(
-      openHAB.url + "/api/v1/devices/items/" + id + "_ACTIVE_EXPORT_KWH",
-      config
-    );
-    setOpenHABItem(response.data);
+    try {
+      const response = await Axios.get(
+        openHAB.url+"/api/v1/devices/items/"+id,
+        config
+      );
+      setOpenHABItem(response.data);
+    } catch (error) {
+      console.error("Error fetching OpenHAB item:", error);
+      // Puedes manejar el error de manera más informativa aquí
+    }
   };
 
-  if (openHABItem === undefined) {
-    return <div />;
+  if (openHABItem === null) {
+    // Puedes mostrar un indicador de carga aquí
+    return <div>Loading...</div>;
   } else {
     return (
       <div className="vertical-scroll-area">
-        <h2 className="title">
-          {openHABItem.stateDescription.options[0].value}
-        </h2>
+        <h2 className="title">{openHABItem.label}</h2>
         <div className="card vertical">
           <div
             key={id}
             className="card-image vertical"
             style={{
-              backgroundImage: `url('/resources/${id}.svg'`,
+              backgroundImage: `url('/resources/${id}.svg')`,
             }}
           />
           <div className="card-title card-content">

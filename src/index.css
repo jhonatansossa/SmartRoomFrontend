@@ -143,7 +143,7 @@ footer {
   /* display: flex; */
 }
 
-.card.hov-primary:hover > .card-title {
+.card.hov-primary:hover>.card-title {
   color: #ef962e;
 }
 
@@ -286,15 +286,170 @@ footer {
   border-color: #cc4125;
 }
 
-#circle {
-  width: 8vmax;
-  height: 8vmax;
-  border: solid 1px black;
-  border-radius: 70px;
+#tv1 {
+  background-image: url(../public/resources/devices_icons/tv_icon.svg);
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 1.5vmax;
   background-color: #f6f6f6;
-  grid-row: 1 / span 2;
-  margin-top: 20%;
+  border-radius: 8px;
+  transform: rotate(180deg);
+  grid-row: 6;
+  grid-column: 2 / span 2;
+  grid-column-start: 1;
+  align-self: end;
+  transform: rotate(180deg) translateX(-30%);
+}
+
+#tv2 {
+  background-image: url(../public/resources/devices_icons/tv_icon.svg);
+  background-repeat: no-repeat;
+  display: inline-block;
+  transform: rotate(90deg) translateX(2%) translateY(-340%);
+  height: 1.4vmax;
+  background-color: #f6f6f6;
+  border-radius: 8px;
+  align-self: end;
+  grid-column: -1 / span 2;
+  grid-row: 2;
+}
+
+#sofa {
+  background-image: url(../public/resources/devices_icons/sofa.svg);
+  width: 11vmax;
+  height: 4vmax;
+  background-repeat: no-repeat;
+  background-color: #f6f6f6;
+  border-radius: 8px;
+  grid-row: 1;
+  grid-column: -1 / span 2;
+  justify-self: center;
+  align-self: end;
+  transform: translateX(-25%) translateY(-7%);
+}
+
+#window1 {
+  /* background-image: url(../public/resources/devices_icons/window.png); */
+  width: 85%;
+  height: 17%;
+  background-repeat: no-repeat;
+  background-color: #f6f6f6;
+  grid-row: 1;
+  grid-column: 1 / span 3;
+  justify-self: center;
+  align-self: top;
+  border: solid 1px black;
+  transform: translateX(5%) translateY(20%);
+  background-size: cover;
+}
+
+#window2 {
+  /* background-image: url(../public/resources/devices_icons/window.png); */
+  width: 100%;
+  height: 17%;
+  background-repeat: no-repeat;
+  background-color: #f6f6f6;
+  grid-row: 1;
+  grid-column: 4 / span 3;
+  justify-self: center;
+  align-self: top;
+  border: solid 1px black;
+  transform: translateX(20%) translateY(20%);
+  background-size: cover;
+}
+
+#lamp1 {
+  background-image: url(../public/resources/devices_icons/lamp.png);
+  background-repeat: no-repeat;
+  background-color: #f6f6f6;
+  justify-self: center;
+  align-self: top;
+  border-radius: 50%;
+  border: solid 1px black;
+  grid-row: 1;
+  grid-column: 6;
+  background-size: cover;
+  width: 2.5vmax;
+  height: 2.5vmax;
+  transform: translateX(100%) translateY(0%)
+}
+
+#lamp2 {
+  background-image: url(../public/resources/devices_icons/lamp.png);
+  background-repeat: no-repeat;
+  background-color: #f6f6f6;
+  justify-self: center;
+  align-self: top;
+  border-radius: 50%;
+  border: solid 1px black;
+  grid-row: 1;
+  grid-column: 5;
+  background-size: cover;
+  width: 2.5vmax;
+  height: 2.5vmax;
+  transform: translateX(100%) translateY(0%)
+}
+
+#camera {
+  background-image: url(../public/resources/devices_icons/camera.png);
+  background-repeat: no-repeat;
+  background-color: #f6f6f6;
+  justify-self: center;
+  align-self: top;
+  grid-row: 6;
+  grid-column: 4;
+  background-size: contain;
+  width: 4vmax;
+  height: 2vmax;
+  transform: rotate(270deg) translateX(-65%) translateY(-30%)
+}
+
+/* TV1 */
+#Smart_Metering_switchbinary_08_01Switch {
+  grid-row: 5;
   grid-column: 2;
+  transform: translateY(120%) translateX(37%)
+}
+
+/* TV2 */
+#Smart_Metering_switchbinary_09_01Switch {
+  grid-row: 3;
+  grid-column: 6;
+  transform: translateY(-50%) translateX(130%)
+}
+
+/* Living lamps */
+#Smart_Metering_switchbinary_10_01Switch {
+  grid-row: 1;
+  grid-column: 6;
+  transform: translateY(70%) translateX(20%)
+}
+
+/* Ceiling lamp Switch 21 01 */
+#Ceiling_Lamp_switch_21_01Switch {
+  grid-row: 1;
+  grid-column: 1;
+  transform: translateY(10%) translateX(10%)
+}
+
+#Color_LED_Lamp_switch_19_01Switch {
+  grid-row: 3;
+  grid-column: 1;
+  transform: translateY(10%) translateX(10%)
+}
+
+#LED_Lights_switch_1000_02Switch {
+  grid-row: 2;
+  grid-column: 1;
+  transform: translateY(10%) translateX(10%)
+}
+
+
+/* Gas sensor */
+#Smart_Metering_switchbinary_07_01Switch {
+  grid-row: 6;
+  grid-column: 7;
+  transform: translateY(10%)
 }
 
 #horRectangle {
@@ -310,15 +465,17 @@ footer {
 }
 
 #server {
-  width: 5.5vmax;
-  height: 5.5vmax;
+  width: 4.5vmax;
+  height: 4.5vmax;
   background-color: #f6f6f6;
-  border: solid 1px black;
   border-radius: 8px;
-  grid-row: 6;
-  grid-column: 2;
+  grid-row: 5;
+  grid-column: 1;
   justify-self: left;
   align-self: end;
+  background-image: url(../public/resources/devices_icons/server.png);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #door {
@@ -331,15 +488,16 @@ footer {
   border-left: solid 1px black;
   border-top-left-radius: 90px;
   grid-row: 4 / span 5;
-  grid-column: 4;
+  grid-column: 6;
   justify-self: end;
   align-self: center;
   margin-bottom: -9%;
+  transform: rotate(90deg) translateX(75%) translateY(-70%);
 }
 
 .square {
-  min-width: 5.2vmax;
-  min-height: 5.2vmax;
+  min-width: 4vmax;
+  min-height: 4vmax;
   width: -moz-fit-content;
   width: fit-content;
   height: -moz-fit-content;
@@ -348,11 +506,12 @@ footer {
   border: solid 1px black;
   border-radius: 8px;
   color: #f6f6f6;
-  overflow: auto;
+  /* overflow: auto; */
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 1vh;
 }
 
 .rectangle {
@@ -395,7 +554,7 @@ footer {
   margin-bottom: 5px;
   font-size: 65%;
   align-self: end;
-  }
+}
 
 #ZWaveNode004HS2SKZSmartMeteringPlug_SwitchSwitch {
   grid-row: 2;
@@ -430,7 +589,7 @@ footer {
 
 .flex-container {
   display: grid;
-  grid: 1fr 1fr 1fr 1fr 1fr 1fr/ 1fr 1fr 1fr 1fr;
+  grid: 1fr 1fr 1fr 1fr 1fr 1fr/ 1fr 1fr 1fr 1fr 1fr;
   width: 40vmax;
   height: 34vmax;
   margin: auto;

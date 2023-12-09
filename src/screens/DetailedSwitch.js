@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import ToggleButton from "react-toggle-button";
 import Axios from "axios";
 import axios from "axios";
+import Graphs from "../components/Graphs";
 import openHAB from "../openHAB/openHAB";
 import { token } from "./Login/Login";
 import base64 from 'base-64';
@@ -40,7 +41,6 @@ import base64 from 'base-64';
       setToggle(false);
     }
   };
-
   const tokens = id.split('_');
   const xtokens = tokens.slice(-2);
 
@@ -71,6 +71,7 @@ import base64 from 'base-64';
         }}
       />
     </div>
+    
   );
 };
 
