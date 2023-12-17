@@ -32,11 +32,13 @@ const AllDevices = () => {
 
   var devices = [];
   openHABItems.forEach(function (item) {
-    if (item.type === "Switch" && !regex.test(item.name)){
-      devices.push(item);
-    }
-    if ("Switch" !== item.type) {
-      devices.push(item);
+    if (item.label !== "Total_Energy_Consumption_1000_01" && item.label !== "Number_people_detection_1000_05"){
+      if (item.type === "Switch" && !regex.test(item.name)){
+        devices.push(item);
+      }
+      if ("Switch" !== item.type) {
+        devices.push(item);
+      }
     }
   });
 

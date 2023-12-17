@@ -36,8 +36,8 @@ const Header = () => {
                   <LinkContainer to='/switches'>
                     <Nav.Link>All Switches</Nav.Link>
                   </LinkContainer>
-                  <LinkContainer to='/door'>
-                    <Nav.Link>Door status</Nav.Link>
+                  <LinkContainer to='/control'>
+                    <Nav.Link>Control Panel</Nav.Link>
                   </LinkContainer>
                   <LinkContainer to='/login'>
                     <Nav.Link>
