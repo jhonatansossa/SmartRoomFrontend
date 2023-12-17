@@ -825,3 +825,157 @@ Devices 25-- washing machine
 #switchON {
   border: 1px solid rgba(106, 168, 79, 1);
 }
+
+.grid-container {
+    display: grid;
+    column-gap: 50px;
+    row-gap: 25px;
+    grid-template-columns: repeat(8, 1fr);
+    background-color: #f6f6f6;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    position: absolute;
+    width: 80%;
+    left: 10%;
+  }
+
+  .sensor{
+    grid-column: span 2;
+    border: 6px solid #DFDFDF;
+    outline: none;
+    border-radius: 8px;
+    height: 120px;
+    overflow: auto;
+  }
+
+  .grid-title{
+    text-align: center;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4 px;
+    background:#ef962e !important;
+    margin: 0;
+  }
+
+  .door-title{
+    text-align: center;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    margin: 0;
+  }
+
+  .grid-contain{
+    display: flex;
+    flex-direction: row;
+    height: 74px;
+    justify-content: space-evenly;
+  }
+
+  .statusSwitch{
+    display: flex;
+  }
+  .consumption{
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    padding: 20px;
+    border: #DFDFDF solid 3px;
+    border-radius: 100px;
+  }
+
+  .door-grid{
+    grid-row: span 2;
+    grid-column: span 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: 6px solid #DFDFDF;
+    border-radius: 8px;
+  }
+  .camera-grid{
+    justify-content: center;
+    align-content: center;
+    grid-row: span 2;
+    grid-column: span 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: 6px solid #DFDFDF;
+    border-radius: 8px;
+  }
+  .spacing{
+    justify-content: center;
+    align-content: center;
+    grid-row: span 2;
+    grid-column: span 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    border-radius: 8px;
+  }
+
+  .door-grid img {
+    margin: auto;
+  }
+
+.grid-line{
+  width: 100%;
+  border: 3px solid #DFDFDF;
+  display: block;
+}
+
+.bar{
+  width: 90%;
+  border: 3px solid #DFDFDF;
+  display: block;
+}
+
+.window_img{
+  height: 175px;
+  width: 146px;
+}
+
+.magician{
+  border: #DFDFDF solid 3px;
+}
+
+.control-title{
+  text-align: center;
+  margin-bottom: 20px;
+}
+@media (max-width: 1200px) {
+  .grid-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sensor {
+    grid-column: span 2;
+  }
+}
+
+
+@media (max-width: 400px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
+
+  .sensor {
+    grid-column: span 2;
+  }
+}
