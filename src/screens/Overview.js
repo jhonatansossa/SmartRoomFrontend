@@ -15,7 +15,7 @@ var regex = /^(?!.*Sensor).*$/i;
 
 const Overview = () => {
   const [openHABItems, setOpenHABItems] = useState([]);
-  const [peopleInsideRoom, setPeopleInsideRoom] = useState(0)
+  const [peopleInsideRoom, setPeopleInsideRoom] = useState()
   const [energyConsumptionData, setEnergyConsumptionData] = useState({
     averageEnergy: 0,
     devicesCount: 0,
@@ -49,18 +49,15 @@ const Overview = () => {
   }, []);
 
   const fetchPeopleInsideRoom = async () => {
-    try {
-      const response = await Axios.get(
-        openHAB.url + "/devices/roomstatus",
-        config
-      );
-
-      const numberOfPeopleInsideRoom = response.data.numberOfPeople;
-      setPeopleInsideRoom(numberOfPeopleInsideRoom);
-    } catch (error) {
-      console.error("Error fetching number of people inside the room:", error);
-    }
-  };
+  try {
+    const response = await Axios.get(openHAB.url + "/api/v1/devices/roomstatus", config);
+    console.log(response.data.amount); // Access the correct key
+    const numberOfPeopleInsideRoom = response.data.amount;
+    setPeopleInsideRoom(numberOfPeopleInsideRoom);
+  } catch (error) {
+    console.error("Error fetching number of people inside the room:", error);
+  }
+};
 
   const fetchOpenHABItems = async () => {
     const response = await Axios.get(openHAB.url + "/api/v1/devices/items", config);
