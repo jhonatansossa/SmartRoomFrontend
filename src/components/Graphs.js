@@ -14,8 +14,13 @@ import { DropdownButton, Dropdown } from 'react-bootstrap';
 import * as moment from 'moment';
 import apiCallBackend from '../services/ApiCallBackend';
 import Stack from 'react-bootstrap/Stack';
+import { token } from "../screens/Login/Login";
+import openHAB from "../openHAB/openHAB";
+import Axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 
-const Graphs = () => {
+
+const Graphs = ({ item_name }) => {
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -25,6 +30,11 @@ const Graphs = () => {
     Tooltip,
     Legend
   );
+
+  const navigate = useNavigate();
+  const config = {
+    headers: { Authorization: token },
+  };
 
   const energies = [
     'active_import_energy',
@@ -44,6 +54,8 @@ const Graphs = () => {
     'apparent_export_energy':'155, 34, 38'
   }
   
+  const [measurement_name, setMeasurementName] = useState();
+  const [thing_id, setThingID] = useState();
   const [allDatasets, setAllDatasets] = useState([])
   const [chartData, setChartData] = useState({
     labels: [],
@@ -59,8 +71,27 @@ const Graphs = () => {
   }
 
   useEffect(() => {
-    apiCall();
-  }, [])
+    let auth = sessionStorage.getItem("auth");
+    if (auth !== "true") {
+      navigate("/login");
+    } else {
+        fetchMeasurementData();
+    }
+  }, [navigate, setMeasurementName]);
+
+  const fetchMeasurementData = async () => {
+    try {
+      const response = await Axios.get(
+        openHAB.url+"/api/v1/devices/relations",
+        config
+      );
+      
+      await setMeasurementName(response.data.filter(Item => (Item.item_name == item_name))[0].measurement_name);
+      await setThingID(response.data.filter(Item => (Item.item_name == item_name))[0].thing_id);
+    } catch (error) {
+      console.error("Error fetching OpenHAB item:", error);
+    }
+  };
 
   const apiCall = async() => {
     setChartData(chartData => ({...chartData,
@@ -95,53 +126,64 @@ const Graphs = () => {
     })
   }
   
-  
+
   var updateRequestBody = (range) => {
     switch(range) {
       case "5hours":
-        requestbody = {...requestbody,
+        requestbody = {
+          id: thing_id,
+          measure: measurement_name,
           final_time : moment().format('YYYY-MM-DD hh:mm:ss'),
           start_time : moment().subtract(5, 'hours').format('YYYY-MM-DD hh:mm:ss')
         }
         setSelectRange('Last 5 hours')
-        apiCall()
+        //apiCall()
         break; 
       case '1day':
-        requestbody = {...requestbody,
+        requestbody = {
+          id: thing_id,
+          measure: measurement_name,
           final_time : moment().format('YYYY-MM-DD hh:mm:ss'),
           start_time : moment().subtract(1, 'days').format('YYYY-MM-DD hh:mm:ss')
         }
-        apiCall()
+        //apiCall()
         setSelectRange('Last day')
         break; 
       case '1week':
         requestbody = {...requestbody,
+          id: thing_id,
+          measure: measurement_name,
           final_time : moment().format('YYYY-MM-DD hh:mm:ss'),
           start_time : moment().subtract(7, 'days').format('YYYY-MM-DD hh:mm:ss')
         }
-        apiCall()
+        //apiCall()
         setSelectRange('Last week')
         break; 
       case '1month':
-        requestbody = {...requestbody,
+        requestbody = {
+          id: thing_id,
+          measure: measurement_name,
           final_time : moment().format('YYYY-MM-DD hh:mm:ss'),
           start_time : moment().subtract(1, 'months').format('YYYY-MM-DD hh:mm:ss')
         }
         setSelectRange('Last month')
-        apiCall()
+        //apiCall()
         break; 
       case '1year':
-        requestbody = {...requestbody,
+        requestbody = {
+          id: "12",
+          measure: measurement_name,
           final_time : moment().format('YYYY-MM-DD hh:mm:ss'),
           start_time : moment().subtract(2, 'months').format('YYYY-MM-DD hh:mm:ss')
         }
         setSelectRange('Last year')
-        apiCall()
+        //apiCall()
         break; 
       default:
         console.log('Wrong range')
         break; 
     }
+    console.log(requestbody)
   }
 
   

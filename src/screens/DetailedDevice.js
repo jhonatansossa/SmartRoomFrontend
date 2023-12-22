@@ -66,7 +66,7 @@ const DetailedDevice = () => {
             </p>
           </div>
         </div>
-        <Graphs />
+        <Graphs item_name={openHABItem.label}/>
       </div>
     );
   }
