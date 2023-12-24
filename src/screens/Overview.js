@@ -8,6 +8,7 @@ import OverviewSwitchList from "../components/OverviewSwitchList";
 import OverviewTopDownStaticElement from "../components/OverviewTopDownStaticElement";
 import Counter from "../components/Counter";
 import { useNavigate } from "react-router-dom";
+import DeviceConfigurator from "../components/DeviceConfig";
 import { token } from "./Login/Login";
 import base64 from 'base-64';
 
@@ -51,7 +52,7 @@ const Overview = () => {
   const fetchPeopleInsideRoom = async () => {
   try {
     const response = await Axios.get(openHAB.url + "/api/v1/devices/roomstatus", config);
-    console.log(response.data.amount); // Access the correct key
+    //console.log(response.data.amount); // Access the correct key
     const numberOfPeopleInsideRoom = response.data.amount;
     setPeopleInsideRoom(numberOfPeopleInsideRoom);
   } catch (error) {
@@ -201,6 +202,10 @@ const Overview = () => {
           deviceList={turnedOnDevices}
         />
         <OverviewSwitchList name={"Switches"} switchList={switches} />
+        {/* New section: Devices that can be turned off */}
+        <div className="your-custom-class-if-needed">
+          <DeviceConfigurator />
+        </div>
       </div>
     </>
   );

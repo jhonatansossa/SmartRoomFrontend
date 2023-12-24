@@ -12,6 +12,9 @@ import NotFoundComponent from "./components/NotFoundComponent";
 import NotFound from "./screens/NotFound";
 import AllSwitches from "./screens/AllSwitches";
 import ControlPanel from "./screens/ControlPanel";
+import UserAccountCreation from "./screens/UserAccountCreation";
+
+
 
 
 const App = () => {
@@ -25,6 +28,7 @@ const App = () => {
                             <Route path="/devices" element={<AllDevices/>}/>
                             <Route path="/switches" element={<AllSwitches/>}/>
                             <Route path="/control" element={<ControlPanel/>}/>
+                            <Route path="/userAccountCreation" element={<UserAccountCreation/>}/>
                             <Route path="/devices/:id/details" element={<DetailedDevice/>}/>
                             <Route path="/switches/:id/details" element={<DetailedSwitch/>}/>
                             <Route path="/login" element={<Login/>}/>

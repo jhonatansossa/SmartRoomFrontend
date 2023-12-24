@@ -8,6 +8,9 @@ import OpenDoor from "../Images/dooropened.png";
 import CloseDoor from "../Images/doorclosed.jpg";
 import Window from "../Images/window.png";
 import Camera from "../Images/camera_control_panel.png";
+import DelayConfigurator from "../components/TimeConfig";
+
+
 
 const ControlPanel = () => {
   let navigate = useNavigate();
@@ -123,7 +126,7 @@ const ControlPanel = () => {
   return (
     <>
       <h1 className="control-title">Controls</h1>
-
+      <DelayConfigurator />
       <div className="grid-container">
          {doorStatus === "CLOSED" && (
           <div className="door-grid">

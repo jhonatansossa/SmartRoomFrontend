@@ -979,3 +979,87 @@ Devices 25-- washing machine
     grid-column: span 2;
   }
 }
+
+
+.timer-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.timer-grid-container {
+  display: grid;
+  column-gap: 20px;
+  row-gap: 25px;
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  background-color: #f6f6f6;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.timer {
+  border: 6px solid #dfdfdf;
+  outline: none;
+  border-radius: 8px;
+  overflow: auto;
+  background-color: #fff;
+}
+
+.timer-grid-title {
+  text-align: center;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  background: #ef962e;
+  margin: 0;
+  padding: 10px;
+}
+
+.timer-grid-contain {
+  display: flex;
+  flex-direction: row;
+  height: 74px;
+  justify-content: space-evenly;
+}
+
+.timer-status {
+  display: flex;
+  align-items: center;
+}
+
+.timer-input {
+  margin-right: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  height: 38px;
+}
+
+@media (max-width: 900px) {
+  .timer-grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .timer-input {
+    max-width: 100px;
+  }
+}
+
+@media (max-width: 767px) {
+  .timer-grid-container {
+    grid-template-columns: 1fr;
+  }
+
+  .timer-input {
+    max-width: 100px;
+  }
+}
+
+@media (max-width: 600px) {
+  .timer-grid-container {
+    grid-template-columns: 1fr;
+  }
+
+  .timer-input {
+    max-width: 100px;
+  }
+}
