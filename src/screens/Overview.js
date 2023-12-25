@@ -9,7 +9,7 @@ import OverviewTopDownStaticElement from "../components/OverviewTopDownStaticEle
 import Counter from "../components/Counter";
 import { useNavigate } from "react-router-dom";
 import DeviceConfigurator from "../components/DeviceConfig";
-import { token } from "./Login/Login";
+import { token, isUserAdmin } from "./Login/Login";
 import base64 from 'base-64';
 
 var regex = /^(?!.*Sensor).*$/i;
@@ -204,7 +204,11 @@ const Overview = () => {
         <OverviewSwitchList name={"Switches"} switchList={switches} />
         {}
         <div>
-          <DeviceConfigurator />
+        {isUserAdmin && (
+          <div>
+            <DeviceConfigurator />
+          </div>
+        )}
         </div>
       </div>
     </>

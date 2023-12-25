@@ -8,7 +8,6 @@ const DeviceConfigurator = () => {
   let navigate = useNavigate();
   const [devices, setDevices] = useState([]);
   const [selectedDevices, setSelectedDevices] = useState([]);
-  const [clickedDevices, setClickedDevices] = useState([]);
 
   const config = {
     headers: { Authorization: token },
@@ -42,30 +41,12 @@ const DeviceConfigurator = () => {
   };
 
   const handleDeviceSelection = (deviceName) => {
-    setClickedDevices((prevClickedDevices) => {
-      const isClicked = prevClickedDevices.includes(deviceName);
-      const updatedClickedDevices = isClicked
-        ? prevClickedDevices.filter((clicked) => clicked !== deviceName)
-        : [...prevClickedDevices, deviceName];
-
-      // Perform action based on click state
-      if (isClicked) {
-        console.log('Not Activated');
-      } else {
-        console.log('Activated');
-      }
-
-      return updatedClickedDevices;
-    });
-
-    setSelectedDevices((prevSelectedDevices) => {
-      const isSelected = prevSelectedDevices.includes(deviceName);
-      const updatedSelectedDevices = isSelected
-        ? prevSelectedDevices.filter((selected) => selected !== deviceName)
-        : [...prevSelectedDevices, deviceName];
-
-      return updatedSelectedDevices;
-    });
+    const isSelected = selectedDevices.includes(deviceName);
+    if (isSelected) {
+      setSelectedDevices(selectedDevices.filter((selected) => selected !== deviceName));
+    } else {
+      setSelectedDevices([...selectedDevices, deviceName]);
+    }
   };
 
   const handleConfirm = async () => {
@@ -79,13 +60,13 @@ const DeviceConfigurator = () => {
     } catch (error) {
       console.error('Error sending items:', error);
     }
-    alert('Confirm');
+    alert('Devices confirmed.');
   };
 
   return (
     <>
       <div className="header">
-        <div className="section-header">Turn off items ({devices.length})</div>
+        <div className="section-header">Automatically turn off items ({devices.length})</div>
         <button
           className="btn-primary-no-background"
           onClick={handleConfirm}
@@ -107,15 +88,15 @@ const DeviceConfigurator = () => {
         {devices.map((device) => (
           <button
             key={device.thing_name}
-            className={`card hov-primary horizontal ${clickedDevices.includes(device.thing_name) ? 'selected' : ''}`}
-            onClick={() => handleDeviceSelection(device.thing_name)}
+            className={`card hov-primary horizontal ${selectedDevices.includes(device.item_name) ? 'selected' : ''}`}
+            onClick={() => handleDeviceSelection(device.item_name)}
             style={{
               flex: '0 0 150px',
               margin: '0 8px',
               backgroundSize: 'cover',
               backgroundRepeat: 'no-repeat',
               backgroundPosition: 'center center',
-              backgroundColor: clickedDevices.includes(device.thing_name) ? '#D1EAF0' : '#FFFFFF', // Set background color
+              backgroundColor: selectedDevices.includes(device.item_name) ? '#D1EAF0' : '#FFFFFF', // Set background color
             }}
           >
             <div
@@ -135,7 +116,7 @@ const DeviceConfigurator = () => {
             >
               <img
                 src={`/resources/${openHAB.switches.LIGHT_SWITCH_ID}.svg`}
-                alt={device.thing_name}
+                alt={device.item_name}
                 style={{ width: '100%', height: '100%' }}
               />
             </div>
