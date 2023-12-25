@@ -5,8 +5,6 @@ import openHAB from "../../openHAB/openHAB";
 
 export var token;
 export var isUserAdmin = false;
-
-// Callback function for notifying Header.js of isUserAdmin changes
 let isUserAdminCallback = null;
 
 export const setIsUserAdminCallback = (callback) => {
@@ -19,8 +17,6 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
-
-  // Initialize a boolean state
   const [passwordShown, setPasswordShown] = useState(false);
 
   // Password toggle handler
@@ -40,15 +36,12 @@ const Login = () => {
         { headers: { Authorization: token } }
       );
 
-      // Set isUserAdmin based on the response
       isUserAdmin = meResponse.data.user_type === "1" || meResponse.data.user_type === 1;
 
-      // Notify the callback function (if available)
       if (isUserAdminCallback) {
         isUserAdminCallback(isUserAdmin);
       }
 
-      // ... (rest of the code)
     } catch (error) {
       console.log("Error fetching user data:", error.message);
     }
@@ -73,7 +66,6 @@ const Login = () => {
         sessionStorage.setItem("auth", "true");
         navigate("/overview");
 
-        // Check if the user is an admin and set formData values
         await CheckIfUserIsAdmin();
       } else {
         setErrorMessage("Wrong username or password, please try again");

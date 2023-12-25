@@ -202,8 +202,8 @@ const Overview = () => {
           deviceList={turnedOnDevices}
         />
         <OverviewSwitchList name={"Switches"} switchList={switches} />
-        {/* New section: Devices that can be turned off */}
-        <div className="your-custom-class-if-needed">
+        {}
+        <div>
           <DeviceConfigurator />
         </div>
       </div>

@@ -1063,3 +1063,15 @@ Devices 25-- washing machine
     max-width: 100px;
   }
 }
+
+
+
+/* Add these styles to your CSS */
+.device-configurator-card.selected .card-title.horizontal {
+  color: #ef962e;
+}
+
+.device-configurator-card .card-title.horizontal {
+  color: #0000ff;
+  /* Blue color */
+}

@@ -9,7 +9,6 @@ const Header = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // Set up the callback function to update isAdmin
     const handleIsUserAdminChange = (newIsUserAdmin) => {
       setIsAdmin(newIsUserAdmin);
     };

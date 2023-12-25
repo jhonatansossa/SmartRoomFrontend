@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { token } from "../screens/Login/Login";
+import { token, isUserAdmin } from "../screens/Login/Login";
 import openHAB from '../openHAB/openHAB';
 import axios from 'axios';
 
@@ -19,7 +19,7 @@ const DelayConfigurator = () => {
     } else {
       fetchTimers();
     }
-  }, [])
+  }, []);
 
   const fetchTimers = async () => {
     try {
@@ -65,9 +65,13 @@ const DelayConfigurator = () => {
     setTimers(modifiedTimers);
   };
 
-  return (
-    <>
-      <h1 className="timer-title">Alarm timers</h1>
+  const renderContent = () => {
+    console.log(isUserAdmin)
+    if (!isUserAdmin) {
+      return null;
+    }
+
+    return (
       <div className="timer-grid-container">
         {timers.map((timer) => {
           const alertName = timer.alert_name.split('_').join(' ');
@@ -103,6 +107,12 @@ const DelayConfigurator = () => {
           );
         })}
       </div>
+    );
+  };
+
+  return (
+    <>
+      {renderContent()}
     </>
   );
 };
