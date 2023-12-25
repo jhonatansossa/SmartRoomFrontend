@@ -12,6 +12,7 @@ import NotFoundComponent from "./components/NotFoundComponent";
 import NotFound from "./screens/NotFound";
 import AllSwitches from "./screens/AllSwitches";
 import ControlPanel from "./screens/ControlPanel";
+import NotificationHandler from "./components/Notification";
 import UserAccountCreation from "./screens/UserAccountCreation";
 
 
@@ -21,6 +22,7 @@ const App = () => {
         return (
             <Router>
                 <Header/>
+                <NotificationHandler/>
                 <main className="py-3">
                     <Container>
                         <Routes>
