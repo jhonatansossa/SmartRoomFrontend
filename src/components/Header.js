@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
-import {LinkContainer} from 'react-router-bootstrap'
-
-import {useLocation} from "react-router-dom";
+import { LinkContainer } from 'react-router-bootstrap';
+import { useLocation } from "react-router-dom";
+import { setIsUserAdminCallback } from "../screens/Login/Login";
 
 const Header = () => {
-    var location = useLocation()
+  const [isAdmin, setIsAdmin] = useState(false);
+  const location = useLocation();
 
+  useEffect(() => {
+    const handleIsUserAdminChange = (newIsUserAdmin) => {
+      setIsAdmin(newIsUserAdmin);
+    };
+
+    setIsUserAdminCallback(handleIsUserAdminChange);
+  }, []);
   if(location.pathname !== "/login" && location.pathname !== "/404" && location.pathname !== "/" ){
     return (
         <header>
@@ -39,6 +47,13 @@ const Header = () => {
                   <LinkContainer to='/control'>
                     <Nav.Link>Control Panel</Nav.Link>
                   </LinkContainer>
+
+                  { isAdmin && (
+                  <LinkContainer to="/userAccountCreation">
+                    <Nav.Link>Create User</Nav.Link>
+                  </LinkContainer>
+                )}
+
                   <LinkContainer to='/login'>
                     <Nav.Link>
                       <i className="fas fa-user"/> Logout
