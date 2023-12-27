@@ -1073,5 +1073,23 @@ Devices 25-- washing machine
 
 .device-configurator-card .card-title.horizontal {
   color: #0000ff;
-  /* Blue color */
 }
+
+/* index.css */
+
+/* index.css */
+
+.back-button {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  background: url('./Images/back_button.png') no-repeat;
+  background-size: cover;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+

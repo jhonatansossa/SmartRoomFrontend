@@ -15,9 +15,13 @@ const AllSwitches = () => {
   const [responseStatus, setResponseStatus] = useState([]);
 
   //let base64 = require("base-64");
+    // const config = {
+    //   headers: { Authorization: token },
+    // };
+
     const config = {
-      headers: { Authorization: token },
-    };
+    headers: { Authorization: sessionStorage.getItem("token") },
+  };
 
   const postConfig = {
     headers: {
@@ -77,6 +81,9 @@ const AllSwitches = () => {
 
   return (
     <>
+    <div>
+      <button className="back-button" onClick={() => navigate(-1)} />
+    </div>
       {switches.length === 0 && (
         <div className="noDevicesPopup">
           No switches found. Make sure openHAB is running!

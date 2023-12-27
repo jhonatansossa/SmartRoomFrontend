@@ -9,12 +9,17 @@ const Header = () => {
   const location = useLocation();
 
   useEffect(() => {
+    const storedIsAdmin = sessionStorage.getItem("isAdmin") === "true";
+    setIsAdmin(storedIsAdmin);
+
     const handleIsUserAdminChange = (newIsUserAdmin) => {
+      console.log("Is Admin:", newIsUserAdmin);
       setIsAdmin(newIsUserAdmin);
     };
 
     setIsUserAdminCallback(handleIsUserAdminChange);
   }, []);
+
   if(location.pathname !== "/login" && location.pathname !== "/404" && location.pathname !== "/" ){
     return (
         <header>
