@@ -5,11 +5,17 @@ import openHAB from '../openHAB/openHAB';
 import axios from 'axios';
 
 const DelayConfigurator = () => {
+
+  const isUserAdmin = sessionStorage.getItem("isAdmin") === "true";
   let navigate = useNavigate();
   const [timers, setTimers] = useState([]);
 
+  // const config = {
+  //   headers: { Authorization: token },
+  // };
+  
   const config = {
-    headers: { Authorization: token },
+    headers: { Authorization: sessionStorage.getItem("token") },
   };
 
   useEffect(() => {

@@ -26,9 +26,13 @@ const Overview = () => {
 
   const navigate = useNavigate();
 
+  // const config = {
+  //   headers: { Authorization: token },
+  //   };
+
   const config = {
-    headers: { Authorization: token },
-    };
+    headers: { Authorization: sessionStorage.getItem("token") },
+  };
 
   const timerRef = useRef(null);
 
@@ -118,10 +122,11 @@ const Overview = () => {
   function getTurnedOnDevices() {
   return turnedOnDevices.filter(device => device.state === "ON");
 }
-
+const isUserAdmin = sessionStorage.getItem("isAdmin") === "true";
   return (
     <>
       <div>
+      <button className="back-button" onClick={() => navigate(-1)} />
         <div className="card cardCounter">
           <Counter
             value={energyConsumptionData.totalEnergy}

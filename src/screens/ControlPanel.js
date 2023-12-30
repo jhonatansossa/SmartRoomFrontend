@@ -18,8 +18,12 @@ const ControlPanel = () => {
   const [backendResponseReceived, setBackendResponseReceived] = useState(false);
   const [toggleStates, setToggleStates] = useState({});
 
+  // const config = {
+  //   headers: { Authorization: token },
+  // };
+
   const config = {
-    headers: { Authorization: token },
+    headers: { Authorization: sessionStorage.getItem("token") },
   };
 
   useEffect(() => {
@@ -125,6 +129,9 @@ const ControlPanel = () => {
   
   return (
     <>
+    <div>
+      <button className="back-button" onClick={() => navigate(-1)} />
+    </div>
       <h1 className="control-title">Controls</h1>
       <DelayConfigurator />
       <div className="grid-container">

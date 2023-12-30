@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import "../UserAccount.css";
 import openHAB from "../openHAB/openHAB";
@@ -13,11 +13,15 @@ const UserAccountCreation = () => {
     username: "",
   });
 
-   const config = {
-    headers: { Authorization: token },
+  //  const config = {
+  //   headers: { Authorization: token },
+  // };
+
+  const config = {
+    headers: { Authorization: sessionStorage.getItem("token") },
   };
 
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -94,6 +98,9 @@ const UserAccountCreation = () => {
           Register
         </button>
       </form>
+      <div>
+      <button className="back-button" onClick={() => navigate(-1)} />
+    </div>
     </div>
   );
 };

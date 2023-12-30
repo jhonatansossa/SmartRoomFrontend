@@ -19,33 +19,44 @@ const Login = () => {
   const navigate = useNavigate();
   const [passwordShown, setPasswordShown] = useState(false);
 
-  // Password toggle handler
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
   };
 
-  useEffect(() => {
-    sessionStorage.removeItem("auth");
-    document.title = "SmartRoom – Login";
-  }, []);
-
   const CheckIfUserIsAdmin = async () => {
+    console.log("CheckIfUserIsAdmin called");
     try {
       const meResponse = await Axios.get(
         openHAB.url + "/api/v1/auth/me",
-        { headers: { Authorization: token } }
+        { headers: { Authorization: sessionStorage.getItem("token") } }
       );
 
-      isUserAdmin = meResponse.data.user_type === "1" || meResponse.data.user_type === 1;
+      const isAdmin =
+        meResponse.data.user_type === "1" || meResponse.data.user_type === 1;
+
+      sessionStorage.setItem("isAdmin", isAdmin);
+
+      isUserAdmin = isAdmin;
 
       if (isUserAdminCallback) {
         isUserAdminCallback(isUserAdmin);
       }
-
     } catch (error) {
       console.log("Error fetching user data:", error.message);
     }
   };
+
+  useEffect(() => {
+    console.log("Login component useEffect called");
+
+    const isAuthenticated = sessionStorage.getItem("auth") === "true";
+
+    if (isAuthenticated) {
+      CheckIfUserIsAdmin();
+    }
+
+    document.title = "SmartRoom – Login";
+  }, []);
 
   const authenticateUser = async (e, usernameValue, passwordValue) => {
     e.preventDefault();
@@ -60,10 +71,10 @@ const Login = () => {
       );
 
       if (response.status === 200) {
-        // Authentication successful
         const accessToken = response.data.user.access;
         token = "Bearer " + accessToken;
         sessionStorage.setItem("auth", "true");
+        sessionStorage.setItem("token", token);
         navigate("/overview");
 
         await CheckIfUserIsAdmin();

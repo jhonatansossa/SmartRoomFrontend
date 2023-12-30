@@ -9,8 +9,12 @@ const DeviceConfigurator = () => {
   const [devices, setDevices] = useState([]);
   const [selectedDevices, setSelectedDevices] = useState([]);
 
-  const config = {
-    headers: { Authorization: token },
+  // const config = {
+  //   headers: { Authorization: token },
+  // };
+
+const config = {
+    headers: { Authorization: sessionStorage.getItem("token") },
   };
 
   useEffect(() => {
@@ -62,6 +66,10 @@ const DeviceConfigurator = () => {
     }
     alert('Devices confirmed.');
   };
+
+   useEffect(() => {
+    localStorage.setItem('selectedDevices', JSON.stringify(selectedDevices));
+  }, [selectedDevices]);
 
   return (
     <>

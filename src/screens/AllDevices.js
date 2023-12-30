@@ -11,8 +11,12 @@ const AllDevices = () => {
   const [openHABItems, setOpenHABItems] = useState([]);
 
   //let base64 = require("base-64");
+  // const config = {
+  //   headers: { Authorization: token },
+  // };
+
   const config = {
-    headers: { Authorization: token },
+    headers: { Authorization: sessionStorage.getItem("token") },
   };
 
   useEffect(() => {
@@ -55,6 +59,9 @@ const AllDevices = () => {
 
   return (
     <> 
+    <div>
+      <button className="back-button" onClick={() => navigate(-1)} />
+    </div>
     {devices.length === 0 &&
       <div className="noDevicesPopup">
         No devices found. Make sure openHAB is running!
