@@ -1081,6 +1081,7 @@ Devices 25-- washing machine
 
 .back-button {
   position: fixed;
+  z-index: 9999;
   bottom: 10px;
   left: 10px;
   background: url('./Images/back_button.png') no-repeat;
