@@ -51,11 +51,11 @@ const Overview = () => {
   const fetchPeopleInsideRoom = async () => {
     try {
       const response = await Axios.get(
-        openHAB.url + "/devices/roomstatus",
+        openHAB.url + "/api/v1/devices/roomstatus",
         config
       );
-
-      const numberOfPeopleInsideRoom = response.data.numberOfPeople;
+      console.log(response.data.amount); // Access the correct key
+      const numberOfPeopleInsideRoom = response.data.amount;
       setPeopleInsideRoom(numberOfPeopleInsideRoom);
     } catch (error) {
       console.error("Error fetching number of people inside the room:", error);
