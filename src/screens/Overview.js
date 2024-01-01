@@ -8,14 +8,15 @@ import OverviewSwitchList from "../components/OverviewSwitchList";
 import OverviewTopDownStaticElement from "../components/OverviewTopDownStaticElement";
 import Counter from "../components/Counter";
 import { useNavigate } from "react-router-dom";
-import { token } from "./Login/Login";
+import DeviceConfigurator from "../components/DeviceConfig";
+import { token, isUserAdmin } from "./Login/Login";
 import base64 from 'base-64';
 
 var regex = /^(?!.*Sensor).*$/i;
 
 const Overview = () => {
   const [openHABItems, setOpenHABItems] = useState([]);
-  const [peopleInsideRoom, setPeopleInsideRoom] = useState(0)
+  const [peopleInsideRoom, setPeopleInsideRoom] = useState()
   const [energyConsumptionData, setEnergyConsumptionData] = useState({
     averageEnergy: 0,
     devicesCount: 0,
@@ -25,9 +26,13 @@ const Overview = () => {
 
   const navigate = useNavigate();
 
+  // const config = {
+  //   headers: { Authorization: token },
+  //   };
+
   const config = {
-    headers: { Authorization: token },
-    };
+    headers: { Authorization: sessionStorage.getItem("token") },
+  };
 
   const timerRef = useRef(null);
 
@@ -120,10 +125,11 @@ const Overview = () => {
   function getTurnedOnDevices() {
   return turnedOnDevices.filter(device => device.state === "ON");
 }
-
+const isUserAdmin = sessionStorage.getItem("isAdmin") === "true";
   return (
     <>
       <div>
+      <button className="back-button" onClick={() => navigate(-1)} />
         <div className="card cardCounter">
           <Counter
             value={energyConsumptionData.totalEnergy}
@@ -204,6 +210,14 @@ const Overview = () => {
           deviceList={turnedOnDevices}
         />
         <OverviewSwitchList name={"Switches"} switchList={switches} />
+        {}
+        <div>
+        {isUserAdmin && (
+          <div>
+            <DeviceConfigurator />
+          </div>
+        )}
+        </div>
       </div>
     </>
   );
