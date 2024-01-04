@@ -1,0 +1,36 @@
+name: Deploy pipelines
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+    # Build and deploy artifact
+  deploy:
+    # should run on linux based OS
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: install-fly-cli
+      uses: superfly/flyctl-actions/setup-flyctl@master
+      with:
+        version: 0.1.128
+    - name: Deploy flask API
+      run: flyctl deploy --remote-only
+      env: 
+        FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+    - name: Bump version and push tag
+      id: tag_release
+      uses: anothrNick/github-tag-action@1.36.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        WITH_V: true
+    - name: Create release
+      uses: ncipollo/release-action@v1.8.9
+      with:
+        artifacts: "."
+        tag: ${{ steps.tag_release.outputs.new_tag }}
+        token: ${{ secrets.GITHUB_TOKEN }}

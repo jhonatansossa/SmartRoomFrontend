@@ -8,6 +8,9 @@ import OpenDoor from "../Images/dooropened.png";
 import CloseDoor from "../Images/doorclosed.jpg";
 import Window from "../Images/window.png";
 import Camera from "../Images/camera_control_panel.png";
+import DelayConfigurator from "../components/TimeConfig";
+
+
 
 const ControlPanel = () => {
   let navigate = useNavigate();
@@ -15,8 +18,12 @@ const ControlPanel = () => {
   const [backendResponseReceived, setBackendResponseReceived] = useState(false);
   const [toggleStates, setToggleStates] = useState({});
 
+  // const config = {
+  //   headers: { Authorization: token },
+  // };
+
   const config = {
-    headers: { Authorization: token },
+    headers: { Authorization: sessionStorage.getItem("token") },
   };
 
   useEffect(() => {
@@ -122,8 +129,11 @@ const ControlPanel = () => {
   
   return (
     <>
+    <div>
+      <button className="back-button" onClick={() => navigate(-1)} />
+    </div>
       <h1 className="control-title">Controls</h1>
-
+      <DelayConfigurator />
       <div className="grid-container">
          {doorStatus === "CLOSED" && (
           <div className="door-grid">

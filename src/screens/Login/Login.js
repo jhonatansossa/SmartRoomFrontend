@@ -4,24 +4,57 @@ import Axios from "axios";
 import openHAB from "../../openHAB/openHAB";
 
 export var token;
+export var isUserAdmin = false;
+let isUserAdminCallback = null;
+
+export const setIsUserAdminCallback = (callback) => {
+  isUserAdminCallback = callback;
+};
+
 const Login = () => {
   const [usernameValue, setUsernameValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const navigate = useNavigate();
 
-  // Initialize a boolean state
+  const navigate = useNavigate();
   const [passwordShown, setPasswordShown] = useState(false);
 
-  // Password toggle handler
   const togglePassword = () => {
-    // When the handler is invoked
-    // inverse the boolean state of passwordShown
     setPasswordShown(!passwordShown);
   };
 
+  const CheckIfUserIsAdmin = async () => {
+    console.log("CheckIfUserIsAdmin called");
+    try {
+      const meResponse = await Axios.get(
+        openHAB.url + "/api/v1/auth/me",
+        { headers: { Authorization: sessionStorage.getItem("token") } }
+      );
+
+      const isAdmin =
+        meResponse.data.user_type === "1" || meResponse.data.user_type === 1;
+
+      sessionStorage.setItem("isAdmin", isAdmin);
+
+      isUserAdmin = isAdmin;
+
+      if (isUserAdminCallback) {
+        isUserAdminCallback(isUserAdmin);
+      }
+    } catch (error) {
+      console.log("Error fetching user data:", error.message);
+    }
+  };
+
   useEffect(() => {
-    sessionStorage.removeItem("auth");
+    console.log("Login component useEffect called");
+
+    const isAuthenticated = sessionStorage.getItem("auth") === "true";
+
+    if (isAuthenticated) {
+      CheckIfUserIsAdmin();
+    }
+
     document.title = "SmartRoom – Login";
   }, []);
 
@@ -38,18 +71,17 @@ const Login = () => {
       );
 
       if (response.status === 200) {
-        // Authentication successful
         const accessToken = response.data.user.access;
-        token = "Bearer "+accessToken;
-        console.log("Bearer "+accessToken);
+        token = "Bearer " + accessToken;
         sessionStorage.setItem("auth", "true");
+        sessionStorage.setItem("token", token);
         navigate("/overview");
+
+        await CheckIfUserIsAdmin();
       } else {
-        // Authentication failed
         setErrorMessage("Wrong username or password, please try again");
       }
     } catch (error) {
-      // Handle any errors during the request
       console.error("Error during authentication:", error);
       setErrorMessage("An error occurred during authentication");
     }
