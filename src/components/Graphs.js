@@ -88,6 +88,8 @@ const Graphs = ({ item_name }) => {
       
       await setMeasurementName(response.data.filter(Item => (Item.item_name == item_name))[0].measurement_name);
       await setThingID(response.data.filter(Item => (Item.item_name == item_name))[0].thing_id);
+      await console.log('measure : ' + measurement_name)
+      await console.log('thing: '+ thing_id)
     } catch (error) {
       console.error("Error fetching OpenHAB item:", error);
     }
@@ -137,7 +139,7 @@ const Graphs = ({ item_name }) => {
           start_time : moment().subtract(5, 'hours').format('YYYY-MM-DD hh:mm:ss')
         }
         setSelectRange('Last 5 hours')
-        //apiCall()
+        apiCall()
         break; 
       case '1day':
         requestbody = {
