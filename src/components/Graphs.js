@@ -85,11 +85,14 @@ const Graphs = ({ item_name }) => {
         openHAB.url+"/api/v1/devices/relations",
         config
       );
-      
-      await setMeasurementName(response.data.filter(Item => (Item.item_name == item_name))[0].measurement_name);
-      await setThingID(response.data.filter(Item => (Item.item_name == item_name))[0].thing_id);
-      await console.log('measure : ' + measurement_name)
-      await console.log('thing: '+ thing_id)
+      console.log(item_name);
+      const matchingItem = response.data.find((Item) => Item.item_name === item_name);
+      if (matchingItem) {
+        setMeasurementName(matchingItem.measurement_name);
+        setThingID(matchingItem.thing_id);
+        console.log('measure : ' + matchingItem.measurement_name);
+        console.log('thing_id: ' + matchingItem.thing_id);
+      }
     } catch (error) {
       console.error("Error fetching OpenHAB item:", error);
     }
@@ -173,7 +176,7 @@ const Graphs = ({ item_name }) => {
         break; 
       case '1year':
         requestbody = {
-          id: "12",
+          id: thing_id,
           measure: measurement_name,
           final_time : moment().format('YYYY-MM-DD hh:mm:ss'),
           start_time : moment().subtract(2, 'months').format('YYYY-MM-DD hh:mm:ss')
@@ -198,7 +201,7 @@ const Graphs = ({ item_name }) => {
       },
       title: {
         display: true,
-        text: 'Energy Measurements',
+        text: 'Energy Measurements ',
       },
     },
     scales: {
