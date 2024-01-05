@@ -1,23 +1,31 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import Graphs from "../components/Graphs";
 import openHAB from "../openHAB/openHAB";
 import Axios from "axios";
-import { token } from "./Login/Login";
-import base64 from 'base-64';
 
 const DetailedDevice = () => {
   const [openHABItem, setOpenHABItem] = useState(null);
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
+
   const config = {
-    headers: { Authorization: token },
+    headers: { Authorization: sessionStorage.getItem("token") },
   };
 
   const timerRef = useRef(null);
+  const displayNameRef = useRef(null);
+
+  const { device } = location.state;
+  let deviceName = device.display_name;
+
+  const splitId = id.split('_');
+  const itemId = splitId[splitId.length-1];
+  const thingId = splitId[splitId.length-2];
 
   useEffect(() => {
-    document.title = "SmartRoom – " + id;
+    document.title = "SmartRoom – " + deviceName;
     let auth = sessionStorage.getItem("auth");
     if (auth !== "true") {
       navigate("/login");
@@ -30,7 +38,7 @@ const DetailedDevice = () => {
         clearInterval(timerRef.current);
       };
     }
-  }, [id, navigate]);
+  }, [deviceName, navigate]);
 
   const fetchOpenHABItem = async () => {
     try {
@@ -45,13 +53,48 @@ const DetailedDevice = () => {
     }
   };
 
+  const setNewDisplayName = async () => {
+    const newName = displayNameRef.current.value;
+    if (newName.length === 0) {
+      console.log("Empty name input");
+      return;
+    }
+    try {
+      await Axios.put(openHAB.url + '/api/v1/devices/new_item_names', {
+        item_id: itemId,
+        new_item_name: newName,
+        thing_id: thingId,
+      }, config);
+      deviceName = newName;
+      navigate(-1);
+    } catch (error) {
+      console.log("Error saving new display name");
+    }
+  }
+
   if (openHABItem === null) {
     // Puedes mostrar un indicador de carga aquí
     return <div>Loading...</div>;
   } else {
     return (
       <div className="vertical-scroll-area">
-        <h2 className="title">{openHABItem.label}</h2>
+        <h2 className="title">{deviceName}</h2>
+        <div className="card vertical">
+          <div className="card-content">
+            Modify device name
+            <input
+              ref={displayNameRef}
+              type="text"
+              placeholder={deviceName}
+              className="timer-input"
+            />
+            <button
+              onClick={() => setNewDisplayName()}
+              className="timer-input"
+            > Save
+            </button>
+          </div>
+        </div>
         <div className="card vertical">
           <div
             key={id}

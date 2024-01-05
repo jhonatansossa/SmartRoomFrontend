@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { generatePath, useNavigate } from "react-router-dom";
 import openHAB from "../openHAB/openHAB";
 import Axios from "axios";
-import base64 from 'base-64';
-import { token } from "./Login/Login";
+
 var regex = /^(?!.*Sensor).*$/i;
+
 const AllDevices = () => {
   let navigate = useNavigate();
 
@@ -46,13 +46,14 @@ const AllDevices = () => {
     }
   });
 
-  function redirectToDetailedDevice(id) {
-    if (!id) {
-      console.error("ID no válido");
+  function redirectToDetailedDevice(device) {
+    if (!device || !device.name) {
+      console.error("Device not valid");
       return;
     }else{
-      let path = generatePath("/devices/:id/details", { id });
-      navigate(path);
+      const deviceName = device.name;
+      let path = generatePath("/devices/:deviceName/details", { deviceName });
+      navigate(path, { state: { device } });
     }
     
   }
@@ -73,7 +74,7 @@ const AllDevices = () => {
           <button
             className="card hov-primary vertical"
             onClick={() =>
-              redirectToDetailedDevice(src.label)
+              redirectToDetailedDevice(src)
             }
           >
             {
