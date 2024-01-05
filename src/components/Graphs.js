@@ -41,12 +41,7 @@ const Graphs = ({ item_name }) => {
   ]
 
   const colors = {
-    'active_import_energy' : '142, 202, 230',
-    'active_export_energy':'33, 158, 188',
-    'reactive_import_energy':'2, 48, 71',
-    'reactive_export_energy':'255, 183, 3',
-    'apparent_import_energy':'251, 133, 0',
-    'apparent_export_energy':'155, 34, 38'
+    'any_measurement' : '142, 202, 230',
   }
   
   const [measurement_name, setMeasurementName] = useState();
