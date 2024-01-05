@@ -8,7 +8,9 @@ export default function apiCallBackend(requestbody) {
       body: JSON.stringify(requestbody)
     };
 
-    return fetch('http://127.0.0.1:5000/api/v1/devices/getlastmeasurements', requestOptions)
+    console.log(requestOptions)
+
+    return fetch('https://smart-room.fly.dev/api/v1/devices/getlastmeasurements', requestOptions)
       .then(response => {
           console.log('res' + response.json())
           if (!response.ok) {

@@ -37,12 +37,7 @@ const Graphs = ({ item_name }) => {
   };
 
   const energies = [
-    'active_import_energy',
-    'active_export_energy',
-    'reactive_import_energy',
-    'reactive_export_energy',
-    'apparent_import_energy',
-    'apparent_export_energy',
+    'any_measurement',
   ]
 
   const colors = {
@@ -90,8 +85,8 @@ const Graphs = ({ item_name }) => {
       if (matchingItem) {
         setMeasurementName(matchingItem.measurement_name);
         setThingID(matchingItem.thing_id);
-        console.log('measure : ' + matchingItem.measurement_name);
-        console.log('thing_id: ' + matchingItem.thing_id);
+        //console.log('measure : ' + matchingItem.measurement_name);
+        //console.log('thing_id: ' + matchingItem.thing_id);
       }
     } catch (error) {
       console.error("Error fetching OpenHAB item:", error);
@@ -136,14 +131,14 @@ const apiCall = async () => {
     }));
 
     const update = energies.map(async (energy) => {
-      const updatedRequestBody = { ...updateRequestBody, measure: energy };
+      const updatedRequestBody = { ...updateRequestBody};
       await apiCallBackend(updatedRequestBody).then((data) => {
         setAllDatasets((allDatasets) => [...allDatasets, energy]);
         setChartData((chartData) => ({
           tension: 0.1,
           labels: data.lastMeasurements.map((eachMeasure) => {
             const moment_source = moment(eachMeasure.time, 'ddd, DD MMM YYYY HH:mm:ss Z');
-            console.log('moment:' + moment_source.format('DD-MM-YYYY HH:mm'));
+            // console.log('moment:' + moment_source.format('DD-MM-YYYY HH:mm'));
             return moment_source.format('DD-MM-YYYY HH:mm');
           }),
           datasets: [
@@ -181,9 +176,9 @@ const apiCall = async () => {
     switch(range) {
       case "5hours":
         updateRequestBody = {
-          id: thing_id,
-          measure: measurement_name,
-          final_time : moment().format('YYYY-MM-DD hh:mm:ss'),
+          thing_id: thing_id,
+          measurement: measurement_name,
+          end_time : moment().format('YYYY-MM-DD hh:mm:ss'),
           start_time : moment().subtract(5, 'hours').format('YYYY-MM-DD hh:mm:ss')
         }
         setSelectRange('Last 5 hours ')
@@ -191,9 +186,9 @@ const apiCall = async () => {
         break; 
       case '1day':
         updateRequestBody = {
-          id: thing_id,
-          measure: measurement_name,
-          final_time : moment().format('YYYY-MM-DD hh:mm:ss'),
+          thing_id: thing_id,
+          measurement: measurement_name,
+          end_time : moment().format('YYYY-MM-DD hh:mm:ss'),
           start_time : moment().subtract(1, 'days').format('YYYY-MM-DD hh:mm:ss')
         }
         setSelectRange('Last day')
@@ -201,9 +196,9 @@ const apiCall = async () => {
         break; 
       case '1week':
         updateRequestBody = {
-          id: thing_id,
-          measure: measurement_name,
-          final_time : moment().format('YYYY-MM-DD hh:mm:ss'),
+          thing_id: thing_id,
+          measurement: measurement_name,
+          end_time : moment().format('YYYY-MM-DD hh:mm:ss'),
           start_time : moment().subtract(7, 'days').format('YYYY-MM-DD hh:mm:ss')
         }
         setSelectRange('Last 7 day')
@@ -211,9 +206,9 @@ const apiCall = async () => {
         break; 
       case '1month':
         updateRequestBody = {
-          id: thing_id,
-          measure: measurement_name,
-          final_time : moment().format('YYYY-MM-DD hh:mm:ss'),
+          thing_id: thing_id,
+          measurement: measurement_name,
+          end_time : moment().format('YYYY-MM-DD hh:mm:ss'),
           start_time : moment().subtract(1, 'months').format('YYYY-MM-DD hh:mm:ss')
         }
         setSelectRange('Last month')
@@ -221,9 +216,9 @@ const apiCall = async () => {
         break; 
       case '1year':
         updateRequestBody = {
-          id: thing_id,
-          measure: measurement_name,
-          final_time : moment().format('YYYY-MM-DD hh:mm:ss'),
+          thing_id: thing_id,
+          measurement: measurement_name,
+          end_time : moment().format('YYYY-MM-DD hh:mm:ss'),
           start_time : moment().subtract(12, 'months').format('YYYY-MM-DD hh:mm:ss')
         }
         setSelectRange('Last year')
