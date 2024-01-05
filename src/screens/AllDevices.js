@@ -86,7 +86,7 @@ const AllDevices = () => {
               />
             }
             <div className="card-title vertical">
-              {src.name}
+              {src.display_name}
             </div>
           </button>
         ))}
