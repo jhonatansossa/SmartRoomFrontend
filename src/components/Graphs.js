@@ -98,106 +98,14 @@ const Graphs = ({ item_name }) => {
     }
   };
 
-  const apiCall = async() => {
-    setChartData(chartData => ({...chartData,
-      datasets: []
-    }))
 
-    const update = energies.map(async (energy) => {
-      requestbody = {...requestbody,
-        measure: energy
-      }
-      await apiCallBackend(requestbody).then(data => {
-        setAllDatasets(allDatasets => ([...allDatasets, energy]));
-        setChartData(chartData => ({
-          tension: 0.1,
-          labels: data.lastMeasurements.map((eachMeasure) => {
-            const moment_source = moment(eachMeasure.time, 'ddd, DD MMM YYYY HH:mm:ss Z')
-            //console.log(moment_source)
-            return moment_source.format('DD-MM-YYYY HH:mm');
-          }),
-          datasets: [...chartData.datasets,
-            {
-              label: energy.replace(/_/gi, " ").split("energy")[0],
-              data: data.lastMeasurements.map((eachMeasure) => {
-                return eachMeasure.value;
-              }),
-              borderColor: 'rgb(' + colors[energy] + ')',
-              backgroundColor: 'rgba(' + colors[energy] + ', 0.5)',
-            }
-          ]
-        }));
-      })
-    })
-  }
-  
 
-  var updateRequestBody = (range) => {
-    switch(range) {
-      case "5hours":
-        requestbody = {
-          id: thing_id,
-          measure: measurement_name,
-          final_time : moment().format('YYYY-MM-DD hh:mm:ss'),
-          start_time : moment().subtract(5, 'hours').format('YYYY-MM-DD hh:mm:ss')
-        }
-        setSelectRange('Last 5 hours')
-        apiCall()
-        break; 
-      case '1day':
-        requestbody = {
-          id: thing_id,
-          measure: measurement_name,
-          final_time : moment().format('YYYY-MM-DD hh:mm:ss'),
-          start_time : moment().subtract(1, 'days').format('YYYY-MM-DD hh:mm:ss')
-        }
-        //apiCall()
-        setSelectRange('Last day')
-        break; 
-      case '1week':
-        requestbody = {...requestbody,
-          id: thing_id,
-          measure: measurement_name,
-          final_time : moment().format('YYYY-MM-DD hh:mm:ss'),
-          start_time : moment().subtract(7, 'days').format('YYYY-MM-DD hh:mm:ss')
-        }
-        //apiCall()
-        setSelectRange('Last week')
-        break; 
-      case '1month':
-        requestbody = {
-          id: thing_id,
-          measure: measurement_name,
-          final_time : moment().format('YYYY-MM-DD hh:mm:ss'),
-          start_time : moment().subtract(1, 'months').format('YYYY-MM-DD hh:mm:ss')
-        }
-        setSelectRange('Last month')
-        //apiCall()
-        break; 
-      case '1year':
-        requestbody = {
-          id: thing_id,
-          measure: measurement_name,
-          final_time : moment().format('YYYY-MM-DD hh:mm:ss'),
-          start_time : moment().subtract(2, 'months').format('YYYY-MM-DD hh:mm:ss')
-        }
-        setSelectRange('Last year')
-        //apiCall()
-        break; 
-      default:
-        console.log('Wrong range')
-        break; 
-    }
-    console.log(requestbody)
-  }
-
-  
-  const options = {
+  const [options, setOptions] = useState({
     responsive: true,
     plugins: {
       legend: {
         position: 'top',
-        display: true
+        display: true,
       },
       title: {
         display: true,
@@ -207,20 +115,144 @@ const Graphs = ({ item_name }) => {
     scales: {
       x: {
         grid: {
-          display: false
+          display: false,
         },
         ticks: {
-          display: false
-        }
+          display: false,
+        },
       },
       y: {
         grid: {
-          display: false
+          display: false,
+        },
+      },
+    },
+  });
+
+const apiCall = async () => {
+    setChartData((chartData) => ({
+      ...chartData,
+      datasets: [],
+    }));
+
+    const update = energies.map(async (energy) => {
+      const updatedRequestBody = { ...updateRequestBody, measure: energy };
+      await apiCallBackend(updatedRequestBody).then((data) => {
+        setAllDatasets((allDatasets) => [...allDatasets, energy]);
+        setChartData((chartData) => ({
+          tension: 0.1,
+          labels: data.lastMeasurements.map((eachMeasure) => {
+            const moment_source = moment(eachMeasure.time, 'ddd, DD MMM YYYY HH:mm:ss Z');
+            console.log('moment:' + moment_source.format('DD-MM-YYYY HH:mm'));
+            return moment_source.format('DD-MM-YYYY HH:mm');
+          }),
+          datasets: [
+            ...chartData.datasets,
+            {
+              label: energy.replace(/_/gi, ' ').split('energy')[0],
+              data: data.lastMeasurements.map((eachMeasure) => {
+                return eachMeasure.value;
+              }),
+              borderColor: 'rgb(' + colors[energy] + ')',
+              backgroundColor: 'rgba(' + colors[energy] + ', 0.5)',
+            },
+          ],
+        }));
+
+        setOptions((options) => ({
+          ...options,
+          plugins: {
+            ...options.plugins,
+            title: {
+              ...options.plugins.title,
+              text:
+                'Energy Measurements ' +
+                moment(updatedRequestBody.start_time).format('YYYY-MM-DD HH:mm:ss') +
+                ' - ' +
+                moment(updatedRequestBody.final_time).format('YYYY-MM-DD HH:mm:ss'),
+            },
+          },
+        }));
+      });
+    });
+  };
+  
+  var updateRequestBody = (range) => {
+    switch(range) {
+      case "5hours":
+        updateRequestBody = {
+          id: thing_id,
+          measure: measurement_name,
+          final_time : moment().format('YYYY-MM-DD hh:mm:ss'),
+          start_time : moment().subtract(5, 'hours').format('YYYY-MM-DD hh:mm:ss')
         }
-      }
+        setSelectRange('Last 5 hours ')
+        
+        break; 
+      case '1day':
+        updateRequestBody = {
+          id: thing_id,
+          measure: measurement_name,
+          final_time : moment().format('YYYY-MM-DD hh:mm:ss'),
+          start_time : moment().subtract(1, 'days').format('YYYY-MM-DD hh:mm:ss')
+        }
+        setSelectRange('Last day')
+        
+        break; 
+      case '1week':
+        updateRequestBody = {
+          id: thing_id,
+          measure: measurement_name,
+          final_time : moment().format('YYYY-MM-DD hh:mm:ss'),
+          start_time : moment().subtract(7, 'days').format('YYYY-MM-DD hh:mm:ss')
+        }
+        setSelectRange('Last 7 day')
+        
+        break; 
+      case '1month':
+        updateRequestBody = {
+          id: thing_id,
+          measure: measurement_name,
+          final_time : moment().format('YYYY-MM-DD hh:mm:ss'),
+          start_time : moment().subtract(1, 'months').format('YYYY-MM-DD hh:mm:ss')
+        }
+        setSelectRange('Last month')
+        
+        break; 
+      case '1year':
+        updateRequestBody = {
+          id: thing_id,
+          measure: measurement_name,
+          final_time : moment().format('YYYY-MM-DD hh:mm:ss'),
+          start_time : moment().subtract(12, 'months').format('YYYY-MM-DD hh:mm:ss')
+        }
+        setSelectRange('Last year')
+        
+        break; 
+      default:
+        console.log('Wrong range')
+        break; 
     }
+    var nb = updateRequestBody;
+    apiCall(nb);
+    setOptions((options) => ({
+      ...options,
+      plugins: {
+        ...options.plugins,
+        title: {
+          ...options.plugins.title,
+          text:
+            'Energy Measurements ' +
+            moment(updateRequestBody.start_time).format('YYYY-MM-DD HH:mm:ss') +
+            ' - ' +
+            moment(updateRequestBody.final_time).format('YYYY-MM-DD HH:mm:ss'),
+        },
+      },
+    }));
   };
 
+  
+  
   return (
     <Stack gap={2}>
       <DropdownButton id="dropdown-basic-button" title={selectRange}  align={{ lg: 'left' }}>
