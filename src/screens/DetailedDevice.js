@@ -10,12 +10,19 @@ const DetailedDevice = () => {
   const [openHABItem, setOpenHABItem] = useState(null);
   const { id } = useParams();
   const navigate = useNavigate();
+  // const config = {
+  //   headers: { Authorization: token },
+  // };
+
   const config = {
-    headers: { Authorization: token },
+    headers: { Authorization: sessionStorage.getItem("token") },
   };
 
   const timerRef = useRef(null);
 
+
+
+  
   useEffect(() => {
     document.title = "SmartRoom – " + id;
     let auth = sessionStorage.getItem("auth");
@@ -51,6 +58,7 @@ const DetailedDevice = () => {
   } else {
     return (
       <div className="vertical-scroll-area">
+      <button className="back-button" onClick={() => navigate(-1)} />
         <h2 className="title">{openHABItem.label}</h2>
         <div className="card vertical">
           <div
