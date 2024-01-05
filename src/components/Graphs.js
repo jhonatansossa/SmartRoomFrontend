@@ -12,6 +12,7 @@ import { Line } from 'react-chartjs-2';
 import { React, useState, useEffect } from 'react';
 import { DropdownButton, Dropdown } from 'react-bootstrap';
 import * as moment from 'moment';
+import 'moment-timezone';
 import apiCallBackend from '../services/ApiCallBackend';
 import Stack from 'react-bootstrap/Stack';
 import { token } from "../screens/Login/Login";
@@ -56,8 +57,8 @@ const Graphs = ({ item_name }) => {
   let requestbody = {
     id : '13',
     measure: 'active_import_energy',
-    final_time : moment().format('YYYY-MM-DD HH:mm:ss'),
-    start_time : moment().subtract(1, 'years').format('YYYY-MM-DD HH:mm:ss')
+    final_time : moment().tz('Europe/Berlin').format('YYYY-MM-DD HH:mm:ss'),
+    start_time : moment().tz('Europe/Berlin').format('YYYY-MM-DD HH:mm:ss')
   }
 
   useEffect(() => {
@@ -173,8 +174,8 @@ const apiCall = async () => {
         updateRequestBody = {
           thing_id: thing_id,
           measurement: measurement_name,
-          end_time : moment().format('YYYY-MM-DD HH:mm:ss'),
-          start_time : moment().subtract(5, 'hours').format('YYYY-MM-DD HH:mm:ss')
+          end_time : moment().tz('Europe/Berlin').format('YYYY-MM-DD HH:mm:ss'),
+          start_time : moment().tz('Europe/Berlin').subtract(5, 'hours').format('YYYY-MM-DD HH:mm:ss')
         }
         setSelectRange('Last 5 hours')
         
@@ -183,8 +184,8 @@ const apiCall = async () => {
         updateRequestBody = {
           thing_id: thing_id,
           measurement: measurement_name,
-          end_time : moment().format('YYYY-MM-DD HH:mm:ss'),
-          start_time : moment().subtract(1, 'days').format('YYYY-MM-DD HH:mm:ss')
+          end_time : moment().tz('Europe/Berlin').format('YYYY-MM-DD HH:mm:ss'),
+          start_time : moment().tz('Europe/Berlin').subtract(1, 'days').format('YYYY-MM-DD HH:mm:ss')
         }
         setSelectRange('Last day')
         
@@ -193,8 +194,8 @@ const apiCall = async () => {
         updateRequestBody = {
           thing_id: thing_id,
           measurement: measurement_name,
-          end_time : moment().format('YYYY-MM-DD HH:mm:ss'),
-          start_time : moment().subtract(7, 'days').format('YYYY-MM-DD HH:mm:ss')
+          end_time : moment().tz('Europe/Berlin').format('YYYY-MM-DD HH:mm:ss'),
+          start_time : moment().tz('Europe/Berlin').subtract(7, 'days').format('YYYY-MM-DD HH:mm:ss')
         }
         setSelectRange('Last 7 day')
         
@@ -203,8 +204,8 @@ const apiCall = async () => {
         updateRequestBody = {
           thing_id: thing_id,
           measurement: measurement_name,
-          end_time : moment().format('YYYY-MM-DD HH:mm:ss'),
-          start_time : moment().subtract(1, 'months').format('YYYY-MM-DD HH:mm:ss')
+          end_time : moment().tz('Europe/Berlin').format('YYYY-MM-DD HH:mm:ss'),
+          start_time : moment().tz('Europe/Berlin').subtract(1, 'months').format('YYYY-MM-DD HH:mm:ss')
         }
         setSelectRange('Last month')
         
@@ -213,8 +214,8 @@ const apiCall = async () => {
         updateRequestBody = {
           thing_id: thing_id,
           measurement: measurement_name,
-          end_time : moment().format('YYYY-MM-DD HH:mm:ss'),
-          start_time : moment().subtract(12, 'months').format('YYYY-MM-DD HH:mm:ss')
+          end_time : moment().tz('Europe/Berlin').format('YYYY-MM-DD HH:mm:ss'),
+          start_time : moment().tz('Europe/Berlin').subtract(12, 'months').format('YYYY-MM-DD HH:mm:ss')
         }
         setSelectRange('Last year')
         
