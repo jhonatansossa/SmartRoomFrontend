@@ -130,7 +130,8 @@ const AllSwitches = () => {
                     key={src.title}
                     className="card-image vertical"
                     style={{
-                      backgroundImage: `url('/resources/${src.name}.svg')`,
+                      backgroundImage: `url('/resources/${openHAB.switches.LIGHT_SWITCH_ID}.svg')`,
+                      //backgroundImage: `url('/resources/${src.name}.svg')`,
                       filter:
                         "invert(35%) sepia(24%) saturate(6006%) hue-rotate(349deg) brightness(84%) contrast(89%)",
                     }}
@@ -157,7 +158,8 @@ const AllSwitches = () => {
                     key={src.title}
                     className="card-image vertical"
                     style={{
-                      backgroundImage: `url('/resources/${src.name}.svg')`,
+                      backgroundImage: `url('/resources/${openHAB.switches.LIGHT_SWITCH_ID}.svg')`,
+                      //backgroundImage: `url('/resources/${src.name}.svg')`,
                       filter:
                         "invert(56%) sepia(39%) saturate(532%) hue-rotate(57deg) brightness(98%) contrast(90%)",
                     }}

@@ -81,7 +81,8 @@ const AllDevices = () => {
                 key={src.title}
                 className="card-image vertical"
                 style={{
-                  backgroundImage: `25`,
+                  backgroundImage: `url('/resources/${SetImage(src.label)}.svg')`,
+                  //backgroundImage: `25`,
                 }}
               />
             }
@@ -94,5 +95,34 @@ const AllDevices = () => {
     </>
   );
 };
+
+
+function SetImage(label) {
+  const deviceTypes = ['Camera', 'Sensor', 'TV', 'LIGHT', 'Lamps', "Lamp", "Thermostat", "Metervoltage"];
+  let imageName = "";
+  console.log(label, "  kleviii");
+  const lowercasedLabel = label.toLowerCase();
+
+  for (const type of deviceTypes) {
+    const lowercasedType = type.toLowerCase();
+
+    if (lowercasedLabel.includes(lowercasedType)) {
+      switch (type) {
+        case 'Camera':        imageName = openHAB.devices.CAMERA_ID;        break;
+        case 'Sensor':        imageName = openHAB.devices.SENSOR_ID;        break;
+        case 'TV':            imageName = openHAB.devices.TV_ID;            break;
+        case 'LIGHT':         imageName = openHAB.devices.LIGHT_ID;         break;
+        case 'Lamp':          imageName = openHAB.devices.LAMP_ID;          break;
+        case 'Lamps':         imageName = openHAB.devices.LAMP_ID;          break;
+        case 'Thermostat':    imageName = openHAB.devices.THERMOSTAT_ID;    break;
+        case 'Metervoltage':  imageName = openHAB.devices.METERVOLTAGE_ID;  break;
+        default: break;
+      }
+      break;
+    }
+  }
+
+  return imageName;
+}
 
 export default AllDevices;
