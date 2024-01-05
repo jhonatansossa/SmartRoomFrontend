@@ -136,7 +136,7 @@ const apiCall = async () => {
         setAllDatasets((allDatasets) => [...allDatasets, energy]);
         setChartData((chartData) => ({
           tension: 0.1,
-          labels: data.lastMeasurements.map((eachMeasure) => {
+          labels: data.data.map((eachMeasure) => {
             const moment_source = moment(eachMeasure.time, 'ddd, DD MMM YYYY HH:mm:ss Z');
             // console.log('moment:' + moment_source.format('DD-MM-YYYY HH:mm'));
             return moment_source.format('DD-MM-YYYY HH:mm');
@@ -145,8 +145,8 @@ const apiCall = async () => {
             ...chartData.datasets,
             {
               label: energy.replace(/_/gi, ' ').split('energy')[0],
-              data: data.lastMeasurements.map((eachMeasure) => {
-                return eachMeasure.value;
+              data: data.data.map((eachMeasure) => {
+                return Number(eachMeasure.state);
               }),
               borderColor: 'rgb(' + colors[energy] + ')',
               backgroundColor: 'rgba(' + colors[energy] + ', 0.5)',
