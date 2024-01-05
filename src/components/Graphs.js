@@ -56,8 +56,8 @@ const Graphs = ({ item_name }) => {
   let requestbody = {
     id : '13',
     measure: 'active_import_energy',
-    final_time : moment().format('YYYY-MM-DD hh:mm:ss'),
-    start_time : moment().subtract(1, 'years').format('YYYY-MM-DD hh:mm:ss')
+    final_time : moment().format('YYYY-MM-DD HH:mm:ss'),
+    start_time : moment().subtract(1, 'years').format('YYYY-MM-DD HH:mm:ss')
   }
 
   useEffect(() => {
@@ -173,18 +173,18 @@ const apiCall = async () => {
         updateRequestBody = {
           thing_id: thing_id,
           measurement: measurement_name,
-          end_time : moment().format('YYYY-MM-DD hh:mm:ss'),
-          start_time : moment().subtract(5, 'hours').format('YYYY-MM-DD hh:mm:ss')
+          end_time : moment().format('YYYY-MM-DD HH:mm:ss'),
+          start_time : moment().subtract(5, 'hours').format('YYYY-MM-DD HH:mm:ss')
         }
-        setSelectRange('Last 5 hours ')
+        setSelectRange('Last 5 hours')
         
         break; 
       case '1day':
         updateRequestBody = {
           thing_id: thing_id,
           measurement: measurement_name,
-          end_time : moment().format('YYYY-MM-DD hh:mm:ss'),
-          start_time : moment().subtract(1, 'days').format('YYYY-MM-DD hh:mm:ss')
+          end_time : moment().format('YYYY-MM-DD HH:mm:ss'),
+          start_time : moment().subtract(1, 'days').format('YYYY-MM-DD HH:mm:ss')
         }
         setSelectRange('Last day')
         
@@ -193,8 +193,8 @@ const apiCall = async () => {
         updateRequestBody = {
           thing_id: thing_id,
           measurement: measurement_name,
-          end_time : moment().format('YYYY-MM-DD hh:mm:ss'),
-          start_time : moment().subtract(7, 'days').format('YYYY-MM-DD hh:mm:ss')
+          end_time : moment().format('YYYY-MM-DD HH:mm:ss'),
+          start_time : moment().subtract(7, 'days').format('YYYY-MM-DD HH:mm:ss')
         }
         setSelectRange('Last 7 day')
         
@@ -203,8 +203,8 @@ const apiCall = async () => {
         updateRequestBody = {
           thing_id: thing_id,
           measurement: measurement_name,
-          end_time : moment().format('YYYY-MM-DD hh:mm:ss'),
-          start_time : moment().subtract(1, 'months').format('YYYY-MM-DD hh:mm:ss')
+          end_time : moment().format('YYYY-MM-DD HH:mm:ss'),
+          start_time : moment().subtract(1, 'months').format('YYYY-MM-DD HH:mm:ss')
         }
         setSelectRange('Last month')
         
@@ -213,8 +213,8 @@ const apiCall = async () => {
         updateRequestBody = {
           thing_id: thing_id,
           measurement: measurement_name,
-          end_time : moment().format('YYYY-MM-DD hh:mm:ss'),
-          start_time : moment().subtract(12, 'months').format('YYYY-MM-DD hh:mm:ss')
+          end_time : moment().format('YYYY-MM-DD HH:mm:ss'),
+          start_time : moment().subtract(12, 'months').format('YYYY-MM-DD HH:mm:ss')
         }
         setSelectRange('Last year')
         
