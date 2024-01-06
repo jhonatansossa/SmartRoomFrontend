@@ -1034,6 +1034,20 @@ Devices 25-- washing machine
   height: 38px;
 }
 
+.timer-name-input.name-config {
+  margin-left: 35px;
+}
+
+.timer-close {
+  margin-right: 15px;
+}
+
+.toggle-separator {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 @media (max-width: 900px) {
   .timer-grid-container {
     grid-template-columns: repeat(2, 1fr);
@@ -1041,6 +1055,10 @@ Devices 25-- washing machine
 
   .timer-name-input {
     max-width: 100px;
+  }
+
+  .timer-name-input.name-config {
+    max-width: 200px;
   }
 }
 
@@ -1052,6 +1070,10 @@ Devices 25-- washing machine
   .timer-name-input {
     max-width: 100px;
   }
+
+  .timer-name-input.name-config {
+    max-width: 200px;
+  }
 }
 
 @media (max-width: 600px) {
@@ -1062,8 +1084,20 @@ Devices 25-- washing machine
   .timer-name-input {
     max-width: 100px;
   }
+
+  .timer-name-input.name-config {
+    max-width: 200px;
+  }
 }
 
+@media (max-width: 460px) {
+  .card-title.vertical.name-config {
+    max-width: 25ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
 
 
 /* Add these styles to your CSS */

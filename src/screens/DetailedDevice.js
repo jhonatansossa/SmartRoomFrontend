@@ -11,22 +11,16 @@ const DetailedDevice = () => {
   const location = useLocation();
   
   const { device } = location.state;
-  const [deviceName, setDeviceName] = useState(device.display_name);
-  const [editMode, setEditMode] = useState(false);
 
   const config = {
     headers: { Authorization: sessionStorage.getItem("token") },
   };
 
   const timerRef = useRef(null);
-  const displayNameRef = useRef(null);
 
-  const splitId = id.split('_');
-  const itemId = splitId[splitId.length-1];
-  const thingId = splitId[splitId.length-2];
 
   useEffect(() => {
-    document.title = "SmartRoom – " + deviceName;
+    document.title = "SmartRoom – " + device.display_name;
     let auth = sessionStorage.getItem("auth");
     if (auth !== "true") {
       navigate("/login");
@@ -39,7 +33,7 @@ const DetailedDevice = () => {
         clearInterval(timerRef.current);
       };
     }
-  }, [deviceName, navigate]);
+  }, [navigate]);
 
   const fetchOpenHABItem = async () => {
     try {
@@ -54,67 +48,29 @@ const DetailedDevice = () => {
     }
   };
 
-  const setNewDisplayName = async () => {
-    const newName = displayNameRef.current.value;
-    if (newName.length === 0) {
-      console.log("Empty name input");
-      return;
-    }
-    try {
-      await Axios.put(openHAB.url + '/api/v1/devices/new_item_names', {
-        item_id: itemId,
-        new_item_name: newName,
-        thing_id: thingId,
-      }, config);
-      setDeviceName(newName);
-    } catch (error) {
-      console.log("Error saving new display name");
-    }
-  }
-
   if (openHABItem === null) {
     // Puedes mostrar un indicador de carga aquí
     return <div>Loading...</div>;
   } else {
     return (
       <div className="vertical-scroll-area">
-      <div>
-          <h2 className="title">{deviceName}</h2>
-          <button className="timer-name-input" onClick={() => setEditMode(!editMode)}>Edit Name</button>
+        <h2 className="title">{device.display_name}</h2>
+      <div className="card vertical">
+        <div
+          key={id}
+          className="card-image vertical"
+          style={{
+            backgroundImage: `url('/resources/${id}.svg')`,
+          }}
+        />
+        <div className="card-title card-content">
+          <p>
+            Current consumption: <b>{openHABItem.state} kWh</b>
+          </p>
         </div>
-        {editMode && (
-        <div className="card vertical">
-          <div className="card-content">
-            <input
-              ref={displayNameRef}
-              type="text"
-              placeholder="Name"
-              className="timer-name-input"
-            />
-            <button
-              onClick={() => setNewDisplayName()}
-              className="timer-name-input"
-            > Save
-            </button>
-          </div>
-        </div>
-      )}
-        <div className="card vertical">
-          <div
-            key={id}
-            className="card-image vertical"
-            style={{
-              backgroundImage: `url('/resources/${id}.svg')`,
-            }}
-          />
-          <div className="card-title card-content">
-            <p>
-              Current consumption: <b>{openHABItem.state} kWh</b>
-            </p>
-          </div>
-        </div>
-        <Graphs />
       </div>
+      <Graphs />
+    </div>
     );
   }
 };
