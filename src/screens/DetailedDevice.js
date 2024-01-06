@@ -1,18 +1,16 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import Graphs from "../components/Graphs";
 import openHAB from "../openHAB/openHAB";
 import Axios from "axios";
-import { token } from "./Login/Login";
-import base64 from 'base-64';
 
 const DetailedDevice = () => {
   const [openHABItem, setOpenHABItem] = useState(null);
   const { id } = useParams();
   const navigate = useNavigate();
-  // const config = {
-  //   headers: { Authorization: token },
-  // };
+  const location = useLocation();
+  
+  const { device } = location.state;
 
   const config = {
     headers: { Authorization: sessionStorage.getItem("token") },
@@ -21,10 +19,8 @@ const DetailedDevice = () => {
   const timerRef = useRef(null);
 
 
-
-  
   useEffect(() => {
-    document.title = "SmartRoom – " + id;
+    document.title = "SmartRoom – " + device.display_name;
     let auth = sessionStorage.getItem("auth");
     if (auth !== "true") {
       navigate("/login");
@@ -37,7 +33,7 @@ const DetailedDevice = () => {
         clearInterval(timerRef.current);
       };
     }
-  }, [id, navigate]);
+  }, [navigate]);
 
   const fetchOpenHABItem = async () => {
     try {
@@ -59,23 +55,23 @@ const DetailedDevice = () => {
     return (
       <div className="vertical-scroll-area">
       <button className="back-button" onClick={() => navigate(-1)} />
-        <h2 className="title">{openHABItem.label}</h2>
-        <div className="card vertical">
-          <div
-            key={id}
-            className="card-image vertical"
-            style={{
-              backgroundImage: `url('/resources/${id}.svg')`,
-            }}
-          />
-          <div className="card-title card-content">
-            <p>
-              Current consumption: <b>{openHABItem.state} kWh</b>
-            </p>
-          </div>
+        <h2 className="title">{device.display_name}</h2>
+      <div className="card vertical">
+        <div
+          key={id}
+          className="card-image vertical"
+          style={{
+            backgroundImage: `url('/resources/${id}.svg')`,
+          }}
+        />
+        <div className="card-title card-content">
+          <p>
+            Current consumption: <b>{openHABItem.state} kWh</b>
+          </p>
         </div>
-        <Graphs />
       </div>
+      <Graphs />
+    </div>
     );
   }
 };

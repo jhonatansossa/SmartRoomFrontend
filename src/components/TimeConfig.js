@@ -89,19 +89,19 @@ const DelayConfigurator = () => {
                     type="number"
                     value={timer.timer_value}
                     onChange={(e) => handleNumberChange(timer.id, e.target.value)}
-                    className="timer-input"
+                    className="timer-name-input"
                   />
                   <select
                     value={timer.timer_units}
                     onChange={(e) => handleUnitsChange(timer.id, e.target.value)}
-                    className="timer-input"
+                    className="timer-name-input"
                   >
                     <option value="seconds">Seconds</option>
                     <option value="minutes">Minutes</option>
                   </select>
                   <button
                     onClick={() => updateTimer(timer.id)}
-                    className="timer-input"
+                    className="timer-name-input"
                   > Save
                   </button>
                 </div>

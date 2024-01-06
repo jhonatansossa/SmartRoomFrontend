@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { generatePath, useNavigate } from "react-router-dom";
 import openHAB from "../openHAB/openHAB";
 import Axios from "axios";
-import base64 from 'base-64';
-import { token } from "./Login/Login";
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import CloseButton from 'react-bootstrap/CloseButton';
+
 var regex = /^(?!.*Sensor).*$/i;
+
 const AllDevices = () => {
   let navigate = useNavigate();
 
   const [openHABItems, setOpenHABItems] = useState([]);
-
-  //let base64 = require("base-64");
-  // const config = {
-  //   headers: { Authorization: token },
-  // };
+  const [editMode, setEditMode] = useState(false);
+  const [selectedDevice, setSelectedDevice] = useState(null);
+  const displayNameRef = useRef(null);
 
   const config = {
     headers: { Authorization: sessionStorage.getItem("token") },
@@ -46,16 +47,63 @@ const AllDevices = () => {
     }
   });
 
-  function redirectToDetailedDevice(id) {
-    if (!id) {
-      console.error("ID no válido");
+  function redirectToDetailedDevice(device) {
+    if (!device || !device.name) {
+      console.error("Device not valid");
       return;
     }else{
-      let path = generatePath("/devices/:id/details", { id });
-      navigate(path);
+      const deviceName = device.name;
+      let path = generatePath("/devices/:deviceName/details", { deviceName });
+      navigate(path, { state: { device } });
     }
-    
   }
+
+  const toggleMenu = (device) => {
+    if (selectedDevice && selectedDevice.name === device.name) {
+      closeEditMode();
+    } else {
+      setSelectedDevice(device);
+      setEditMode(true);
+    }
+  };
+
+  const setNewDisplayName = async () => {
+    const splitId = selectedDevice.name.split('_');
+    const itemId = splitId[splitId.length-1];
+    const thingId = splitId[splitId.length-2];
+    const newName = displayNameRef.current.value;
+
+    if (newName.length === 0) {
+      console.log("Empty name input");
+      return;
+    }
+    try {
+      await Axios.put(openHAB.url + '/api/v1/devices/new_item_names', {
+        item_id: itemId,
+        new_item_name: newName,
+        thing_id: thingId,
+      }, config);
+      setOpenHABItems(prevOpenHABItems => {
+        return prevOpenHABItems.map(item => {
+          if (item.name === selectedDevice.name) {
+            return {
+              ...item,
+              display_name: newName,
+            };
+          }
+          return item;
+        });
+      });
+    } catch (error) {
+      console.log("Error saving new display name");
+    }
+    closeEditMode();
+  };
+
+  const closeEditMode = () => {
+    setEditMode(false);
+    setSelectedDevice(null);
+  };
 
   return (
     <> 
@@ -70,26 +118,51 @@ const AllDevices = () => {
 
       <div className="vertical-scroll-area">
         {devices.map((src) => (
-          <button
-            className="card hov-primary vertical"
-            onClick={() =>
-              redirectToDetailedDevice(src.label)
-            }
-          >
-            {
-              <div
-                key={src.title}
-                className="card-image vertical"
-                style={{
-                  backgroundImage: `url('/resources/${SetImage(src.label)}.svg')`,
+          <>
+          <div key={src.name} className="card hov-primary vertical toggle-separator">
+            <div className="toggle-separator">
+              {
+                <div
+                  key={src.title}
+                  className="card-image vertical"
+                  style={{
+                    backgroundImage: `url('/resources/${SetImage(src.label)}.svg')`,
                   //backgroundImage: `25`,
-                }}
-              />
-            }
-            <div className="card-title vertical">
-              {src.name}
+                  }}
+                />
+              }
+              <div className="card-title vertical name-config">
+                {src.display_name}
+              </div>
             </div>
-          </button>
+            <DropdownButton id="dropdown-basic-button" title="...">
+              <Dropdown.Item onClick={() => redirectToDetailedDevice(src)}>Measurements</Dropdown.Item>
+              <Dropdown.Item onClick={() => toggleMenu(src)}>Change Name</Dropdown.Item>
+            </DropdownButton>
+          </div>
+          {editMode && selectedDevice && selectedDevice.name === src.name && (
+            <div className="card vertical toggle-separator">
+              <div className="card-content toggle-separator">
+                <div className="toggle-separator">
+                <input
+                  ref={displayNameRef}
+                  type="text"
+                  placeholder="Name"
+                  defaultValue={src.display_name}
+                  className="timer-name-input name-config"
+                />
+                <button
+                    onClick={setNewDisplayName}
+                    className="timer-name-input"
+                > Save
+                </button>
+                </div>
+              </div>
+              <CloseButton onClick={closeEditMode} className="timer-close">
+              </CloseButton>
+            </div>
+            )}
+          </>
         ))}
       </div>
     </>
