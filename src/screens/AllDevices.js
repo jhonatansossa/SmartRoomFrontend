@@ -127,7 +127,6 @@ const AllDevices = () => {
                   className="card-image vertical"
                   style={{
                     backgroundImage: `url('/resources/${SetImage(src.label)}.svg')`,
-                  //backgroundImage: `25`,
                   }}
                 />
               }

@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Axios from "axios";
 import ToggleButton from "react-toggle-button";
 import openHAB from "../openHAB/openHAB";
 import { useNavigate } from "react-router-dom";
-import ReactTooltip from "react-tooltip";
 import { token } from "./Login/Login";
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import CloseButton from 'react-bootstrap/CloseButton';
 var regex = /^(?!.*Sensor).*$/i;
 
 const AllSwitches = () => {
@@ -12,7 +14,9 @@ const AllSwitches = () => {
 
   const [openHABItems, setOpenHABItems] = useState([]);
   const [responseStatus, setResponseStatus] = useState([]);
-  const [toggle, setToggle] = useState(false); // Switch toggle handler
+  const [editMode, setEditMode] = useState(false);
+  const [selectedDevice, setSelectedDevice] = useState(null);
+  const displayNameRef = useRef(null);
 
   const config = {
     headers: { Authorization: sessionStorage.getItem("token") },
@@ -117,6 +121,53 @@ const AllSwitches = () => {
     }
   }
 
+  const toggleMenu = (device) => {
+    if (selectedDevice && selectedDevice.name === device.name) {
+      closeEditMode();
+    } else {
+      setSelectedDevice(device);
+      setEditMode(true);
+    }
+  };
+
+  const setNewDisplayName = async () => {
+    const splitId = selectedDevice.name.split('_');
+    const itemId = splitId[splitId.length-1];
+    const thingId = splitId[splitId.length-2];
+    const newName = displayNameRef.current.value;
+
+    if (newName.length === 0) {
+      console.log("Empty name input");
+      return;
+    }
+    try {
+      await Axios.put(openHAB.url + '/api/v1/devices/new_item_names', {
+        item_id: itemId,
+        new_item_name: newName,
+        thing_id: thingId,
+      }, config);
+      setOpenHABItems(prevOpenHABItems => {
+        return prevOpenHABItems.map(item => {
+          if (item.name === selectedDevice.name) {
+            return {
+              ...item,
+              display_name: newName,
+            };
+          }
+          return item;
+        });
+      });
+    } catch (error) {
+      console.log("Error saving new display name");
+    }
+    closeEditMode();
+  };
+
+  const closeEditMode = () => {
+    setEditMode(false);
+    setSelectedDevice(null);
+  };
+
   return (
     <>
       <div>
@@ -130,36 +181,66 @@ const AllSwitches = () => {
       {switches.length > 0 && (
         <div className="vertical-scroll-area">
           {switches.map((src) => (
-            <div key={src.title} className="card hov-primary vertical">
-              <div
-                className="card-image vertical"
-                style={{
-                  backgroundImage: `url('/resources/${openHAB.switches.LIGHT_SWITCH_ID}.svg')`,
-                  filter:
-                    src.state === "OFF"
-                      ? "invert(35%) sepia(24%) saturate(6006%) hue-rotate(349deg) brightness(84%) contrast(89%)"
-                      : "invert(56%) sepia(39%) saturate(532%) hue-rotate(57deg) brightness(98%) contrast(90%)",
-                }}
-              />
-              <div
-                className="card-title vertical"
-                style={{
-                  color: src.state === "OFF" ? "#cc4125" : "#6aa84f",
-                }}
-              >
-                {src.label}
-              </div>
-              <div className="toggle-container">
-                <ToggleButton
-                  id={`switchToggle-${src.name}`}
-                  value={src.state === "ON"}
-                  onToggle={() => {
-                    toggleSwitch(src);
-                    sendOpenHABRequest(src.name, src.state);
+            <>
+            <div key={src.title} className="card hov-primary vertical toggle-separator">
+              <div className="toggle-separator">
+                <div
+                  className="card-image vertical"
+                  style={{
+                    backgroundImage: `url('/resources/${openHAB.switches.LIGHT_SWITCH_ID}.svg')`,
+                    filter:
+                      src.state === "OFF"
+                        ? "invert(35%) sepia(24%) saturate(6006%) hue-rotate(349deg) brightness(84%) contrast(89%)"
+                        : "invert(56%) sepia(39%) saturate(532%) hue-rotate(57deg) brightness(98%) contrast(90%)",
                   }}
                 />
+                <div
+                  className="card-title vertical name-config"
+                  style={{
+                    color: src.state === "OFF" ? "#cc4125" : "#6aa84f",
+                  }}
+                >
+                  {src.display_name}
+                </div>
               </div>
+              <DropdownButton id="dropdown-basic-button" title="...">
+                <Dropdown.Item>
+                  Turn On/Off
+                  <ToggleButton
+                    id={`switchToggle-${src.name}`}
+                    value={src.state === "ON"}
+                    onToggle={() => {
+                      toggleSwitch(src);
+                      sendOpenHABRequest(src.name, src.state);
+                    }}
+                  />
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => toggleMenu(src)}>Change Name</Dropdown.Item>
+              </DropdownButton>
             </div>
+            {editMode && selectedDevice && selectedDevice.name === src.name && (
+              <div className="card vertical toggle-separator">
+                <div className="card-content toggle-separator">
+                  <div className="toggle-separator">
+                  <input
+                    ref={displayNameRef}
+                    type="text"
+                    placeholder="Name"
+                    defaultValue={src.display_name}
+                    className="timer-name-input name-config"
+                  />
+                  <button
+                      onClick={setNewDisplayName}
+                      className="timer-name-input"
+                  > Save
+                  </button>
+                  </div>
+                </div>
+                <CloseButton onClick={closeEditMode} className="timer-close">
+                </CloseButton>
+              </div>
+              )}
+            </>
           ))}
         </div>
       )}
