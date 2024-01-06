@@ -141,7 +141,7 @@ const ControlPanel = () => {
             <span className="bar"></span>
             <img src={CloseDoor} alt="Door closed" />
             <span className="bar"></span>
-            <p>The door is closed</p>
+            <p>Status: Closed</p>
           </div>
         )}
          {doorStatus === "OPEN" && (
@@ -150,7 +150,7 @@ const ControlPanel = () => {
             <span className="bar"></span>
             <img src={OpenDoor} alt="Door opened" />
             <span className="bar"></span>
-            <p>The door is opened</p>
+            <p>Status: Opened</p>
           </div>
         )}
 

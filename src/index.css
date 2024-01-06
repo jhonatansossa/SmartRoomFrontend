@@ -1094,3 +1094,44 @@ Devices 25-- washing machine
 }
 
 
+
+
+
+
+
+.card {
+  position: relative;
+}
+
+.toggle-container {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  /* Adjust the distance from the right as needed */
+  transform: translateY(-50%) translateX(-80%);
+  display: flex;
+  align-items: center;
+}
+
+.toggle-button {
+  width: 20px;
+  /* Adjust this value based on your design */
+  height: 20px;
+  /* Adjust this value based on your design */
+}
+
+.toggle-button .react-toggle-thumb {
+  height: 20px !important;
+  /* Adjust the height as needed */
+  width: 20px !important;
+  /* Adjust the width as needed */
+}
+
+.toggle-button .react-toggle-track {
+  height: 20px !important;
+  /* Adjust the height as needed */
+}
+
+.switch-button-container {
+  position: relative;
+}

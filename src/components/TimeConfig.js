@@ -47,11 +47,8 @@ const DelayConfigurator = () => {
     }
   
     try {
-      await axios.put(openHAB.url + '/api/v1/devices/set_alarm_timers', {
-        id,
-        timer_units,
-        timer_value: parsedTimerValue,
-      }, config);
+      await axios.put(openHAB.url + '/api/v1/devices/set_alarm_timers', {id, timer_units, timer_value: parsedTimerValue,}, config);
+      alert(id +" " +timer_units+" "+timer_value);
     } catch (error) {
       console.error("Error updating the timer:", error);
     }  
