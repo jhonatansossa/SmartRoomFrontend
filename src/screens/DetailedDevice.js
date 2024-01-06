@@ -9,6 +9,10 @@ const DetailedDevice = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
+  
+  const { device } = location.state;
+  const [deviceName, setDeviceName] = useState(device.display_name);
+  const [editMode, setEditMode] = useState(false);
 
   const config = {
     headers: { Authorization: sessionStorage.getItem("token") },
@@ -16,9 +20,6 @@ const DetailedDevice = () => {
 
   const timerRef = useRef(null);
   const displayNameRef = useRef(null);
-
-  const { device } = location.state;
-  let deviceName = device.display_name;
 
   const splitId = id.split('_');
   const itemId = splitId[splitId.length-1];
@@ -65,8 +66,7 @@ const DetailedDevice = () => {
         new_item_name: newName,
         thing_id: thingId,
       }, config);
-      deviceName = newName;
-      navigate(-1);
+      setDeviceName(newName);
     } catch (error) {
       console.log("Error saving new display name");
     }
@@ -78,23 +78,27 @@ const DetailedDevice = () => {
   } else {
     return (
       <div className="vertical-scroll-area">
-        <h2 className="title">{deviceName}</h2>
+      <div>
+          <h2 className="title">{deviceName}</h2>
+          <button className="timer-name-input" onClick={() => setEditMode(!editMode)}>Edit Name</button>
+        </div>
+        {editMode && (
         <div className="card vertical">
           <div className="card-content">
-            Modify device name
             <input
               ref={displayNameRef}
               type="text"
-              placeholder={deviceName}
-              className="timer-input"
+              placeholder="Name"
+              className="timer-name-input"
             />
             <button
               onClick={() => setNewDisplayName()}
-              className="timer-input"
+              className="timer-name-input"
             > Save
             </button>
           </div>
         </div>
+      )}
         <div className="card vertical">
           <div
             key={id}

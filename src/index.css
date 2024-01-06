@@ -1026,7 +1026,7 @@ Devices 25-- washing machine
   align-items: center;
 }
 
-.timer-input {
+.timer-name-input {
   margin-right: 10px;
   padding: 8px;
   border: 1px solid #ccc;
@@ -1039,7 +1039,7 @@ Devices 25-- washing machine
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .timer-input {
+  .timer-name-input {
     max-width: 100px;
   }
 }
@@ -1049,7 +1049,7 @@ Devices 25-- washing machine
     grid-template-columns: 1fr;
   }
 
-  .timer-input {
+  .timer-name-input {
     max-width: 100px;
   }
 }
@@ -1059,7 +1059,7 @@ Devices 25-- washing machine
     grid-template-columns: 1fr;
   }
 
-  .timer-input {
+  .timer-name-input {
     max-width: 100px;
   }
 }

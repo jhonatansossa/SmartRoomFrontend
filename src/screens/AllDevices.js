@@ -55,7 +55,6 @@ const AllDevices = () => {
       let path = generatePath("/devices/:deviceName/details", { deviceName });
       navigate(path, { state: { device } });
     }
-    
   }
 
   return (
