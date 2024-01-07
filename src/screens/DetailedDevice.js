@@ -64,13 +64,8 @@ const DetailedDevice = () => {
             backgroundImage: `url('/resources/${id}.svg')`,
           }}
         />
-        <div className="card-title card-content">
-          <p>
-            Current consumption: <b>{openHABItem.state} kWh</b>
-          </p>
-        </div>
+        <Graphs item_name={openHABItem.name}/>
       </div>
-      <Graphs />
     </div>
     );
   }

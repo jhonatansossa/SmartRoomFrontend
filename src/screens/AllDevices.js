@@ -172,7 +172,6 @@ const AllDevices = () => {
 function SetImage(label) {
   const deviceTypes = ['Camera', 'Sensor', 'TV', 'LIGHT', 'Lamps', "Lamp", "Thermostat", "Metervoltage"];
   let imageName = "";
-  console.log(label, "  kleviii");
   const lowercasedLabel = label.toLowerCase();
 
   for (const type of deviceTypes) {
