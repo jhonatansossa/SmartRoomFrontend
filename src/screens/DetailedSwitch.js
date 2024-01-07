@@ -19,7 +19,7 @@ import base64 from 'base-64';
 
   //let base64 = require("base-64");
   const config = {
-    headers: { Authorization: token },
+    headers: { Authorization: sessionStorage.getItem("token") },
   };
 
   useEffect(() => {

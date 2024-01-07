@@ -36,14 +36,6 @@ const Graphs = ({ item_name }) => {
   const config = {
     headers: { Authorization: token },
   };
-
-  const energies = [
-    'any_measurement',
-  ]
-
-  const colors = {
-    'any_measurement' : '142, 202, 230',
-  }
   
   const [measurement_name, setMeasurementName] = useState();
   const [thing_id, setThingID] = useState();
@@ -61,6 +53,14 @@ const Graphs = ({ item_name }) => {
     start_time : moment().tz('Europe/Berlin').format('YYYY-MM-DD HH:mm:ss')
   }
 
+  const energies = [
+    measurement_name,
+  ]
+
+  const colors = {
+    measurement_name : '142, 202, 230',
+  }
+
   useEffect(() => {
     let auth = sessionStorage.getItem("auth");
     if (auth !== "true") {
@@ -76,7 +76,7 @@ const Graphs = ({ item_name }) => {
         openHAB.url+"/api/v1/devices/relations",
         config
       );
-      console.log(item_name);
+      // console.log(item_name);
       const matchingItem = response.data.find((Item) => Item.item_name === item_name);
       if (matchingItem) {
         setMeasurementName(matchingItem.measurement_name);
@@ -100,7 +100,7 @@ const Graphs = ({ item_name }) => {
       },
       title: {
         display: true,
-        text: 'Energy Measurements ',
+        text: measurement_name,
       },
     },
     scales: {
@@ -157,7 +157,7 @@ const apiCall = async () => {
             title: {
               ...options.plugins.title,
               text:
-                'Energy Measurements ' +
+              measurement_name + ' ' + 
                 moment(updatedRequestBody.start_time).format('YYYY-MM-DD HH:mm:ss') +
                 ' - ' +
                 moment(updatedRequestBody.final_time).format('YYYY-MM-DD HH:mm:ss'),
@@ -233,7 +233,7 @@ const apiCall = async () => {
         title: {
           ...options.plugins.title,
           text:
-            'Energy Measurements ' +
+           measurement_name + ' ' + 
             moment(updateRequestBody.start_time).format('YYYY-MM-DD HH:mm:ss') +
             ' - ' +
             moment(updateRequestBody.final_time).format('YYYY-MM-DD HH:mm:ss'),
@@ -247,11 +247,11 @@ const apiCall = async () => {
   return (
     <Stack gap={2}>
       <DropdownButton id="dropdown-basic-button" title={selectRange}  align={{ lg: 'left' }}>
-      <Dropdown.Item href="#/action-1" onClick={() => updateRequestBody('5hours')}>Last 5 hours</Dropdown.Item>
-      <Dropdown.Item href="#/action-2" onClick={() => updateRequestBody('1day')}>Last day</Dropdown.Item>
-      <Dropdown.Item href="#/action-3" onClick={() => updateRequestBody('1week')}>Last week</Dropdown.Item>
-      <Dropdown.Item href="#/action-3" onClick={() => updateRequestBody('1month')}>Last month</Dropdown.Item>
-      <Dropdown.Item href="#/action-3" onClick={() => updateRequestBody('1year')}>Last year</Dropdown.Item>
+      <Dropdown.Item onClick={() => updateRequestBody('5hours')}>Last 5 hours</Dropdown.Item>
+      <Dropdown.Item onClick={() => updateRequestBody('1day')}>Last day</Dropdown.Item>
+      <Dropdown.Item onClick={() => updateRequestBody('1week')}>Last week</Dropdown.Item>
+      <Dropdown.Item onClick={() => updateRequestBody('1month')}>Last month</Dropdown.Item>
+      <Dropdown.Item onClick={() => updateRequestBody('1year')}>Last year</Dropdown.Item>
       </DropdownButton>
       <div className="bg-light border">
       <Line options={options} data={chartData} />
