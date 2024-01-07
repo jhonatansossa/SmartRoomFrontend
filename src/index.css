@@ -860,6 +860,12 @@ Devices 25-- washing machine
     margin: 0;
   }
 
+  .grid-title.control-panel {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   .door-title{
     text-align: center;
     border-top-left-radius: 4px;
