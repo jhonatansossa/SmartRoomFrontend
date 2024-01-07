@@ -9,9 +9,10 @@ function OverviewSwitchList(props) {
     navigate("/switches");
   };
 
-  function redirectToDetailedSwitch(id) {
+  function redirectToDetailedSwitch(device) {
+    const id = device.name;
     let path = generatePath("/switches/:id/details", { id });
-    navigate(path);
+    navigate(path, { state: { device }});
   }
 
   function shortname(parameter) {
@@ -52,7 +53,7 @@ function OverviewSwitchList(props) {
         {props.switchList.map((src) => (
           <button
             className="card hov-primary horizontal"
-            onClick={() => redirectToDetailedSwitch(src.name)}
+            onClick={() => redirectToDetailedSwitch(src)}
           >
             <div
               key={src.label}
@@ -62,7 +63,7 @@ function OverviewSwitchList(props) {
                 backgroundImage: `url('/resources/${openHAB.switches.LIGHT_SWITCH_ID}.svg')`,
               }}
             />
-            <div className="card-title horizontal">{shortname(src.label)}</div>
+            <div className="card-title horizontal">{shortname(src.display_name)}</div>
           </button>
         ))}
       </div>

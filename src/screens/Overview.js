@@ -214,7 +214,7 @@ const isUserAdmin = sessionStorage.getItem("isAdmin") === "true";
         <div>
         {isUserAdmin && (
           <div>
-            <DeviceConfigurator />
+            <DeviceConfigurator switchList={switches} />
           </div>
         )}
         </div>

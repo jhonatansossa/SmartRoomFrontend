@@ -199,6 +199,10 @@ footer {
   margin-bottom: 10px;
   position: absolute;
   bottom: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 15ch;
 }
 
 .card-title.vertical {
