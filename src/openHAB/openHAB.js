@@ -11,7 +11,9 @@ const openHAB = {
         CAMERA_ID: "camera_s",
         LIGHT_ID: "light",
         LAMP_ID: "light",
-        SENSOR_ID: "sensor"
+        SENSOR_ID: "sensor",
+        THERMOSTAT_ID: "thermostat",
+        METERVOLTAGE_ID: "Metervoltage"
     },
     switches: {
         LIGHT_SWITCH_ID: "switch"

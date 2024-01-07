@@ -47,11 +47,8 @@ const DelayConfigurator = () => {
     }
   
     try {
-      await axios.put(openHAB.url + '/api/v1/devices/set_alarm_timers', {
-        id,
-        timer_units,
-        timer_value: parsedTimerValue,
-      }, config);
+      await axios.put(openHAB.url + '/api/v1/devices/set_alarm_timers', {id, timer_units, timer_value: parsedTimerValue,}, config);
+      alert(id +" " +timer_units+" "+timer_value);
     } catch (error) {
       console.error("Error updating the timer:", error);
     }  
@@ -92,19 +89,19 @@ const DelayConfigurator = () => {
                     type="number"
                     value={timer.timer_value}
                     onChange={(e) => handleNumberChange(timer.id, e.target.value)}
-                    className="timer-input"
+                    className="timer-name-input"
                   />
                   <select
                     value={timer.timer_units}
                     onChange={(e) => handleUnitsChange(timer.id, e.target.value)}
-                    className="timer-input"
+                    className="timer-name-input"
                   >
                     <option value="seconds">Seconds</option>
                     <option value="minutes">Minutes</option>
                   </select>
                   <button
                     onClick={() => updateTimer(timer.id)}
-                    className="timer-input"
+                    className="timer-name-input"
                   > Save
                   </button>
                 </div>
