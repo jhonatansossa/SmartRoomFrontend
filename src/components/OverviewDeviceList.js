@@ -9,9 +9,10 @@ function OverviewDeviceList(props) {
     navigate("/devices");
   };
 
-  function redirectToDetailedDevice(id) {
+  function redirectToDetailedDevice(device) {
+    const id = device.name;
     let path = generatePath("/devices/:id/details", { id });
-    navigate(path);
+    navigate(path, { state: { device }});
   }
 
   function printId(label) {
@@ -80,7 +81,7 @@ function OverviewDeviceList(props) {
           <button
             className="card hov-primary horizontal"
             onClick={() =>
-              redirectToDetailedDevice(src.name)
+              redirectToDetailedDevice(src)
             }
           >
             <div
@@ -94,7 +95,7 @@ function OverviewDeviceList(props) {
               }}
             />
             <div className="card-title horizontal">
-              {shortname(src.label)}
+              {shortname(src.display_name)}
             </div>
           </button>
         ))}

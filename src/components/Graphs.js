@@ -177,11 +177,11 @@ const Graphs = () => {
   return (
     <Stack gap={2}>
       <DropdownButton id="dropdown-basic-button" title={selectRange}  align={{ lg: 'left' }}>
-      <Dropdown.Item href="#/action-1" onClick={() => updateRequestBody('5hours')}>Last 5 hours</Dropdown.Item>
-      <Dropdown.Item href="#/action-2" onClick={() => updateRequestBody('1day')}>Last day</Dropdown.Item>
-      <Dropdown.Item href="#/action-3" onClick={() => updateRequestBody('1week')}>Last week</Dropdown.Item>
-      <Dropdown.Item href="#/action-3" onClick={() => updateRequestBody('1month')}>Last month</Dropdown.Item>
-      <Dropdown.Item href="#/action-3" onClick={() => updateRequestBody('1year')}>Last year</Dropdown.Item>
+      <Dropdown.Item onClick={() => updateRequestBody('5hours')}>Last 5 hours</Dropdown.Item>
+      <Dropdown.Item onClick={() => updateRequestBody('1day')}>Last day</Dropdown.Item>
+      <Dropdown.Item onClick={() => updateRequestBody('1week')}>Last week</Dropdown.Item>
+      <Dropdown.Item onClick={() => updateRequestBody('1month')}>Last month</Dropdown.Item>
+      <Dropdown.Item onClick={() => updateRequestBody('1year')}>Last year</Dropdown.Item>
       </DropdownButton>
       <div className="bg-light border">
       <Line options={options} data={chartData} />

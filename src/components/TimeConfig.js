@@ -77,7 +77,10 @@ const DelayConfigurator = () => {
     return (
       <div className="timer-grid-container">
         {timers.map((timer) => {
-          const alertName = timer.alert_name.split('_').join(' ');
+          let alertName = timer.alert_name.split('_').join(' ');
+          alertName = alertName.replace(/\b\w/g, function(match) {
+            return match.toUpperCase();
+          });
           
           return (
             <div key={timer.id} className="timer">

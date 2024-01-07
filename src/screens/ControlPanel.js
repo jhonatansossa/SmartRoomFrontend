@@ -218,7 +218,7 @@ const ControlPanel = () => {
 
           return (
             <div key={item.name} className="sensor">
-              <h4 className="grid-title">{shortname(item.label)}</h4>
+              <h4 className="grid-title control-panel">{shortname(item.display_name)}</h4>
               <span className="grid-line"></span>
               <div className="grid-contain">
                 <div className="statusSwitch">
@@ -241,7 +241,7 @@ const ControlPanel = () => {
 
           return (
             <div key={item.name} className="sensor">
-              <h4 className="grid-title">{shortname(item.label)}</h4>
+              <h4 className="grid-title control-panel">{shortname(item.display_name)}</h4>
               <span className="grid-line"></span>
               <div className="grid-contain">
                 <div className="consumption">{item.state}</div>

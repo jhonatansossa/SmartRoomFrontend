@@ -199,6 +199,10 @@ footer {
   margin-bottom: 10px;
   position: absolute;
   bottom: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 15ch;
 }
 
 .card-title.vertical {
@@ -854,6 +858,12 @@ Devices 25-- washing machine
     border-top-right-radius: 4 px;
     background:#ef962e !important;
     margin: 0;
+  }
+
+  .grid-title.control-panel {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .door-title{

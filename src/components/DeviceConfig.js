@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { token } from '../screens/Login/Login';
 import openHAB from '../openHAB/openHAB';
 import axios from 'axios';
 
-const DeviceConfigurator = () => {
+const DeviceConfigurator = (props) => {
   let navigate = useNavigate();
-  const [devices, setDevices] = useState([]);
+  let switchList = props.switchList;
   const [selectedDevices, setSelectedDevices] = useState([]);
 
   // const config = {
   //   headers: { Authorization: token },
   // };
 
-const config = {
+  const config = {
     headers: { Authorization: sessionStorage.getItem("token") },
   };
 
@@ -29,15 +28,26 @@ const config = {
   const fetchDevices = async () => {
     try {
       const response = await axios(openHAB.url + '/api/v1/devices/relations', config);
+
       const filteredDevices = response.data.filter(
         (device) =>
           device.item_type === 'Switch' &&
-          (device.measurement_name === 'switchbinary' || device.measurement_name === 'switch')
+          (device.measurement_name === 'switchbinary' || device.measurement_name === 'switch' || device.measurement_name === 'binary')
       );
 
-      const autoSwitchOffDevices = filteredDevices.filter((device) => device?.auto_switchoff === true);
+      const autoSwitchOffDevices = filteredDevices.filter((device) => device.auto_switchoff === true);
 
-      setDevices(filteredDevices);
+      const mergedDevices = switchList.map((device) => {
+        const matchingRelation = response.data.find((relation) => relation.thing_name === device.name);
+  
+        if (matchingRelation) {
+          return { ...device, auto_switchoff: matchingRelation.auto_switchoff };
+        }
+  
+        return device;
+      });
+
+      switchList = mergedDevices;
       setSelectedDevices(autoSwitchOffDevices.map((device) => device.item_name));
     } catch (error) {
       console.error('Error fetching devices that can be switched off:', error);
@@ -74,7 +84,7 @@ const config = {
   return (
     <>
       <div className="header">
-        <div className="section-header">Automatically turn off items ({devices.length})</div>
+        <div className="section-header">Automatically turn off items ({switchList.length})</div>
         <button
           className="btn-primary-no-background"
           onClick={handleConfirm}
@@ -93,18 +103,18 @@ const config = {
           marginBottom: '20px',
         }}
       >
-        {devices.map((device) => (
+        {switchList.map((device) => (
           <button
             key={device.thing_name}
-            className={`card hov-primary horizontal ${selectedDevices.includes(device.item_name) ? 'selected' : ''}`}
-            onClick={() => handleDeviceSelection(device.item_name)}
+            className={`card hov-primary horizontal ${selectedDevices.includes(device.name) ? 'selected' : ''}`}
+            onClick={() => handleDeviceSelection(device.name)}
             style={{
               flex: '0 0 150px',
               margin: '0 8px',
               backgroundSize: 'cover',
               backgroundRepeat: 'no-repeat',
               backgroundPosition: 'center center',
-              backgroundColor: selectedDevices.includes(device.item_name) ? '#D1EAF0' : '#FFFFFF', // Set background color
+              backgroundColor: selectedDevices.includes(device.name) ? '#D1EAF0' : '#FFFFFF', // Set background color
             }}
           >
             <div
@@ -124,14 +134,14 @@ const config = {
             >
               <img
                 src={`/resources/${openHAB.switches.LIGHT_SWITCH_ID}.svg`}
-                alt={device.item_name}
+                alt={device.name}
                 style={{ width: '100%', height: '100%' }}
               />
             </div>
             <div
               className="card-title horizontal"
             >
-              {device.thing_name.split(' ').slice(1).join(' ')}
+              {device.name}
             </div>
           </button>
         ))}

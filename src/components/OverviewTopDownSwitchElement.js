@@ -15,14 +15,14 @@ const updateColorSwitch = (state) => {
 function OverviewTopDownSwitchElement(props) {
   let navigate = useNavigate();
 
-  function redirectToDetailedSwitch(id) {
+  function redirectToDetailedSwitch(device, id) {
     let path = generatePath("/switches/:id/details", { id });
-    navigate(path);
+    navigate(path, { state: { device }});
   }
 
   return (
     <div
-      onClick={() => redirectToDetailedSwitch(props.id)}
+      onClick={() => redirectToDetailedSwitch(props.switches.find((s) => s.name === props.id), props.id)}
       style={{
         backgroundColor: updateColorSwitch(
           props.switches.find((s) => s.name === props.id).state
@@ -34,7 +34,7 @@ function OverviewTopDownSwitchElement(props) {
       data-for={props.id + "Tooltip"}
     >
       <ReactTooltip id={props.id + "Tooltip"}>
-        <span>{props.switches.find((s) => s.name === props.id).label}</span>
+        <span>{props.switches.find((s) => s.name === props.id).display_name}</span>
       </ReactTooltip>
       <div className="topdown-element-text">
         {props.switches.find((s) => s.name === props.id).state}
