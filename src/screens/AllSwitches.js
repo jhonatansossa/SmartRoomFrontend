@@ -182,7 +182,7 @@ const AllSwitches = () => {
         <div className="vertical-scroll-area">
           {switches.map((src) => (
             <>
-            <div key={src.title} className="card hov-primary vertical toggle-separator">
+            <div style={{backgroundColor: src.state === "ON" ? "#D1EAF0" : "#FFFFFF"}} key={src.title} className="card hov-primary vertical toggle-separator">
               <div className="toggle-separator">
                 <div
                   className="card-image vertical"

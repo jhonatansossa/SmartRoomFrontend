@@ -2,11 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { LinkContainer } from 'react-router-bootstrap';
 import { useLocation } from "react-router-dom";
-import { setIsUserAdminCallback } from "../screens/Login/Login";
+import { setIsUserAdminCallback, userName } from "../screens/Login/Login";
+import { url, username } from "../openHAB/openHAB";
+
+var maxNameSize = 13;
 
 const Header = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const location = useLocation();
+  
+   const truncatedUserName = userName.length > maxNameSize ? userName.substring(0, maxNameSize) + "...": userName;
+
 
   useEffect(() => {
     const storedIsAdmin = sessionStorage.getItem("isAdmin") === "true";
@@ -67,7 +73,15 @@ const Header = () => {
                   
                 </Nav>
               </Navbar.Collapse>
-            </Container>
+                <Navbar.Brand>
+                  <span style={{ marginLeft: '10px', fontSize: '0.9em', color: 'white' }}>{truncatedUserName+" "}</span>
+                    <img
+                        src="user.svg"
+                        width="40"
+                        height="40"
+                    /> 
+                </Navbar.Brand>
+              </Container>
           </Navbar>
         </header>
     );
