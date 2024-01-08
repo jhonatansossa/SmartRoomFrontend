@@ -95,7 +95,7 @@ function OverviewDeviceList(props) {
               }}
             />
             <div className="card-title horizontal">
-              {shortname(src.display_name)}
+              {src.display_name}
             </div>
           </button>
         ))}

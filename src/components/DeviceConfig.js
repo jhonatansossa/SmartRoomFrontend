@@ -95,13 +95,7 @@ const DeviceConfigurator = (props) => {
       </div>
 
       <div
-        className="horizontal-scroll-area"
-        style={{
-          display: 'flex',
-          overflowX: 'auto',
-          width: '100%',
-          marginBottom: '20px',
-        }}
+        className="scroll-area"
       >
         {switchList.map((device) => (
           <button
@@ -109,11 +103,6 @@ const DeviceConfigurator = (props) => {
             className={`card hov-primary horizontal ${selectedDevices.includes(device.name) ? 'selected' : ''}`}
             onClick={() => handleDeviceSelection(device.name)}
             style={{
-              flex: '0 0 150px',
-              margin: '0 8px',
-              backgroundSize: 'cover',
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center center',
               backgroundColor: selectedDevices.includes(device.name) ? '#D1EAF0' : '#FFFFFF', // Set background color
             }}
           >
@@ -141,7 +130,7 @@ const DeviceConfigurator = (props) => {
             <div
               className="card-title horizontal"
             >
-              {device.name}
+              {device.display_name}
             </div>
           </button>
         ))}

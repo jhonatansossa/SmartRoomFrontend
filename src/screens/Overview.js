@@ -211,13 +211,9 @@ const isUserAdmin = sessionStorage.getItem("isAdmin") === "true";
         />
         <OverviewSwitchList name={"Switches"} switchList={switches} />
         {}
-        <div>
         {isUserAdmin && (
-          <div>
-            <DeviceConfigurator switchList={switches} />
-          </div>
+          <DeviceConfigurator switchList={switches} />
         )}
-        </div>
       </div>
     </>
   );
