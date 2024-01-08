@@ -342,7 +342,7 @@ footer {
   grid-column: 1 / span 3;
   justify-self: center;
   align-self: top;
-  border: solid 1px black;
+  border: solid 1.5px black;
   transform: translateX(5%) translateY(20%);
   background-size: cover;
 }
@@ -357,7 +357,7 @@ footer {
   grid-column: 4 / span 3;
   justify-self: center;
   align-self: top;
-  border: solid 1px black;
+  border: solid 1.5px black;
   transform: translateX(20%) translateY(20%);
   background-size: cover;
 }
@@ -369,7 +369,7 @@ footer {
   justify-self: center;
   align-self: top;
   border-radius: 50%;
-  border: solid 1px black;
+  border: solid 2px black;
   grid-row: 1;
   grid-column: 6;
   background-size: cover;
@@ -385,7 +385,7 @@ footer {
   justify-self: center;
   align-self: top;
   border-radius: 50%;
-  border: solid 1px black;
+  border: solid 2px black;
   grid-row: 1;
   grid-column: 5;
   background-size: cover;
@@ -412,6 +412,7 @@ footer {
 #Smart_Metering_switchbinary_08_01Switch {
   grid-row: 5;
   grid-column: 2;
+  border: solid 1.5px rgb(150, 150, 150);
   transform: translateY(120%) translateX(37%)
 }
 
@@ -419,6 +420,7 @@ footer {
 #Smart_Metering_switchbinary_09_01Switch {
   grid-row: 3;
   grid-column: 6;
+  border: solid 1.5px rgb(150, 150, 150);
   transform: translateY(-50%) translateX(130%)
 }
 
@@ -426,6 +428,7 @@ footer {
 #Smart_Metering_switchbinary_10_01Switch {
   grid-row: 1;
   grid-column: 6;
+  border: solid 1.5px rgb(150, 150, 150);
   transform: translateY(70%) translateX(20%)
 }
 
@@ -433,18 +436,21 @@ footer {
 #Ceiling_Lamp_switch_21_01Switch {
   grid-row: 1;
   grid-column: 1;
+  border: solid 1.5px rgb(150, 150, 150);
   transform: translateY(10%) translateX(10%)
 }
 
 #Color_LED_Lamp_switch_19_01Switch {
   grid-row: 3;
   grid-column: 1;
+  border: solid 1.5px rgb(150, 150, 150);
   transform: translateY(10%) translateX(10%)
 }
 
 #LED_Lights_switch_1000_02Switch {
   grid-row: 2;
   grid-column: 1;
+  border: solid 1.5px rgb(150, 150, 150);
   transform: translateY(10%) translateX(10%)
 }
 
@@ -453,6 +459,7 @@ footer {
 #Smart_Metering_switchbinary_07_01Switch {
   grid-row: 6;
   grid-column: 7;
+  border: solid 1.5px rgb(150, 150, 150);
   transform: translateY(10%)
 }
 
@@ -460,7 +467,7 @@ footer {
   width: 7vmax;
   height: 2.5vmax;
   background-color: #f6f6f6;
-  border: solid 1px black;
+  border: solid 1.5px rgb(150, 150, 150);
   border-radius: 8px;
   grid-row: 6;
   grid-column: 1;
@@ -496,6 +503,7 @@ footer {
   justify-self: end;
   align-self: center;
   margin-bottom: -9%;
+  border: solid 1.5px rgb(150, 150, 150);
   transform: rotate(90deg) translateX(75%) translateY(-70%);
 }
 
@@ -591,6 +599,8 @@ footer {
   align-self: start;
 }
 
+/*Klevi*/
+
 .flex-container {
   display: grid;
   grid: 1fr 1fr 1fr 1fr 1fr 1fr/ 1fr 1fr 1fr 1fr 1fr;
@@ -598,7 +608,7 @@ footer {
   height: 34vmax;
   margin: auto;
   background-color: #f6f6f6;
-  border: solid 1px black;
+  border: solid 4px rgb(150, 150, 150);
   border-radius: 8px;
   margin-bottom: 20px;
 }
@@ -1145,6 +1155,7 @@ Devices 25-- washing machine
 
 .card {
   position: relative;
+  border: solid 1.2px rgb(150, 150, 150);
 }
 
 .toggle-container {

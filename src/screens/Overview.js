@@ -59,7 +59,7 @@ const Overview = () => {
         openHAB.url + "/api/v1/devices/roomstatus",
         config
       );
-      console.log(response.data.amount); // Access the correct key
+      //console.log(response.data.amount); // Access the correct key
       const numberOfPeopleInsideRoom = response.data.amount;
       setPeopleInsideRoom(numberOfPeopleInsideRoom);
     } catch (error) {
@@ -200,9 +200,7 @@ const isUserAdmin = sessionStorage.getItem("isAdmin") === "true";
             />
           ))} */}
 
-          {switches.map((s) => (
-            <OverviewTopDownSwitchElement id={s.name} switches={switches} />
-          ))}
+          {switches.map((s) => (<OverviewTopDownSwitchElement id={s.name} switches={switches} />))}
         </div>
         
         <OverviewDeviceList
