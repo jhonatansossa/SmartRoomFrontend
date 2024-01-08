@@ -133,9 +133,9 @@ const apiCall = async () => {
         setChartData((chartData) => ({
           tension: 0.1,
           labels: data.data.map((eachMeasure) => {
-            const moment_source = moment(eachMeasure.time, 'ddd, DD MMM YYYY HH:mm:ss Z');
+            const moment_source = moment(eachMeasure.time).tz('Europe/Berlin').format('DD-MM-YYYY HH:mm');
             // console.log('moment:' + moment_source.format('DD-MM-YYYY HH:mm'));
-            return moment_source.format('DD-MM-YYYY HH:mm');
+            return moment_source;
           }),
           datasets: [
             ...chartData.datasets,
