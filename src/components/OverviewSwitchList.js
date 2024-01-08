@@ -63,7 +63,7 @@ function OverviewSwitchList(props) {
                 backgroundImage: `url('/resources/${openHAB.switches.LIGHT_SWITCH_ID}.svg')`,
               }}
             />
-            <div className="card-title horizontal">{shortname(src.display_name)}</div>
+            <div className="card-title horizontal">{src.display_name}</div>
           </button>
         ))}
       </div>
