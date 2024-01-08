@@ -5,6 +5,7 @@ import openHAB from "../../openHAB/openHAB";
 
 export var token;
 export var isUserAdmin = false;
+export var userName = "";
 let isUserAdminCallback = null;
 
 export const setIsUserAdminCallback = (callback) => {
@@ -37,7 +38,7 @@ const Login = () => {
       sessionStorage.setItem("isAdmin", isAdmin);
 
       isUserAdmin = isAdmin;
-
+      userName = meResponse.data.username;
       if (isUserAdminCallback) {
         isUserAdminCallback(isUserAdmin);
       }
@@ -69,7 +70,6 @@ const Login = () => {
           password: passwordValue,
         }
       );
-
       if (response.status === 200) {
         const accessToken = response.data.user.access;
         token = "Bearer " + accessToken;

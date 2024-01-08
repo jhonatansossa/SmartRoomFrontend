@@ -1,9 +1,21 @@
-import { React } from "react";
+import { React, useState } from "react";
 import { generatePath, useNavigate } from "react-router-dom";
 import openHAB from "../openHAB/openHAB";
+import Axios from "axios";
+
+const updateColorSwitch = (state) => {
+  let color;
+  if (state === "OFF") {
+    color = "#FFFFFF";
+  } else {
+    color = "#D1EAF0";
+  }
+  return { backgroundColor: color };
+};
 
 function OverviewSwitchList(props) {
   let navigate = useNavigate();
+  const [responseStatus, setResponseStatus] = useState([]);
 
   const redirectToSwitches = () => {
     navigate("/switches");
@@ -12,19 +24,43 @@ function OverviewSwitchList(props) {
   function redirectToDetailedSwitch(device) {
     const id = device.name;
     let path = generatePath("/switches/:id/details", { id });
-    navigate(path, { state: { device }});
+    ActivateSwitch(device);
   }
 
-  function shortname(parameter) {
-    const fullWord = parameter.split('_');
-    const indiceSwitch = fullWord.indexOf('switch');
+  function ActivateSwitch(device) {
+    const config = {
+      headers: { Authorization: sessionStorage.getItem("token") },
+    };
 
-    const selection = indiceSwitch !== -1 ? fullWord.slice(0, indiceSwitch) : fullWord.slice(0, 2);
-    const result = selection.join(' ');
+    if (device) {
+      const switchState = device.state;
 
-    return result;
+      sendOpenHABRequest(device.state === "ON" ? "OFF" : "ON");
+
+      async function sendOpenHABRequest(newState) {
+        let data = { "state": newState };
+        const tokens = device.name.split('_');
+        const xtokens = tokens.slice(-2);
+        try {
+          const response = await Axios.post(
+            openHAB.url + "/api/v1/devices/items/" + xtokens[0] + "/" + xtokens[1] + "/state",
+            data,
+            config
+          );
+
+          setResponseStatus(response.data);
+
+          if (newState === "OFF") {
+            console.log("Device turned off:", response.data);
+          } else if (newState === "ON") {
+            console.log("Device turned on:", response.data);
+          }
+        } catch (error) {
+          console.error("Error updating switch state:", error);
+        }
+      }
+    }
   }
-
 
   return (
     <>
@@ -54,13 +90,13 @@ function OverviewSwitchList(props) {
           <button
             className="card hov-primary horizontal"
             onClick={() => redirectToDetailedSwitch(src)}
+            style={updateColorSwitch(src.state)} // Set background color dynamically
           >
             <div
               key={src.label}
               className="card-image horizontal"
               style={{
-                //backgroundImage: `url('/resources/${src.name}.svg')`,
-                backgroundImage: `url('/resources/${openHAB.switches.LIGHT_SWITCH_ID}.svg')`,
+                backgroundImage: `url('/resources/switch${src.state === "ON" ? "_on" : ""}.svg')`,
               }}
             />
             <div className="card-title horizontal">{src.display_name}</div>
