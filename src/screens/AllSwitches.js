@@ -7,6 +7,7 @@ import { token } from "./Login/Login";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import CloseButton from 'react-bootstrap/CloseButton';
+
 var regex = /^(?!.*Sensor).*$/i;
 
 const AllSwitches = () => {
@@ -17,6 +18,7 @@ const AllSwitches = () => {
   const [editMode, setEditMode] = useState(false);
   const [selectedDevice, setSelectedDevice] = useState(null);
   const displayNameRef = useRef(null);
+  const [userAdmin, setUserAdmin] = useState(false);
 
   const config = {
     headers: { Authorization: sessionStorage.getItem("token") },
@@ -35,6 +37,7 @@ const AllSwitches = () => {
     if (auth !== "true") {
       navigate("/login");
     } else {
+      fetchAdminStatus();
       fetchOpenHABItems();
     }
   }, []);
@@ -48,6 +51,16 @@ const AllSwitches = () => {
       console.error("Fetch OpenHAB items error:", error);
     }
   };
+
+  const fetchAdminStatus = async () => {
+    try {
+      const response = await Axios.get(openHAB.url + "/api/v1/auth/me", config);
+      const isUserAdmin = response.data.user_type === 1 ? true : false;
+      setUserAdmin(isUserAdmin);
+    } catch (error) {
+      console.error("User auth fetch error:", error);
+    }
+  }
 
   var switches = [];
   openHABItems.forEach(function (item) {
@@ -215,8 +228,10 @@ const AllSwitches = () => {
                     }}
                   />
                 </Dropdown.Item>
-                <Dropdown.Item onClick={() => toggleMenu(src)}>Change Name</Dropdown.Item>
-              </DropdownButton>
+                {userAdmin && (
+                  <Dropdown.Item onClick={() => toggleMenu(src)}>Change Name</Dropdown.Item>
+                )}
+                </DropdownButton>
             </div>
             {editMode && selectedDevice && selectedDevice.name === src.name && (
               <div className="card vertical toggle-separator">
