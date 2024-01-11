@@ -15,6 +15,7 @@ const AllDevices = () => {
   const [editMode, setEditMode] = useState(false);
   const [selectedDevice, setSelectedDevice] = useState(null);
   const displayNameRef = useRef(null);
+  const [userAdmin, setUserAdmin] = useState(false);
 
   const config = {
     headers: { Authorization: sessionStorage.getItem("token") },
@@ -26,6 +27,7 @@ const AllDevices = () => {
     if(auth !== "true") {
       navigate("/login");
     }else{
+      fetchAdminStatus();
       fetchOpenHABItems();
     }
   }, []);
@@ -34,6 +36,16 @@ const AllDevices = () => {
     const response = await Axios(openHAB.url + "/api/v1/devices/items", config);
     setOpenHABItems(response.data);
   };
+
+  const fetchAdminStatus = async () => {
+    try {
+      const response = await Axios.get(openHAB.url + "/api/v1/auth/me", config);
+      const isUserAdmin = response.data.user_type === 1 ? true : false;
+      setUserAdmin(isUserAdmin);
+    } catch (error) {
+      console.error("User auth fetch error:", error);
+    }
+  }
 
   var devices = [];
   openHABItems.forEach(function (item) {
@@ -136,7 +148,9 @@ const AllDevices = () => {
             </div>
             <DropdownButton id="dropdown-basic-button" title="...">
               <Dropdown.Item onClick={() => redirectToDetailedDevice(src)}>Measurements</Dropdown.Item>
-              <Dropdown.Item onClick={() => toggleMenu(src)}>Change Name</Dropdown.Item>
+              {userAdmin && (
+                <Dropdown.Item onClick={() => toggleMenu(src)}>Change Name</Dropdown.Item>
+              )}
             </DropdownButton>
           </div>
           {editMode && selectedDevice && selectedDevice.name === src.name && (
